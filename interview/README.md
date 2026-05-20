@@ -21,14 +21,14 @@
 ## 大厂文件清单
 
 ### 互联网大厂（推理引擎 / 端侧 AI SDK）
-- [x] `bytedance.md`
-- [x] `tencent.md`
-- [x] `alibaba.md`
-- [x] `meituan.md`
-- [x] `baidu.md`
-- [x] `jingdong.md`
-- [x] `pinduoduo.md`
-- [x] `huawei.md`
+- [√] `bytedance.md`
+- [√] `tencent.md`
+- [√] `alibaba.md`
+- [√] `meituan.md`
+- [√] `baidu.md`
+- [√] `jingdong.md`
+- [√] `pinduoduo.md`
+- [√] `huawei.md`
 - [ ] `sensetime.md`
 - [ ] `megvii.md`
 - [ ] `cloudwalk.md`
