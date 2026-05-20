@@ -2,9 +2,11 @@
 
 > **目标**：AI Infra 工程师（推理引擎 | 训练框架）上岸
 >
-> **开始**：2026-05-20 | **周期**：9-10 个月 | **状态**：🟡 进行中
+> **开始**：2026-05-20 | **B线周期**：10.5 个月（W1–W44） | **整体周期**：~12 个月 | **状态**：🟡 进行中
 >
-> **四线并行**：A 算法刷题 · B 基础技术栈 · C llm.c-learning · D cs224n-learning
+> **四线并行**：A 算法刷题 · B 基础技术栈（5轨+3项目）· C llm.c-learning · D cs224n-learning
+>
+> **B 线详细计划**：[→ fundamentals/plan.md](fundamentals/plan.md)
 
 ---
 
@@ -13,7 +15,7 @@
 | 线 | 方向 | 目标 | 周期 |
 |----|------|------|------|
 | **A** | 手撕算法 | 代码随想录→Hot100→面试经典150→灵神题单 | Week 1–36 |
-| **B** | 基础技术栈 | CUDA/C++/Python/GPU架构/分布式 | Week 1–36 |
+| **B** | 基础技术栈 | B1 CUDA编程 · B2 C++/Python · B3 分布式 · B4 PyTorch/Triton · B5 框架源码<br>+ 3 项目：MiniInfer → MiniQuant → MiniMegatron<br>📖 详细路径见 [fundamentals/plan.md](fundamentals/plan.md) | Week 1–44 |
 | **C** | llm.c-learning | 从 nanoGPT 到 CUDA kernel 级理解 GPT-2 训练 | Week 1–18 |
 | **D** | cs224n-learning | Stanford NLP 课程：词向量→RNN→Transformer→LLM | Week 4–24 |
 
@@ -29,12 +31,11 @@
   - 209 长度最小的子数组 | 59 螺旋矩阵II | 35 搜索插入位置 | 34 排序数组查找
 - [ ] 笔记输出：`algorithm/notes/01-programmercarl/01-array/` 章节总结
 
-### B 基础
+### B 基础 → [详细路径](fundamentals/plan.md#w1-0520-0526cuda-编程模型--c-智能指针)
+- [ ] B1 CUDA：PMPP Ch1-2 + Vector Addition kernel `B-cuda-w1`
+- [ ] B2 C++：智能指针 + move 语义（Effective Modern C++ Item 17-29）`B-cpp-w1`
+- [ ] B2 Python：装饰器 + 生成器（Fluent Python Ch7, Ch14）`B-python-w1`
 - [ ] 安装 CUDA Toolkit 12.x（nvcc 可用）`B-cuda-env`
-- [ ] 配置 WSL2 Ubuntu（可选，Windows 下继续也可以）
-- [ ] PMPP 第1章：CUDA 编程模型概述 `B-cuda-pmpp1`
-- [ ] C++：move语义、智能指针复习 `B-cpp-review`
-- [ ] Python：装饰器、生成器（yield）复习 `B-python-review`
 
 ### C llm.c-learning
 - [ ] 回顾 Weeks 1–9 笔记，整理一份完整目录索引 `C-llmc-review`
@@ -58,11 +59,10 @@
   - 142 环形链表II | 141 环形链表 | 234 回文链表 | 143 重排链表
 - [ ] 链表章节总结
 
-### B 基础
-- [ ] PMPP 第2-3章：Grid/Block/Thread 模型、线程组织 `B-cuda-pmpp2-3`
-- [ ] 手写 Vector Addition kernel（naive + grid-stride loop）
-- [ ] C++：多线程（thread/mutex/atomic/condition_variable）`B-cpp-thread`
-- [ ] Python：协程 async/await、asyncio 基础 `B-python-async`
+### B 基础 → [详细路径](fundamentals/plan.md#w2-0527-0602gridblockthread--c-模板)
+- [ ] B1 CUDA：Grid/Block/Thread 组织 + grid-stride loop `B-cuda-w2`
+- [ ] B2 C++：模板深入（类型萃取、SFINAE、特化/偏特化）`B-cpp-w2`
+- [ ] B2 Python：GIL + 多线程 vs 多进程 vs asyncio `B-python-w2`
 
 ### C llm.c-learning
 - [ ] Week 10：attention 算子的 CUDA kernel 深入 `C-llmc-w10`
@@ -85,11 +85,10 @@
 - [ ] 代码随想录：04-string 前 4 题（344, 541, 151, 28 KMP）`A-string`
 - [ ] 哈希章节总结
 
-### B 基础
-- [ ] PMPP 第4-5章：Shared Memory + Bank Conflict `B-cuda-shared-mem`
-- [ ] 手写 Matrix Multiply（naive 全局内存版）
-- [ ] C++：STL 深入（vector扩容、unordered_map哈希、deque分段）`B-cpp-stl`
-- [ ] Python：GIL 原理 + 多线程 vs 多进程对比 `B-python-gil`
+### B 基础 → [详细路径](fundamentals/plan.md#w3-0603-0609shared-memory--多线程)
+- [ ] B1 CUDA：Shared Memory + Bank Conflict + MatMul naive `B-cuda-w3`
+- [ ] B2 C++：多线程编程（mutex/atomic/condition_variable/有界阻塞队列）`B-cpp-w3`
+- [ ] B2 Python：asyncio 实战 `B-python-w3`
 
 ### C llm.c-learning
 - [ ] Week 11：多层 Transformer 的 CUDA 实现 `C-llmc-w11`
@@ -112,10 +111,10 @@
 - [ ] 代码随想录：06-stack-queue 前 5 题（232, 225, 20, 1047, 150）`A-stack`
 - [ ] 字符串章节总结（KMP 重点）
 
-### B 基础
-- [ ] PMPP 第6-7章：并行模式（Reduction、Scan）`B-cuda-reduction`
-- [ ] 手写 Reduction kernel（shared memory 优化版）
-- [ ] Python：内存管理（引用计数、GC、`__slots__`、memoryview）`B-python-mem`
+### B 基础 → [详细路径](fundamentals/plan.md#w4-0610-0616reduction--cmake--内存管理)
+- [ ] B1 CUDA：Reduction（7 版优化链）+ PMPP Ch7 `B-cuda-w4`
+- [ ] B2 C++：CMake 工程化 + CUDA 项目组织 `B-cpp-w4`
+- [ ] B2 Python：内存管理（引用计数/GC/`__slots__`/buffer protocol）`B-python-w4`
 
 ### C llm.c-learning
 - [ ] Week 12：训练循环的 CUDA 端到端 `C-llmc-w12`
@@ -144,10 +143,9 @@
 - [ ] 代码随想录：08-binary-tree 遍历（144, 145, 94, 102）`A-tree-traversal`
 - [ ] 栈与队列章节总结
 
-### B 基础
-- [ ] CUDA C++ Programming Guide 精读前 3 章 `B-cuda-guide`
-- [ ] Nsight Systems (`nsys`) 基础用法 `B-profiling-nsys`
-- [ ] C++：CMake 基础（add_library、target_link_libraries）`B-cpp-cmake`
+### B 基础 → [详细路径](fundamentals/plan.md#w5-0617-0623scan--pybind11--profiling)
+- [ ] B1 CUDA：Parallel Scan（Blelloch）+ Profiling 工具链（nsys/ncu）`B-cuda-w5`
+- [ ] B2 C++：pybind11 基础（暴露 CUDA kernel 给 Python）`B-cpp-w5`
 
 ### C llm.c-learning
 - [ ] Week 13：自定义 CUDA kernel 实战 `C-llmc-w13`
@@ -174,10 +172,9 @@
 - [ ] 代码随想录：08-binary-tree 属性题 12 题（226→113）`A-tree-prop`
 - [ ] 代码随想录：09-backtracking 前 5 题（77, 216, 17, 39, 40）`A-backtrack`
 
-### B 基础
-- [ ] CUDA C++ Programming Guide 第4-5章 `B-cuda-guide-finish`
-- [ ] 手写 LayerNorm kernel `B-cuda-layernorm`
-- [ ] Python：pybind11 基础（暴露 C++ 函数给 Python）`B-python-pybind11`
+### B 基础 → [详细路径](fundamentals/plan.md#w6-0624-0630cuda-c-guide--stl-深入)
+- [ ] B1 CUDA：CUDA C++ Programming Guide §1-3, §5（occupancy 分析）`B-cuda-w6`
+- [ ] B2 C++：STL 内部原理（vector扩容/hash表/deque分段）`B-cpp-w6`
 
 ### C llm.c-learning
 - [ ] Week 14：性能优化专题 `C-llmc-w14`
@@ -204,10 +201,9 @@
 - [ ] 代码随想录：09-backtracking 完成（131→37）`A-backtrack-finish`
 - [ ] 二叉树章节总结（重点：遍历、构造、BST）
 
-### B 基础
-- [ ] PMPP 复习 + 总结前 7 章核心概念 `B-cuda-review`
-- [ ] 手写 Softmax kernel（safe softmax）`B-cuda-softmax`
-- [ ] GPU 架构：SM 微架构、Warp Scheduler、Register File `B-gpu-arch`
+### B 基础 → [详细路径](fundamentals/plan.md#w7-0701-0707gemm-入门--cpython-内部)
+- [ ] B1 CUDA：GEMM naive + shared memory tiled（how-to-optimize-gemm）`B-cuda-w7`
+- [ ] B2 Python：CPython 内部（PyObject/引用计数/bytecode）`B-python-w7`
 
 ### C llm.c-learning
 - [ ] Week 15：Multi-GPU 训练（DP 实现）`C-llmc-w15`
@@ -234,10 +230,9 @@
   - 重点：跳跃游戏系列、区间问题系列、分发糖果
 - [ ] 贪心章节总结（和 DP 对比）
 
-### B 基础
-- [ ] 手写 GEMM kernel：naive 版 `B-cuda-gemm-naive`
-- [ ] GPU 架构：Roofline Model 分析 kernel 瓶颈 `B-gpu-roofline`
-- [ ] C++：pybind11 进阶（绑定类、NumPy 数组零拷贝）`B-cpp-pybind11-adv`
+### B 基础 → [详细路径](fundamentals/plan.md#w8-0708-0714gemm-进阶--pytorch-tensor-源码)
+- [ ] B1 CUDA：GEMM 优化链（coalescing + bank conflict fix）`B-cuda-w8`
+- [ ] B4 PyTorch：Tensor 内部（stride/contiguous/storage）`B-pytorch-w8`
 
 ### C llm.c-learning
 - [ ] Week 16：混合精度训练 `C-llmc-w16`
@@ -265,10 +260,9 @@
   - 509, 70, 746, 62, 63, 343, 96
 - [ ] 背包：01背包理论 + 416, 1049, 494, 474 `A-dp-01knap`
 
-### B 基础
-- [ ] 手写 GEMM kernel：shared memory 版 `B-cuda-gemm-shared`
-- [ ] 对比 naive vs shared memory 版性能
-- [ ] Tensor Core 编程：mma.sync 基础 `B-cuda-tensorcore`
+### B 基础 → [详细路径](fundamentals/plan.md#w9-0715-0721warp-level--pytorch-autograd)
+- [ ] B1 CUDA：Warp Shuffle + Cooperative Groups `B-cuda-w9`
+- [ ] B4 PyTorch：autograd 源码（计算图/build_fn/backward）`B-pytorch-w9`
 
 ### C llm.c-learning
 - [ ] Week 17：性能分析报告 + 技术博客 `C-llmc-w17`
@@ -296,10 +290,10 @@
 - [ ] 代码随想录：完全背包理论 + 518, 377, 322, 279, 139 `A-dp-fullknap`
 - [ ] 打家劫舍系列：198, 213, 337 `A-dp-house`
 
-### B 基础
-- [ ] 手写 GEMM kernel：Tensor Core 版（mma.sync）`B-cuda-gemm-tc`
-- [ ] GEMM 三版（naive/shared/tc）性能图表
-- [ ] GPU 架构：Tensor Core 工作原理详解 `B-gpu-tensorcore`
+### B 基础 → [详细路径](fundamentals/plan.md#w10-0722-0728tensor-core--b3-分布式启动)
+- [ ] B1 CUDA：Tensor Core 编程（mma.sync.f16）+ GEMM 全链性能图 `B-cuda-w10`
+- [ ] B3 分布式：MPI 基础 + AllReduce 算法（Ring/RH-D）`B-dist-w10`
+- [ ] 🚀 MiniInfer v0.1：CPU 单 token 推理 `B-project-w10`
 
 ### C llm.c-learning
 - [ ] Week 18：最终总结 + 开源贡献准备 `C-llmc-w18`
@@ -326,10 +320,9 @@
 - [ ] 股票系列：121, 122, 123, 188, 309, 714 `A-dp-stock`
 - [ ] 子序列：300, 674, 718, 1143, 1035 `A-dp-lis`
 
-### B 基础
-- [ ] 手写 FlashAttention forward（对照论文公式）`B-cuda-flash-attn`
-- [ ] PyTorch autograd 源码：计算图构建 `B-python-autograd1`
-- [ ] cuda-mode lectures 跟完前 5 讲 `B-cuda-mode`
+### B 基础 → [详细路径](fundamentals/plan.md#w11-0729-0804cuda-graph--nvtx--miniinfer-v02)
+- [ ] B1 CUDA：CUDA Graph + NVTX + cuBLAS/cuDNN 基础 `B-cuda-w11`
+- [ ] 🚀 MiniInfer v0.2：完整模型前向（Attention/FFN/LayerNorm）`B-project-w11`
 
 ### C llm.c-learning ✅ 主线完成，后续维护
 - [ ] 将 llm.c-learning 核心笔记迁移到 `projects.md` 中作为项目成果
@@ -353,10 +346,10 @@
 - [ ] 回文：647, 516 `A-dp-palindrome`
 - [ ] 动态规划章节总结（核心：五部曲、背包、编辑距离）
 
-### B 基础
-- [ ] FlashAttention 优化（tiling + recomputation）`B-cuda-flash-attn2`
-- [ ] PyTorch autograd 源码：反向传播、grad_fn 链 `B-python-autograd2`
-- [ ] cuda-mode lectures 6-10 `B-cuda-mode-finish`
+### B 基础 → [详细路径](fundamentals/plan.md#w12-0805-0811gemm-优化链2--miniinfer-v10)
+- [ ] B1 CUDA：GEMM 优化链 register tiling + double buffering `B-cuda-w12`
+- [ ] B3 分布式：NCCL 通信原语（AllReduce/AllGather/ReduceScatter）`B-dist-w12`
+- [ ] 🚀 MiniInfer v1.0：GPU 推理 + KV Cache `B-project-w12`
 
 ### D cs224n
 - [ ] Lecture 17：Large Language Models `D-cs224n-lec17`
@@ -378,10 +371,10 @@
 - [ ] LeetCode Hot100：01-hash（1, 49, 128）+ 02-two-pointers（283, 11, 15, 42）`A-hot100-start`
 - [ ] 图论 DFS/BFS 章节总结
 
-### B 基础
-- [ ] PyTorch Tensor 源码：stride、contiguous、view vs reshape `B-python-tensor`
-- [ ] PyTorch nn.Module 加载：state_dict 源码 `B-python-module`
-- [ ] 分布式基础：MPI 概念、AllReduce 原理 `B-dist-allreduce`
+### B 基础 → [详细路径](fundamentals/plan.md#w13w14-0812-0825flashattention--triton-入门)
+- [ ] B1 CUDA：FlashAttention 完整推导 + forward kernel `B-cuda-w13`
+- [ ] B4 Triton：DSL 入门 + GEMM kernel `B-triton-w13`
+- [ ] B3 分布式：Ring AllReduce 深入（公式推导 + MPI 实现）`B-dist-w13`
 
 ### D cs224n
 - [ ] Lecture 19：Ethics, Bias & Safety `D-cs224n-lec19`
@@ -402,10 +395,11 @@
 - [ ] Hot100：04-array（53, 56, 189, 238, 41）`A-hot100-array`
 - [ ] Hot100：05-matrix（73, 54, 48, 240）`A-hot100-matrix`
 
-### B 基础
-- [ ] Triton DSL 入门：编程模型 + 第一个 kernel `B-triton-intro`
-- [ ] 用 Triton 写 GEMM kernel（对比 CUDA 版）`B-triton-gemm`
-- [ ] 分布式：NCCL 通信原语详解（AllReduce/Broadcast/AllGather）`B-dist-nccl`
+### B 基础 → [详细路径](fundamentals/plan.md#w15w16-0826-0908flashattention-2--triton-flashattention)
+- [ ] B1 CUDA：FlashAttention-2 改进 + FlashAttn forward kernel 完成 `B-cuda-w14`
+- [ ] B4 Triton：FlashAttention kernel（对比 CUDA 手写版）`B-triton-w14`
+- [ ] B3 分布式：NCCL Topology + NVLink/NVSwitch `B-dist-w14`
+- [ ] 🚀 MiniInfer v1.1：集成 FlashAttention + baseline benchmark `B-project-w14`
 
 ### D cs224n
 - [ ] A4 继续
@@ -425,10 +419,11 @@
   - **重点**：146 LRU缓存（必考设计题）
 - [ ] Hot100：07-binary-tree 前 8 题 `A-hot100-tree`
 
-### B 基础
-- [ ] Triton DSL：手写 FlashAttention forward `B-triton-flash-attn`
-- [ ] Triton autotuning：`@triton.autotune` `B-triton-autotune`
-- [ ] 分布式：Ring AllReduce 算法推导 `B-dist-ring`
+### B 基础 → [详细路径](fundamentals/plan.md#w17w18-0909-0922cutlass--triton-autotune)
+- [ ] B1 CUDA：CUTLASS 基础（template hierarchy + FP16 GEMM）`B-cuda-w15`
+- [ ] B4 Triton：autotune + GEMM 优化 `B-triton-w15`
+- [ ] B3 分布式：ZeRO-1 理论（optimizer state partitioning）`B-dist-w15`
+- [ ] 🚀 MiniInfer v2.0：PagedAttention（BlockManager）`B-project-w15`
 
 ### D cs224n
 - [ ] A4 完成
@@ -449,10 +444,11 @@
 - [ ] Hot100：08-graph（200, 994, 207, 208）`A-hot100-graph`
 - [ ] Hot100：09-backtracking 8 题 `A-hot100-backtrack`
 
-### B 基础
-- [ ] vLLM 源码：BlockManager（PagedAttention 实现）第一遍精读 `B-vllm-block`
-- [ ] vLLM 源码：LLMEngine 入口 + 请求生命周期 `B-vllm-engine`
-- [ ] 分布式：ZeRO-1（优化器状态分片）实现原理 `B-dist-zero1`
+### B 基础 → [详细路径](fundamentals/plan.md#w19w20-0923-1006ptxsass--pytorch-nnmodule)
+- [ ] B1 CUDA：PTX/SASS 基础（cuobjdump/nvdisasm）`B-cuda-w16`
+- [ ] B4 PyTorch：nn.Module 源码（state_dict/`_apply`/hooks）`B-pytorch-w16`
+- [ ] B3 分布式：ZeRO-2/3（gradient/parameter partitioning）`B-dist-w16`
+- [ ] 🚀 MiniInfer v2.1：Continuous Batching（Scheduler）`B-project-w16`
 
 ### D cs224n
 - [ ] Final Project：文献调研
@@ -472,10 +468,11 @@
 - [ ] Hot100：11-stack 5 题 `A-hot100-stack`
 - [ ] Hot100：12-heap 3 题 `A-hot100-heap`
 
-### B 基础
-- [ ] vLLM 源码：Scheduler 模块精读（Continuous Batching）`B-vllm-scheduler`
-- [ ] vLLM 源码：Worker/ModelRunner 精读 `B-vllm-worker`
-- [ ] 分布式：ZeRO-2/3（梯度/参数分片）`B-dist-zero2-3`
+### B 基础 → [详细路径](fundamentals/plan.md#w21w23-1007-1027tensor-parallelism--异步拷贝--miniinfer-v3)
+- [ ] B1 CUDA：Async Copy + Pipeline（producer-consumer overlap）`B-cuda-w17`
+- [ ] B3 分布式：Tensor Parallelism（Megatron 风格 col/row parallel）`B-dist-w17`
+- [ ] B5 框架：vLLM 源码 — LLM/LLMEngine 入口 `B-vllm-w17`
+- [ ] 🚀 MiniInfer v3.0：Tensor Parallelism 推理 `B-project-w17`
 
 ### D cs224n
 - [ ] Final Project：实验设计 + 初步代码
@@ -497,10 +494,9 @@
 - [ ] Hot100：15-dp-2d 5 题 `A-hot100-dp2d`
   - **重点**：72 编辑距离
 
-### B 基础
-- [ ] DeepSpeed 源码：ZeRO 初始化流程 `B-deepspeed-init`
-- [ ] DeepSpeed 源码：Engine 前向/反向 `B-deepspeed-engine`
-- [ ] Megatron-LM：TP 切分通信分析 `B-megatron-tp`
+### B 基础 → [详细路径](fundamentals/plan.md#w22w23-1014-1027量化入门)
+- [ ] B1 CUDA：INT8/FP8 GEMM（CUTLASS INT8 内置 kernel）`B-cuda-w18`
+- [ ] 🚀 MiniQuant 启动：量化工具 + AWQ/GPTQ 论文精读 `B-project-w18`
 
 ### D cs224n
 - [ ] Final Project：实验运行 + 调参
@@ -519,10 +515,9 @@
 - [ ] Hot100 错题回顾 + 时间复盘 `A-hot100-review`
 - [ ] 代码随想录：12-graph 并查集 + 最短路部分 `A-graph-adv`
 
-### B 基础
-- [ ] 量化：AWQ 论文精读 + 核心算法笔记 `B-quant-awq`
-- [ ] 量化：GPTQ 论文理解 `B-quant-gptq`
-- [ ] MiniInfer 项目启动：设计文档 + 模型加载模块 `B-miniinfer-start`
+### B 基础 → [详细路径](fundamentals/plan.md#w24w25-1028-1110awq-实现--vllm-worker)
+- [ ] 🚀 MiniQuant：AWQ 核心算法（salient channel + per-channel scaling）`B-project-w19`
+- [ ] B5 框架：vLLM Worker + ModelRunner 源码 `B-vllm-w19`
 
 ### D cs224n
 - [ ] Final Project：实验完成 + 报告撰写
@@ -541,10 +536,9 @@
 - [ ] 面试经典150：01-array-string 前 12 题 `A-top150-arr1`
   - 88, 27, 26, 80, 169, 189, 121, 122, 55, 45, 274, 380
 
-### B 基础
-- [ ] MiniInfer：实现模型加载（读取权重 → Tensor）`B-miniinfer-model`
-- [ ] MiniInfer：实现单 token 推理循环 `B-miniinfer-forward`
-- [ ] 量化：GGUF 格式 + llama.cpp 量化代码阅读 `B-quant-gguf`
+### B 基础 → [详细路径](fundamentals/plan.md#w26w28-1111-1201int4-gemm-kernel--pipeline-parallelism)
+- [ ] 🚀 MiniQuant：INT4 GEMM CUDA kernel（CUTLASS 或纯 CUDA）`B-project-w20`
+- [ ] B3 分布式：Pipeline Parallelism（GPipe/1F1B）`B-dist-w20`
 
 ### 本周产出
 - [ ] 面试经典150 12 题
@@ -558,10 +552,9 @@
 - [ ] 面试经典150：01-array-string 后 12 题 `A-top150-arr2`
   - 238, 134, 135, 42, 13, 12, 58, 14, 151, 6, 28, 68
 
-### B 基础
-- [ ] MiniInfer：实现 KV Cache 管理 `B-miniinfer-kvcache`
-- [ ] MiniInfer：实现 GPU 推理（将计算搬到 CUDA）`B-miniinfer-gpu`
-- [ ] pybind11 实战：给 MiniInfer 绑定 Python 接口 `B-miniinfer-pybind`
+### B 基础 → [详细路径](fundamentals/plan.md#w29w30-1202-1215flashattention-3--kernel-fusion)
+- [ ] B1 CUDA：FlashAttention-3 + Kernel Fusion 模式 `B-cuda-w21`
+- [ ] B5 框架：DeepSpeed 源码启动（DeepSpeedEngine）`B-deepspeed-w21`
 
 ### 本周产出
 - [ ] 面试经典150 12 题
@@ -593,28 +586,27 @@
 
 ---
 
-## W22–W26 期间 B 基础技术栈
+## W22–W26 期间 B 基础技术栈 → [详细路径](fundamentals/plan.md#phase-3miniquant--量化深入w22w34)
 
-### MiniInfer 完善（W22–W24）
-- [ ] W22：实现 PagedAttention（BlockManager）`B-miniinfer-paged`
-- [ ] W23：实现 Continuous Batching `B-miniinfer-batch`
-- [ ] W24：性能对比 vLLM baseline + 写 benchmark 报告 `B-miniinfer-bench`
+> B 线各轨道推进与项目里程碑见 fundamentals/plan.md Phase 3。此处仅保留八股任务。
 
-### MiniQuant 启动（W25–W26）
-- [ ] W25：实现 AWQ 核心算法 `B-miniquant-awq`
-- [ ] W26：实现 CUDA INT4 GEMM kernel `B-miniquant-kernel`
+### B 技术栈重点（详见 plan.md）
+- [ ] B5 框架：vLLM BlockManager + Scheduler 源码 `B-vllm-w22-24`
+- [ ] B5 框架：DeepSpeed ZeRO 源码（stage 1/2/3）`B-deepspeed-w24-26`
+- [ ] CUTLASS 进阶（自定义 Epilogue）+ GEMM 优化链完稿 `B-cuda-w22-24`
+- [ ] 🚀 MiniQuant：AWQ 实现 + INT4 GEMM + integration benchmark `B-project-w22-26`
+- [ ] 🚀 MiniInfer 收尾：完整 benchmark + 项目总结 `B-project-miniinfer-final`
 
-### 开源贡献（W22–W26）
-- [ ] vLLM：浏览 Issues 找 beginner-friendly `B-oss-vllm-issue`
-- [ ] vLLM PR #1（W24 前）`B-oss-vllm-pr1`
-- [ ] DeepSpeed PR #1（W26 前）`B-oss-deepspeed-pr1`
-
-### 八股整理（W22–W26）
+### 八股整理（并行推进）
 - [ ] W22：`interview/bajin/cuda.md` 初版
 - [ ] W23：`interview/bajin/cpp.md` 初版
 - [ ] W24：`interview/bajin/python.md` 初版
 - [ ] W25：`interview/bajin/inference.md` 初版
 - [ ] W26：`interview/bajin/training.md` + `pytorch.md` 初版
+
+### 开源贡献（备用）
+- [ ] vLLM：浏览 Issues 找 beginner-friendly `B-oss-vllm-issue`
+- [ ] vLLM PR #1（W24 前）`B-oss-vllm-pr1`
 
 ---
 
@@ -627,10 +619,11 @@
 - [ ] W30：DP 入门 + 背包专题（30 题，难度分 1400–1700）`A-lingshen-dp1`
 - [ ] W31：DP 区间 + 状压 + 树形专题（20 题，难度分 1700+）`A-lingshen-dp2`
 
-### B 项目完善
-- [ ] MiniInfer：完整版（TP 分布式推理）`B-miniinfer-final`
-- [ ] MiniQuant：精度 + 性能 benchmark 对比 `B-miniquant-final`
-- [ ] MiniMegatron：TP + PP + DP 训练 GPT-2 `B-minimegatron`
+### B 项目完善 → [详细路径](fundamentals/plan.md#phase-4minimegatron--冲刺w30w46)
+- [ ] 🚀 MiniMegatron v0：单卡 DP 训练 loop（W30）`B-project-w27`
+- [ ] 🚀 MiniMegatron v1：TP+PP 训练（W33-W37）`B-project-w28-31`
+- [ ] B5 框架：Megatron-LM TP/PP 源码 `B-megatron-w27-31`
+- [ ] 🚀 MiniQuant 收尾 + 集成进 MiniInfer `B-project-w27`
 
 ### 简历
 - [ ] W28：简历 v1.0 初版 `B-resume-v1`
@@ -638,20 +631,44 @@
 
 ---
 
-## W32–W36 (12.23–2027.01.26)：面试冲刺
+## W32–W36 (2027.01.06–02.09)：MiniMegatron 核心
 
 ### A 算法冲刺
 - [ ] 各厂高频真题（字节/腾讯/阿里/百度/华为）`A-company`
 - [ ] 模拟面试：每天 3 题限时 60 分钟 `A-mock`
 - [ ] 错题本回顾
 
-### B 八股冲刺
+### B 项目冲刺 → [详细路径](fundamentals/plan.md#w33w35-1230-0119tp--megatron-源码)
+- [ ] 🚀 MiniMegatron v1：TP+PP 集成训练（W33-W35）`B-project-w32-35`
+- [ ] B5 框架：Megatron-LM TP/PP 源码精读 `B-megatron-w32-35`
+- [ ] B3 分布式：3D Parallelism 理论 + communication analysis `B-dist-w32`
+
+### 八股冲刺（W32+）
 - [ ] 全部 7 个八股文件反复背诵 + 模拟问答 `B-bajin-final`
 
-### 面试循环
-- [ ] W32–33：投递简历
-- [ ] W34–36：各厂一面 → 复盘 → 改进
-- [ ] 每轮面试后更新 `interview/companies/` 对应厂面经
+---
+
+## W37–W44 (2027.02.10–04.06)：MiniMegatron 冲刺 + 收尾 → [详细路径](fundamentals/plan.md#phase-4minimegatron--冲刺w30w46)
+
+### W37–W38：混合精度 + ZeRO
+- [ ] 🚀 MiniMegatron v2：FP16/BF16 混合精度训练（AMP + loss scaling）`B-project-w37`
+- [ ] 🚀 MiniMegatron v2：ZeRO-1/2 集成（optimizer state + gradient partitioning）`B-project-w38`
+- [ ] B5 框架：Megatron-LM PP 源码（1F1B schedule）`B-megatron-w37-38`
+
+### W39–W41：FSDP + MoE + 完整训练
+- [ ] B3 分布式：FSDP + Expert Parallelism（MoE 基础）`B-dist-w39`
+- [ ] 🚀 MiniMegatron v3：完整 GPT-2 3D 并行训练 `B-project-w39-41`
+- [ ] B5 框架：Megatron-LM Dataset + Checkpoint `B-megatron-w39-41`
+
+### W42–W44：Scaling Test + 全面收尾
+- [ ] 🚀 MiniMegatron v3：云 GPU（4×A100）scaling test + report `B-project-w42-44`
+- [ ] B5 框架收尾：vLLM/DeepSpeed/Megatron-LM 源码索引完成 `B-source-final`
+- [ ] B 线全面复盘：`fundamentals/retrospective.md` `B-retro`
+- [ ] 简历 v2.0 最终版 `B-resume-final`
+
+### 面试启动
+- [ ] W42–43：投递简历
+- [ ] W44+：各厂一面 → 复盘 → 改进
 
 ---
 
@@ -660,16 +677,18 @@
 | 时间 | 里程碑 | 状态 |
 |------|--------|------|
 | 2026.05.20 | 仓库初始化 + 四线启动 | ✅ |
-| 2026.06.20 | CUDA Toolkit + PMPP 前 5 章 + 代码随想录数组/链表/哈希完成 | ⬜ |
-| 2026.07.15 | 代码随想录全部完成 + GEMM shared memory kernel 完成 | ⬜ |
-| 2026.08.10 | llm.c-learning 18周主线完成 + cs224n lec1-12 完成 | ⬜ |
-| 2026.08.31 | Hot100 完成 + FlashAttention kernel 完成 | ⬜ |
-| 2026.09.30 | cs224n 全部完成（含 Final Project）+ vLLM 源码 3 模块 | ⬜ |
-| 2026.10.31 | 面试经典150题完成 + MiniInfer 基础版 | ⬜ |
-| 2026.11.30 | MiniQuant + 八股初版 + 简历 v1.0 | ⬜ |
-| 2026.12.31 | 灵神题单核心完成 + MiniMegatron + MiniInfer 完整版 | ⬜ |
-| 2027.01.31 | 简历 v2.0 + 面试开始 | ⬜ |
-| 2027.03.31 | 第一个 offer | ⬜ |
+| 2026.06.20 | B1 CUDA：PMPP Ch1-7 + Reducation 7版优化；B2 C++：智能指针/模板/多线程 | ⬜ |
+| 2026.07.15 | B1 GEMM naive→shared memory + B2 CPython内部 + B4 PyTorch Tensor/autograd | ⬜ |
+| 2026.08.10 | B1 Tensor Core GEMM + B3 MPI/AllReduce + MiniInfer v0 (CPU推理) | ⬜ |
+| 2026.08.31 | FlashAttention forward kernel + B3 NCCL/Ring AllReduce + MiniInfer v1 (GPU+KV Cache) | ⬜ |
+| 2026.09.30 | CUTLASS 基础 + Triton GEMM/FlashAttn + ZeRO 1/2/3 + MiniInfer v2 (PagedAttn+ContBatch) | ⬜ |
+| 2026.10.31 | PTX/SASS + PyTorch nn.Module 源码 + vLLM 源码 2 模块 + MiniInfer v3 (TP) | ⬜ |
+| 2026.11.30 | AWQ 实现 + INT4 GEMM kernel + DeepSpeed ZeRO 源码 + MiniQuant 完成 | ⬜ |
+| 2026.12.31 | FlashAttention-2/3 + CUTLASS 进阶 + Megatron-LM TP/PP 源码 + MiniMegatron DP训练 | ⬜ |
+| 2027.01.31 | 3D 并行 + 混合精度 + ZeRO 集成 + MiniMegatron TP+PP 训练跑通 | ⬜ |
+| 2027.02.28 | Kernel Fusion + FSDP/MoE + 源码收尾 + MiniMegatron 完整版 + 八股全部 | ⬜ |
+| 2027.03.31 | 简历 v2.0 + 面试开始 | ⬜ |
+| 2027.04.30 | 第一个 offer | ⬜ |
 
 ---
 
@@ -678,15 +697,37 @@
 | 时段 | 内容 |
 |------|------|
 | 上午 2h | A 线：算法刷题（C++ + Python） |
-| 下午 2h | B 线：基础技术栈（CUDA/C++/Python/源码阅读） |
+| 下午 45min | B1 CUDA/GPU（kernel 实现 + 笔记） |
+| 下午 45min | B2/B3/B4/B5 轮流（语言/分布式/Triton/源码） |
+| 下午 30min | 项目推进（MiniInfer/MiniQuant/MiniMegatron） |
 | 下午 1h | C 或 D 线：llm.c-learning / cs224n（交替进行） |
-| 晚上 1h | 复习 + 笔记整理 + 八股积累 |
+| 晚上 1h | 复习 + 笔记 + 八股 + 论文精读 |
 
-> 每天 5-6 小时，四线交替推进，重点在"持续"而非"突击"
+> 每天 5-6 小时，B 线 3 个 session 交替，重点在"持续"而非"突击"
+> B 线详细时间分配见 [fundamentals/plan.md](fundamentals/plan.md#每日时间分配b-线专属-2h)
 
 ---
 
 # 陈果记录
+
+## B 线（基础技术栈）当前进度
+
+> 详见 [fundamentals/plan.md](fundamentals/plan.md)
+
+| 阶段 | 周期 | 核心产出 | 状态 |
+|------|------|----------|------|
+| Phase 1: 基础建设 | W1–W10 | PMPP + C++/Python 深度 + GEMM + PyTorch内部 | ⬜ |
+| Phase 2: MiniInfer | W10–W26 | 推理引擎 4 版本（CPU→GPU→PagedAttn→TP） | ⬜ |
+| Phase 3: MiniQuant | W22–W34 | 量化引擎（AWQ + INT4 GEMM） | ⬜ |
+| Phase 4: MiniMegatron | W30–W46 | 分布式训练（TP+PP+DP+ZeRO+AMP） | ⬜ |
+
+| 轨道 | 当前进度 | 状态 |
+|------|----------|------|
+| B1 CUDA/GPU | W1 进行中 | 🟡 |
+| B2 C++/Python | W1 进行中 | 🟡 |
+| B3 分布式 | W10 启动 | ⬜ |
+| B4 PyTorch/Triton | W8 启动 | ⬜ |
+| B5 框架源码 | W16 启动 | ⬜ |
 
 ## llm.c-learning 当前进度
 
@@ -713,9 +754,10 @@
 
 | 风险 | 应对 |
 |------|------|
-| GTX 1650 4GB 跑不动大模型 | W10 起租云 GPU（AutoDL/恒源云/Vast.ai） |
-| CUDA 学习曲线陡峭 | PMPP + how-to-optimize-gemm + llm.c 三线同步推进 |
-| 四线并行时间不够 | 主线 A/B 不可压缩，C/D 线可灵活调整节奏 |
+| GTX 1650 4GB 跑不动大模型 | W10 起租云 GPU（AutoDL/恒源云/Vast.ai）；MiniInfer 早期用 CPU+小模型 |
+| CUDA 学习曲线陡峭 | PMPP → how-to-optimize-gemm → CUTLASS 渐进式；Plan B 五轨并行可跳转 |
+| 五轨并行时间不够 | B1 不可压缩；B2–B5 按需调整节奏；项目驱动确保产出 |
 | cs224n 数学要求高 | Assignment 慢慢做，重点是 Lecture 的直觉理解 |
-| 面试时间与预期冲突 | 每 4 周评估进度，动态调整里程碑 |
+| 面试时间与预期冲突 | 每 4 周评估进度（见 plan.md 检查点），动态调整里程碑 |
 | 单打独斗效率低 | CUDA MODE Discord / vLLM Slack / cs224n Piazza / 牛客圈子 |
+| 战线拉长（44周）动力不足 | 3 个项目（MiniInfer/MiniQuant/MiniMegatron）提供持续的正反馈和简历产出 |
