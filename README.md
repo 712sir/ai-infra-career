@@ -11,7 +11,7 @@
 ```
 ai-infra-career/
 ├── README.md                  ← 本文件：完整求职路线图
-├── .plan.md                   ← 分步执行计划 + 进度跟踪
+├── 520plan.md                  ← 分步执行计划 + 进度跟踪
 ├── algorithm/                 ← 板块1：手撕算法
 │   ├── cpp/                   ← C++ 题解
 │   ├── python/                ← Python 题解
