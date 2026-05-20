@@ -13,6 +13,13 @@
 - **目录**：`d:/study/llm.c-learning/`
 - **涉及技术**：C 语言、CUDA kernel、GPT-2 架构、训练循环
 
+### cs224n-learning
+- **仓库**：[cs224n-learning](https://github.com/712sir/cs224n-learning)
+- **状态**：🟡 进行中
+- **内容**：Stanford CS224N 课程学习：词向量 → RNN → Transformer → LLM 全栈
+- **目录**：`d:/study/cs224n-learning/`
+- **涉及技术**：PyTorch、Word2Vec、RNN/LSTM、Transformer、BERT/GPT、LoRA/PEFT、RAG、LLM 评估
+
 ### nanoGPT
 - **仓库**：`Project-nanoGPT`
 - **状态**：✅ 已完成 Shakespeare 训练

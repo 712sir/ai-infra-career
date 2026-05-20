@@ -24,6 +24,10 @@ ai-infra-career/
 │   └── distributed/           ← 分布式训练/推理
 ├── projects.md                ← 板块3：项目索引
 └── interview/                 ← 板块4：求职备战
+```
+```
+../cs224n-learning/             ← 独立仓库：Stanford NLP 课程学习
+../llm.c-learning/              ← 独立仓库：C/CUDA 训练 GPT-2
     ├── bajin/                 ← 八股文整理
     ├── resume/                ← 简历版本管理
     └── companies/             ← 各大厂面经/真题
@@ -215,6 +219,7 @@ ai-infra-career/
 | 项目 | 仓库 | 涉及技术 |
 |------|------|----------|
 | llm.c-learning | [链接](https://github.com/) | C 语言训练 GPT-2、CUDA kernel |
+| cs224n-learning | [链接](https://github.com/) | Stanford NLP 课程：词向量→Transformer→LLM |
 | nanoGPT | `../Project-nanoGPT` | GPT 训练全流程、PyTorch |
 | llm.c | `../Project-llm.c` | C/CUDA 高效 GPT 训练 |
 
@@ -329,9 +334,9 @@ resume/
 ## 时间线总览
 
 ```
-Month 1-2  │ CUDA入门 + PMPP + 代码随想录刷题 + C++/Python复习
-Month 3-4  │ how-to-optimize-gemm + PyTorch autograd源码 + LeetCode Hot100
-Month 5-6  │ MiniInfer + Triton DSL + DeepSpeed源码 + 灵神题单
+Month 1-2  │ CUDA入门 + PMPP + 代码随想录刷题 + C++/Python复习 + llm.c收尾 + cs224n词向量/RNN
+Month 3-4  │ how-to-optimize-gemm + PyTorch autograd源码 + LeetCode Hot100 + cs224n Transformer/LLM + cs224n Final Project
+Month 5-6  │ MiniInfer + Triton DSL + DeepSpeed源码 + 灵神题单 + llm.c-learning 收尾
 Month 7-8  │ MiniQuant + vLLM笔记输出 + pybind11实践 + 整理八股
 Month 9-10 │ MiniMegatron + vLLM开源PR + 简历投递 + 面试
 ```
@@ -342,7 +347,22 @@ Month 9-10 │ MiniMegatron + vLLM开源PR + 简历投递 + 面试
 
 1. **先通后专**：CUDA 是底座，学好 CUDA 再决定推理/训练方向
 2. **双语言同等重视**：手撕算法每道题 C++ + Python 两个版本；引擎开发 C++ 是武器，Python 是胶水，两个都不可或缺
-3. **造轮子**：手写推理引擎 > 只看源码，手写 GEMM > 只看书
-4. **开源 PR**：vLLM/PyTorch 提 PR，面试时比"我看过源码"强 10 倍
-5. **量化成果**：所有项目描述必须有数字对比（延迟降了 X%，吞吐提了 Y 倍）
-6. **芯片厂 + 大厂双线关注**：芯片厂 Compiler/SDK 岗位对 CUDA 要求更深，互联网厂对系统设计更看重
+3. **四线并行，主线优先**：A（算法）和 B（基础技术栈）不可压缩；C（llm.c-learning）和 D（cs224n）可灵活调整节奏
+4. **造轮子**：手写推理引擎 > 只看源码，手写 GEMM > 只看书
+5. **理论与实践结合**：cs224n 学完 Transformer → 立刻看 llm.c 的 CUDA 实现；vLLM 源码读完后 → 立刻写 MiniInfer
+6. **开源 PR**：vLLM/PyTorch 提 PR，面试时比"我看过源码"强 10 倍
+7. **量化成果**：所有项目描述必须有数字对比（延迟降了 X%，吞吐提了 Y 倍）
+8. **芯片厂 + 大厂双线关注**：芯片厂 Compiler/SDK 岗位对 CUDA 要求更深，互联网厂对系统设计更看重
+
+---
+
+## 每日时间分配（参考）
+
+| 时段 | 内容 |
+|------|------|
+| 上午 2h | A 线：算法刷题（C++ + Python） |
+| 下午 2h | B 线：基础技术栈（CUDA/C++/Python/源码阅读） |
+| 下午 1h | C 或 D 线：llm.c-learning / cs224n（交替进行） |
+| 晚上 1h | 复习 + 笔记整理 + 八股积累 |
+
+> 每天 5-6 小时，四线交替推进，重点在"持续"而非"突击"
