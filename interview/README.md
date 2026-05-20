@@ -6,12 +6,13 @@
 |------|------|
 | `bajin/` | 八股文整理（按技术方向分文件） |
 | `resume/` | 简历版本管理 |
-| `companies/` | 各大厂面经、真题、面试风格 |
+| `companies/` | 各厂面经、真题、面试风格（互联网大厂 + AI芯片厂 + 端侧SDK厂） |
 
 ## 八股文件清单
 
 - [ ] `cuda.md` — GPU 架构、内存层次、Tensor Core、Roofline
 - [ ] `cpp.md` — 智能指针、多线程、内存模型、STL
+- [ ] `python.md` — GIL、装饰器、生成器、asyncio、pybind11
 - [ ] `inference.md` — PagedAttention、Continuous Batching、量化对比、vLLM
 - [ ] `training.md` — NCCL、ZeRO、TP/PP、混合精度
 - [ ] `pytorch.md` — autograd、DDP、DataLoader、CUDA Stream
@@ -19,11 +20,26 @@
 
 ## 大厂文件清单
 
-- [ ] `bytedance.md`
-- [ ] `tencent.md`
-- [ ] `alibaba.md`
-- [ ] `meituan.md`
-- [ ] `baidu.md`
-- [ ] `jingdong.md`
-- [ ] `pinduoduo.md`
-- [ ] `huawei.md`
+### 互联网大厂（推理引擎 / 端侧 AI SDK）
+- [x] `bytedance.md`
+- [x] `tencent.md`
+- [x] `alibaba.md`
+- [x] `meituan.md`
+- [x] `baidu.md`
+- [x] `jingdong.md`
+- [x] `pinduoduo.md`
+- [x] `huawei.md`
+- [ ] `sensetime.md`
+- [ ] `megvii.md`
+- [ ] `cloudwalk.md`
+- [ ] `yitu.md`
+
+### AI 芯片厂（SDK / Compiler）
+- [ ] `cambricon.md`
+- [ ] `horizon.md`
+- [ ] `enflame.md`
+- [ ] `bitmain.md`
+- [ ] `biren.md`
+
+### 端侧 AI SDK
+- [ ] `arcsoft.md`

@@ -19,6 +19,7 @@ ai-infra-career/
 ├── fundamentals/              ← 板块2：核心技术栈
 │   ├── cuda/                  ← CUDA 内核编程
 │   ├── cpp/                   ← C++ 深入
+│   ├── python/                ← Python 深入
 │   ├── gpu-arch/              ← GPU 架构
 │   └── distributed/           ← 分布式训练/推理
 ├── projects.md                ← 板块3：项目索引
@@ -52,6 +53,7 @@ ai-infra-career/
   - 图论（BFS/DFS/拓扑排序/最短路径）
   - 设计题（LRU/LFU → 顺手理解 KV Cache 淘汰策略）
   - C++ 专项（智能指针、多线程、内存池、lock-free queue）
+  - Python 专项（装饰器、生成器、协程、GIL、内存管理）
 
 ### 参考资源
 
@@ -80,8 +82,7 @@ ai-infra-career/
 
 **核心书目**：《Programming Massively Parallel Processors》(PMPP) 第4版
 
-**关键产出**：
-- `fundamentals/cuda/` 下每个 kernel 有正确性测试 + 性能对比（naive vs optimized）
+**关键产出**：`fundamentals/cuda/` 下每个 kernel 有正确性测试 + 性能对比（naive vs optimized）
 
 ### 2.2 GPU 架构理解
 
@@ -106,7 +107,27 @@ ai-infra-career/
 | 编译工具 | CMake、Makefile、GDB 调试 |
 | pybind11 | Python 与 C++ 绑定（引擎开发常用） |
 
-### 2.4 推理优化核心技术
+### 2.4 Python 深入 ⭐
+
+> Python 是 AI Infra 的"胶水语言"——模型导出、Kernel 原型、分布式调度全用它。
+
+| 主题 | 核心内容 | 与 Infra 的关系 |
+|------|----------|-----------------|
+| **PyTorch 源码** | autograd 引擎、nn.Module、Tensor 内存布局、CUDA 扩展 | 推理引擎需理解模型的计算图导出 |
+| **PyTorch Distributed** | DDP 实现、`torch.distributed`、ProcessGroup、Store | 训练框架核心 |
+| **Triton DSL** | 用 Python 写 GPU kernel（block-level）、自动调优 | 快速原型验证 CUDA kernel 思路 |
+| **Python/C++ 绑定** | pybind11 写 C++ 扩展、Python C API、ctypes | 推理引擎暴露 Python 接口的核心技术 |
+| **Python 性能** | GIL 原理与绕过（subprocess/multiprocessing）、asyncio | 推理服务高并发调度 |
+| **内存与对象模型** | 引用计数、GC、`__slots__`、memoryview、buffer protocol | 零拷贝数据传输 |
+| **构建与打包** | setuptools、wheel、conda package、CMake + Python | 引擎 SDK 发布 |
+| **Profiling** | cProfile、line_profiler、memory_profiler、py-spy | 推理服务性能调优 |
+
+**核心产出**：
+- 精读 PyTorch autograd 源码并输出笔记
+- 用 Triton DSL 重写 GEMM / FlashAttention 作为原型
+- 用 pybind11 给 C++ 推理引擎绑定 Python 接口
+
+### 2.5 推理优化核心技术
 
 #### 引擎源码深度阅读
 
@@ -141,7 +162,7 @@ ai-infra-career/
 | FP8 训练+推理 | H100/L40S | Transformer Engine |
 | SmoothQuant | 激活量化 | 论文实现 |
 
-### 2.5 分布式训练核心技术
+### 2.6 分布式训练核心技术
 
 #### 通信基础
 
@@ -206,12 +227,14 @@ ai-infra-career/
 | **vLLM 源码笔记** | `vllm-notes` | 模块级架构图 + 数据流 + 开源 PR 2-3 个 | ⭐⭐⭐ |
 | **MiniMegatron** | `mini-megatron` | PyTorch 手写 TP+PP+DP 训练 GPT-2 | ⭐⭐ |
 | **CUDA Kernel 合集** | `cuda-kernels` | GEMM/FlashAttention/LayerNorm/RoPE，含正确性测试和性能对比 | ⭐⭐ |
+| **Triton Kernel 实验** | `triton-kernels` | 用 Triton DSL 实现和对比各种 Attention/GEMM kernel 性能 | ⭐⭐ |
 
 ### 开源贡献清单
 
 - [ ] vLLM：提 2-3 个 PR（bug fix / 文档 / 小功能）
 - [ ] DeepSpeed：提 1-2 个 PR
 - [ ] llama.cpp：了解 GGUF 量化实现
+- [ ] PyTorch：提 1 个 PR（了解 PyTorch 贡献流程）
 
 ---
 
@@ -225,6 +248,7 @@ ai-infra-career/
 |------|------|
 | `cuda.md` | GPU 架构、内存层次、Bank Conflict、Tensor Core、Roofline |
 | `cpp.md` | 智能指针、多线程、内存模型、STL 原理、虚函数 |
+| `python.md` | GIL、装饰器、生成器、asyncio、内存管理、pybind11 |
 | `inference.md` | PagedAttention 原理、Continuous Batching、量化算法对比、vLLM 架构 |
 | `training.md` | NCCL 通信、ZeRO 各阶段对比、TP/PP 通信量计算、混合精度 |
 | `pytorch.md` | autograd 原理、DDP 实现、DataLoader、CUDA Stream |
@@ -250,20 +274,43 @@ resume/
 4. 实习经历（如有）
 5. 教育背景
 
-### 4.3 大厂攻略
+### 4.3 AI Infra 厂谱攻略
 
-`interview/companies/` 下每厂一个文件：
+`interview/companies/` 下按三类厂商整理：
 
-| 文件 | 内容 |
-|------|------|
-| `bytedance.md` | 字节跳动：算法要求最高，每轮 2-3 道手撕，项目挖到极致 |
-| `tencent.md` | 腾讯：流程长，底层原理深（TCP/Redis/OS），LRU 必考 |
-| `alibaba.md` | 阿里：HR 权力大，价值观必问，STAR 法则准备案例 |
-| `meituan.md` | 美团：务实风格，量化成果说话，分布式高并发是重点 |
-| `baidu.md` | 百度：90% AI 岗，技术氛围浓，ML/DL 基础理论问得细 |
-| `jingdong.md` | 京东：看重执行力，对跨专业包容，聚焦项目实际结果 |
-| `pinduoduo.md` | 拼多多：薪资最高强度最大，DP 高频，流程快（1周内） |
-| `huawei.md` | 华为：昇腾生态/MindSpore，国产芯片方向 |
+#### 第一类：互联网大厂（推理引擎 / 端侧 AI SDK 团队）
+
+| 文件 | 厂商 | AI Infra 相关团队 |
+|------|------|-------------------|
+| `bytedance.md` | 字节跳动 | 豆包推理引擎、AI Infra 团队，算法要求最高 |
+| `tencent.md` | 腾讯 | 混元大模型、腾讯云 AI 平台，底层原理问得深 |
+| `alibaba.md` | 阿里 | 通义千问、PAI 平台，重系统设计 |
+| `baidu.md` | 百度 | 文心一言、飞桨框架，AI 岗占比最高 |
+| `huawei.md` | 华为 | 昇腾生态、MindSpore、CANN，国产芯方向 |
+| `sensetime.md` | 商汤 | SenseNova 大模型、推理引擎、端侧 SDK |
+| `megvii.md` | 旷视 | 端侧 AI SDK、Brain++ 平台 |
+| `cloudwalk.md` | 云从 | 金融/安防 AI 推理 |
+| `yitu.md` | 依图 | 医疗 AI 推理引擎 |
+
+#### 第二类：AI 芯片厂（SDK / Compiler 团队）
+
+| 文件 | 厂商 | 方向 |
+|------|------|------|
+| `cambricon.md` | 寒武纪 | 思元 AI 芯片、Bangbang SDK、CNML/CNDRV |
+| `horizon.md` | 地平线 | 征程自动驾驶芯片、BPU 编译器、推理 SDK |
+| `enflame.md` | 燧原 | 云燧训练/推理芯片、TopsRider 软件栈 |
+| `bitmain.md` | 比特大陆（算能） | 算丰 AI 芯片、BMNNSDK |
+| `biren.md` | 壁仞 | BR100 通用 GPU、Biren Compiler |
+
+#### 第三类：端侧 AI SDK 厂商
+
+| 文件 | 厂商 | 方向 |
+|------|------|------|
+| `arcsoft.md` | 虹软 | 端侧 AI 引擎（ArcSoft AI Engine）、手机影像 SDK |
+| `megvii.md` | 旷视 | MegEngine 端侧推理、手机/车载 SDK |
+| `sensetime.md` | 商汤 | SenseMARS 端侧方案 |
+
+> 注：旷视、商汤同时覆盖大厂和端侧两类，文件共用。
 
 ---
 
@@ -273,7 +320,7 @@ resume/
 |------|----------|----------|
 | GPU | GTX 1650 (4GB) | Phase 2 租云 GPU（AutoDL / 恒源云 / Vast.ai） |
 | CUDA | CUDA 12.1 (PyTorch 内置) | 安装 CUDA Toolkit 12.x 完整版 |
-| Python | 3.9.13 | 够用 |
+| Python | 3.9.13 | 够用，后续升级 3.11+ |
 | C++ 编译器 | gcc 16.1.0 | 够用 |
 | OS | Windows 10 | WSL2 Ubuntu 做 CUDA 开发体验更好 |
 
@@ -282,10 +329,10 @@ resume/
 ## 时间线总览
 
 ```
-Month 1-2  │ CUDA入门 + PMPP + 代码随想录刷题 + C++复习
-Month 3-4  │ how-to-optimize-gemm + vLLM源码 + LeetCode Hot100
-Month 5-6  │ MiniInfer + PyTorch/DeepSpeed源码 + 灵神题单
-Month 7-8  │ MiniQuant + vLLM笔记输出 + 整理八股
+Month 1-2  │ CUDA入门 + PMPP + 代码随想录刷题 + C++/Python复习
+Month 3-4  │ how-to-optimize-gemm + PyTorch autograd源码 + LeetCode Hot100
+Month 5-6  │ MiniInfer + Triton DSL + DeepSpeed源码 + 灵神题单
+Month 7-8  │ MiniQuant + vLLM笔记输出 + pybind11实践 + 整理八股
 Month 9-10 │ MiniMegatron + vLLM开源PR + 简历投递 + 面试
 ```
 
@@ -294,7 +341,8 @@ Month 9-10 │ MiniMegatron + vLLM开源PR + 简历投递 + 面试
 ## 关键原则
 
 1. **先通后专**：CUDA 是底座，学好 CUDA 再决定推理/训练方向
-2. **双语言**：手撕算法每道题 C++ + Python 两个版本
+2. **双语言同等重视**：手撕算法每道题 C++ + Python 两个版本；引擎开发 C++ 是武器，Python 是胶水，两个都不可或缺
 3. **造轮子**：手写推理引擎 > 只看源码，手写 GEMM > 只看书
-4. **开源 PR**：vLLM 提 2-3 个 PR，面试时比"我看过源码"强 10 倍
+4. **开源 PR**：vLLM/PyTorch 提 PR，面试时比"我看过源码"强 10 倍
 5. **量化成果**：所有项目描述必须有数字对比（延迟降了 X%，吞吐提了 Y 倍）
+6. **芯片厂 + 大厂双线关注**：芯片厂 Compiler/SDK 岗位对 CUDA 要求更深，互联网厂对系统设计更看重
