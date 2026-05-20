@@ -1,8 +1,6 @@
 # 学习资源清单
 
 > 整理自 `fundamentals/plan.md` 44 周学习计划，按类别汇总。
->
-> ⚙️ Claude Code Skills 配置详见 → [Skills 配置说明](#skills-配置说明)
 
 ---
 
@@ -166,73 +164,3 @@
 | 1 | Tensor Parallel | `megatron/core/tensor_parallel/` | [github.com/NVIDIA/Megatron-LM/tree/main/megatron/core/tensor_parallel](https://github.com/NVIDIA/Megatron-LM/tree/main/megatron/core/tensor_parallel) | W33 |
 | 2 | Pipeline Parallel | `megatron/core/pipeline_parallel/` | [github.com/NVIDIA/Megatron-LM/tree/main/megatron/core/pipeline_parallel](https://github.com/NVIDIA/Megatron-LM/tree/main/megatron/core/pipeline_parallel) | W36 |
 | 3 | Dataset & Checkpoint | 相关模块 | 同上仓库按路径查找 | W39 |
-
----
-
-## Skills 配置说明
-
-> 本项目的 Claude Code Skills 配置，2026-05-20 安装。
-
-### 已安装 Skills
-
-| 命令 | 类型 | 功能 | 安装方式 |
-|------|------|------|----------|
-| **gstack** (Garry Tan) | skill 包 | 28+ 角色化斜杠命令：`/review` `/ship` `/plan-*` `/qa` `/cso` `/retro` 等 | `git clone → ~/.claude/skills/gstack` |
-| **neat-freak** (洁癖) | skill | 会话结束后自动审查并同步 CLAUDE.md / docs / memory | `npx skills add kkkkhazix/khazix-skills` |
-| **web-access** (联网) | skill | CDP 浏览器联网：三层通道调度 + 并行分治 + 站点经验积累 | `git clone → ~/.claude/skills/web-access` |
-| **claude-mem** (记忆) | plugin | 跨会话持久记忆：SQLite + Chroma 向量检索 + Web 面板 | `npx claude-mem install`（已注册） |
-
-### 项目自带 Skills
-
-| 命令 | 功能 |
-|------|------|
-| `/planning-with-files` | 复杂任务前建计划文件，分步记录进度 |
-| `/code-simplifier` | 审查修改后的代码，检查冗余和质量问题 |
-
-### 常用命令速查
-
-| 场景 | 命令 |
-|------|------|
-| 代码审查 | `/review` (gstack) |
-| 整理文档/记忆 | `/neat` 或说 "整理一下" |
-| 搜索/抓取网页 | 直接说需求，自动调用 web-access |
-| 安全审查 | `/cso` (gstack) |
-| 发布上线 | `/ship` (gstack) |
-| 任务规划 | `/plan-eng-review` (gstack) |
-
-### 文件位置
-
-```
-~/.claude/
-├── skills/
-│   ├── gstack/          # Garry Tan 技能包 (88K★)
-│   ├── neat-freak/      # 文档洁癖同步
-│   ├── web-access/      # 浏览器联网
-│   └── ...              # 其他 skills
-├── plugins/
-│   └── cache/
-│       └── thedotmack/
-│           └── claude-mem/  # 记忆插件 (v13.2.0)
-├── settings.json        # 全局配置（env / permissions / plugins）
-└── projects/
-    └── d--study/
-        └── memory/      # 项目记忆存储
-```
-
-### 环境变量（`~/.claude/settings.json`）
-
-| 变量 | 值 | 说明 |
-|------|-----|------|
-| `ANTHROPIC_BASE_URL` | `https://api.deepseek.com/anthropic` | API 代理 |
-| `ANTHROPIC_MODEL` | `deepseek-v4-pro` | 默认模型 |
-| `CLAUDE_CODE_EFFORT_LEVEL` | `max` | 最大推理努力度 |
-
-### 前置依赖
-
-| 依赖 | 用途 | 状态 |
-|------|------|------|
-| Node.js 22+ | web-access CDP 通信 | ✅ |
-| Chrome（开启远程调试） | web-access 浏览器自动化 | ⚐ 需配置 |
-| Bun 1.0+ | gstack `/browse` + claude-mem worker | ❌ 待安装 |
-
-> **安装 Bun**：`winget install Oven-sh.Bun` 或 `powershell -c "irm bun.sh/install.ps1 | iex"`（需稳定网络）
