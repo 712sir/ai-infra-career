@@ -40,7 +40,7 @@ ai-infra-career/
 | 阶段 | 内容 | 题量 | 预计时间 |
 |------|------|------|----------|
 | 入门 | [代码随想录](https://programmercarl.com/) + B站视频逐题敲 | ~200 | 8 周 |
-| 巩固 | [LeetCode Hot 100](https://leetcode.cn/problem-list/2cktkvj/) + 剑指 Offer + 面试经典 150 | ~300 | 6 周 |
+| 巩固 | [Hot 100](https://leetcode.cn/problem-list/2cktkvj/) + [面试经典 150 题](https://leetcode.cn/studyplan/top-interview-150/) | ~250 | 6 周 |
 | 冲刺 | [灵神题单](https://leetcode.cn/u/endlesscheng/) + 高频 Hard（DP/贪心/图论） | ~100 | 4 周 |
 
 ### 规则
