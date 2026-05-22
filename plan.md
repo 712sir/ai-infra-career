@@ -23,30 +23,35 @@
 
 # 周计划（Week 1–36）
 
-## W1 (05.20–05.26)：环境 + 算法预热 + llm.c 收尾准备
+## W1 (05.20–05.26)：环境 + 算法预热 + llm.c Week1
 
-### A 算法
-- [ ] 代码随想录：01-array 全部 7 题（C++ + Python）`A-array`
-  - 704 二分查找 | 27 移除元素 | 977 有序数组的平方
-  - 209 长度最小的子数组 | 59 螺旋矩阵II | 35 搜索插入位置 | 34 排序数组查找
-- [ ] 笔记输出：`algorithm/notes/01-programmercarl/01-array/` 章节总结
+> 📅 每天 2-3 道算法题，llm.c 实际在 Week 1（非 Week 1-9 回顾）
+
+### A 算法（每天 2-3 题，本周 7 题）
+- [x] **Day A1 (5/21 周四)**：704 二分查找 + 27 移除元素 ✅
+- [ ] **Day A2 (5/22 周五)**：977 有序数组的平方 + 209 长度最小的子数组 + 35 搜索插入位置 `A-array-day2`
+- [ ] **Day A3 (5/24 周日)**：59 螺旋矩阵II + 34 排序数组查找 `A-array-day3`
+- [ ] 周末输出笔记：`algorithm/notes/01-programmercarl/01-array/` 章节总结
 
 ### B 基础 → [详细路径](fundamentals/plan.md#w1-0520-0526cuda-编程模型--c-智能指针)
-- [ ] B1 CUDA：PMPP Ch1-2 + Vector Addition kernel `B-cuda-w1`
+- [ ] 安装 CUDA Toolkit 12.x（nvcc 可用）`B-cuda-env`
+- [ ] B1 CUDA：PMPP Ch1（异构计算概述）`B-cuda-w1`
 - [ ] B2 C++：智能指针 + move 语义（Effective Modern C++ Item 17-29）`B-cpp-w1`
 - [ ] B2 Python：装饰器 + 生成器（Fluent Python Ch7, Ch14）`B-python-w1`
-- [ ] 安装 CUDA Toolkit 12.x（nvcc 可用）`B-cuda-env`
 
-### C llm.c-learning
-- [ ] 回顾 Weeks 1–9 笔记，整理一份完整目录索引 `C-llmc-review`
-- [ ] 将已有的 CUDA kernel 实验代码整理到 `experiments/cuda-kernels/`
+### C llm.c-learning（Week 1 继续）
+- [x] Day 1：环境搭建 + 首次训练（Shakespeare, 100 iters）✅
+- [x] Day 2：超参实验（block_size / n_layer / lr 对照）✅
+- [ ] Day 3：换 OpenWebText 数据集 + `sample.py` 生成文本 `C-w1-d3`
+- [ ] Day 4-5：Wandb 可视化 + 5000 步完整训练 `C-w1-d4`
 
 ### D cs224n ⏸️ 下周开始
 
 ### 本周产出
-- [ ] algorithm/cpp/01-programmercarl/01-array/ 下 7 个 .cpp 文件
-- [ ] algorithm/python/01-programmercarl/01-array/ 下 7 个 .py 文件
-- [ ] fundamentals/cuda/ 下 PMPP ch1 笔记
+- [ ] `algorithm/cpp/01-programmercarl/01-array/` 下 7 个 .cpp 文件
+- [ ] `algorithm/python/01-programmercarl/01-array/` 下 7 个 .py 文件
+- [ ] `fundamentals/cuda/` 下 PMPP ch1 笔记
+- [ ] llm.c Week 1 笔记完整（含超参实验数据 + 完整训练结果）
 
 ---
 
@@ -733,7 +738,10 @@
 
 | 周 | 主题 | 状态 |
 |----|------|------|
-| W1–W9 | 环境→模型→主循环→GEMM→反向→kernel | ✅ 已完成 |
+| W1 Day1 | 环境搭建 + 首次训练（Shakespeare） | ✅ 已完成 |
+| W1 Day2 | 超参实验 | 🟡 进行中 |
+| W1 Day3-5 | 换数据集 + wandb + 完整训练 | ⬜ 待完成 |
+| W2–W9 | 模型前向→自测→主循环→matmul→反向→perf→kernel→GEMM | ⬜ 待完成 |
 | W10–W18 | attention kernel→多层→训练循环→自定义kernel→性能优化→Multi-GPU→总结 | ⬜ 待完成 |
 
 ## cs224n 规划进度
