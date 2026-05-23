@@ -31,7 +31,7 @@
 - [x] **Day A1 (5/21 周四)**：704 二分查找 + 27 移除元素 ✅
 - [ ] **Day A2 (5/22 周五)**：977 有序数组的平方 + 209 长度最小的子数组 + 35 搜索插入位置 `A-array-day2`
 - [ ] **Day A3 (5/24 周日)**：59 螺旋矩阵II + 34 排序数组查找 `A-array-day3`
-- [ ] 周末输出笔记：`algorithm/notes/01-programmercarl/01-array/` 章节总结
+- [x] 周末输出笔记：`algorithm/notes/01-programmercarl/01-array/` 章节总结 ✅
 
 ### B 基础 → [详细路径](fundamentals/plan.md#w1-0520-0526cuda-编程模型--c-智能指针)
 - [ ] 安装 CUDA Toolkit 12.x（nvcc 可用）`B-cuda-env`
