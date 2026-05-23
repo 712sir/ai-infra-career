@@ -27,11 +27,21 @@
 
 > 📅 每天 2-3 道算法题，llm.c 实际在 Week 1（非 Week 1-9 回顾）
 
-### A 算法（每天 2-3 题，本周 7 题）
-- [x] **Day A1 (5/21 周四)**：704 二分查找 + 27 移除元素 ✅
-- [ ] **Day A2 (5/22 周五)**：977 有序数组的平方 + 209 长度最小的子数组 + 35 搜索插入位置 `A-array-day2`
-- [ ] **Day A3 (5/24 周日)**：59 螺旋矩阵II + 34 排序数组查找 `A-array-day3`
-- [x] 周末输出笔记：`algorithm/notes/01-programmercarl/01-array/` 章节总结 ✅
+### A 算法（代码随想录数组篇：核心 5 + 拓展 10，每天 2-3 题）
+
+> 正确顺序按 代码随想录：先核心 5，再按技巧分组刷拓展。
+
+**核心 5 题**（Day A1–A2）
+- [x] **Day A1 (5/21 四)**：704 二分查找 + 27 移除元素 ✅
+- [ ] **Day A2 (5/23 五→5/24 六)**：977 有序数组的平方 + 209 长度最小的子数组 + 59 螺旋矩阵II `A-core-finish`
+
+**拓展题**（Day A3–A6，按技巧分组）
+- [ ] **Day A3**：35 搜索插入位置 + 34 排序数组查找边界 `A-ext-bsearch`
+- [ ] **Day A4**：26 删除重复项 + 283 移动零 + 844 比较含退格 `A-ext-twoptr`
+- [ ] **Day A5**：69 x平方根 + 367 完全平方数 `A-ext-bsearch2`
+- [ ] **Day A6**：904 水果成篮 + 76 最小覆盖子串 `A-ext-sliding`
+- [ ] **Day A7**：54 螺旋矩阵 `A-ext-sim`
+- [x] 章节笔记：`algorithm/notes/01-programmercarl/01-array/` ✅（随进度更新）
 
 ### B 基础 → [详细路径](fundamentals/plan.md#w1-0520-0526cuda-编程模型--c-智能指针)
 - [ ] 安装 CUDA Toolkit 12.x（nvcc 可用）`B-cuda-env`
@@ -55,39 +65,41 @@
 
 ---
 
-## W2 (05.27–06.02)：链表 + PMPP 深入 + llm.c 第10周
+## W2 (05.27–06.02)：链表 + PMPP 深入 + llm.c Week2
 
-### A 算法
-- [ ] 代码随想录：02-linked-list 全部 10 题 `A-linked-list`
-  - 203 移除链表元素 | 707 设计链表 | 206 反转链表
-  - 24 两两交换 | 19 删除倒数第N | 160 链表相交
-  - 142 环形链表II | 141 环形链表 | 234 回文链表 | 143 重排链表
+### A 算法（代码随想录 02-linked-list：核心 7 题）
+
+> 每天 2-3 题，核心 7 题分 3 天完成。
+
+- [ ] 203 移除链表元素（虚拟头节点）`A-linked-list`
+- [ ] 707 设计链表（基本操作）
+- [ ] 206 反转链表（双指针/头插法）
+- [ ] 24 两两交换链表中的节点
+- [ ] 19 删除链表的倒数第 N 个节点（快慢指针）
+- [ ] 160 链表相交（双指针换轨）
+- [ ] 142 环形链表 II（快慢指针 + 数学推导）
 - [ ] 链表章节总结
 
-### B 基础 → [详细路径](fundamentals/plan.md#w2-0527-0602gridblockthread--c-模板)
-- [ ] B1 CUDA：Grid/Block/Thread 组织 + grid-stride loop `B-cuda-w2`
-- [ ] B2 C++：模板深入（类型萃取、SFINAE、特化/偏特化）`B-cpp-w2`
-- [ ] B2 Python：GIL + 多线程 vs 多进程 vs asyncio `B-python-w2`
-
-### C llm.c-learning
-- [ ] Week 10：attention 算子的 CUDA kernel 深入 `C-llmc-w10`
-  - 对照 nanoGPT 的 PyTorch attention → llm.c 的 C 实现 → CUDA kernel
-  - 画 attention 计算的数据流图
-
-### D cs224n ⏸️
+> 拓展题（后续穿插）：141 环形链表 / 234 回文链表 / 143 重排链表
 
 ### 本周产出
-- [ ] 10 个链表题双版本代码
-- [ ] PMPP ch2-3 笔记 + Vector Addition kernel
-- [ ] Attention 算子对照笔记
+- [ ] 7 个链表题双版本代码
 
 ---
 
 ## W3 (06.03–06.09)：哈希表 + 字符串 + PMPP shared memory
 
-### A 算法
-- [ ] 代码随想录：03-hash-table 全部 10 题 `A-hash`
-- [ ] 代码随想录：04-string 前 4 题（344, 541, 151, 28 KMP）`A-string`
+### A 算法（代码随想录 03-hash-table 核心 8 题 + 04-string 开始）
+
+- [ ] 242 有效的字母异位词（数组作哈希表）`A-hash`
+- [ ] 349 两个数组的交集（set 作哈希表）
+- [ ] 202 快乐数（set 判重）
+- [ ] 1 两数之和（map 作哈希表）
+- [ ] 454 四数相加 II（map 分组 + 两两组合）
+- [ ] 383 赎金信（数组作哈希表）
+- [ ] 15 三数之和（双指针 + 去重）
+- [ ] 18 四数之和（双指针 + 剪枝 + 去重）
+- [ ] 代码随想录：04-string 前 4 题：344 反转字符串 / 541 反转字符串II / 剑指05 替换空格 / 151 翻转字符串里的单词 `A-string`
 - [ ] 哈希章节总结
 
 ### B 基础 → [详细路径](fundamentals/plan.md#w3-0603-0609shared-memory--多线程)
@@ -103,7 +115,7 @@
 ### D cs224n ⏸️
 
 ### 本周产出
-- [ ] 10 个哈希题 + 4 个字符串题
+- [ ] 8 个哈希题 + 4 个字符串题双版本代码
 - [ ] Matrix Multiply naive kernel
 - [ ] LayerNorm/GeLU CUDA kernel 笔记
 
@@ -111,9 +123,10 @@
 
 ## W4 (06.10–06.16)：字符串收尾 + 栈队列 + cs224n 开始
 
-### A 算法
-- [ ] 代码随想录：04-string 完成（459, 925, 844）`A-string-finish`
-- [ ] 代码随想录：06-stack-queue 前 5 题（232, 225, 20, 1047, 150）`A-stack`
+### A 算法（04-string 收尾 + 06-stack-queue 开始）
+
+- [ ] 代码随想录 04-string 完成：剑指58-II 左旋转字符串 / 28 实现 strStr (KMP) / 459 重复的子字符串 `A-string-finish`
+- [ ] 代码随想录 06-stack-queue 前 5 题：232 用栈实现队列 / 225 用队列实现栈 / 20 有效的括号 / 1047 删除相邻重复项 / 150 逆波兰表达式求值 `A-stack`
 - [ ] 字符串章节总结（KMP 重点）
 
 ### B 基础 → [详细路径](fundamentals/plan.md#w4-0610-0616reduction--cmake--内存管理)
@@ -134,7 +147,7 @@
 - [ ] 建立 cs224n-learning 仓库目录结构
 
 ### 本周产出
-- [ ] 5 个字符串题 + 5 个栈队列题
+- [ ] 3 个字符串题 + 5 个栈队列题双版本代码
 - [ ] Reduction kernel + PMPP ch6-7 笔记
 - [ ] cs224n-learning 仓库初始化 + lec1-2 笔记
 

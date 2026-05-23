@@ -24,13 +24,14 @@
  */
 
 #include <vector>
+#include <iostream>
 using namespace std;
 
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
         int slow = 0;
-        for (int fast = 0; fast < nums.size(); fast++) {
+        for (int fast = 0; fast < static_cast<int>(nums.size()); fast++) {
             if (nums[fast] != val) {
                 nums[slow] = nums[fast];
                 slow++;
@@ -39,3 +40,13 @@ public:
         return slow;
     }
 };
+
+int main() {
+    Solution s;
+    vector<int> nums = {3, 2, 2, 3};
+    int len = s.removeElement(nums, 3);
+    cout << "len=" << len << " -> ";
+    for (int i = 0; i < len; i++) cout << nums[i] << " ";
+    cout << endl;
+    return 0;
+}
