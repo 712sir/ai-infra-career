@@ -33,7 +33,7 @@
 
 **核心 5 题**（Day A1–A2）
 - [x] **Day A1 (5/21 四)**：704 二分查找 + 27 移除元素 ✅
-- [ ] **Day A2 (5/23 五→5/24 六)**：977 有序数组的平方 + 209 长度最小的子数组 + 59 螺旋矩阵II `A-core-finish`
+- [x] **Day A2 (5/23 五→5/24 六)**：977 有序数组的平方 + 209 长度最小的子数组 + 59 螺旋矩阵II ✅
 
 **拓展题**（Day A3–A6，按技巧分组）
 - [ ] **Day A3**：35 搜索插入位置 + 34 排序数组查找边界 `A-ext-bsearch`
@@ -158,7 +158,8 @@
 ### A 算法
 - [ ] 代码随想录：06-stack-queue 完成（239 滑动窗口最大值，347 前K高频）`A-stack-finish`
 - [ ] 代码随想录：07-monotonic-stack 全部 5 题（739, 496, 503, 42, 84）`A-monostack`
-- [ ] 代码随想录：08-binary-tree 遍历（144, 145, 94, 102）`A-tree-traversal`
+- [ ] 代码随想录：08-binary-tree 遍历（144, 145, 94 递归+迭代）`A-tree-traversal`
+- [ ] 代码随想录：08-binary-tree 层序遍历 10 连（102, 107, 199, 637, 429, 515, 116, 117, 104, 111）`A-tree-levelorder`
 - [ ] 栈与队列章节总结
 
 ### B 基础 → [详细路径](fundamentals/plan.md#w5-0617-0623scan--pybind11--profiling)
@@ -178,7 +179,7 @@
 - [ ] Assignment 1：Word2Vec from scratch `D-cs224n-a1`
 
 ### 本周产出
-- [ ] 5 个单调栈题 + 4 个二叉树遍历题
+- [ ] 5 个单调栈题 + 13 个二叉树遍历/层序遍历题
 - [ ] Nsight Systems profiling 笔记
 - [ ] cs224n lec3-4 笔记 + A1 开始
 
@@ -187,7 +188,10 @@
 ## W6 (06.24–06.30)：二叉树 + 回溯基础
 
 ### A 算法
-- [ ] 代码随想录：08-binary-tree 属性题 12 题（226→113）`A-tree-prop`
+- [ ] 代码随想录：08-binary-tree 属性题 13 题（101→113）`A-tree-prop`
+  - 101 对称 + 100 相同 + 572 子树 + 104/559 最大深度 + 111 最小深度
+  - 222 完全二叉节点数 + 110 平衡 + 257 所有路径
+  - 404 左叶子 + 513 左下角 + 112/113 路径总和
 - [ ] 代码随想录：09-backtracking 前 5 题（77, 216, 17, 39, 40）`A-backtrack`
 
 ### B 基础 → [详细路径](fundamentals/plan.md#w6-0624-0630cuda-c-guide--stl-深入)
@@ -206,7 +210,7 @@
 - [ ] A1 完成
 
 ### 本周产出
-- [ ] 12 个二叉树属性题 + 5 个回溯题
+- [ ] 13 个二叉树属性题 + 5 个回溯题
 - [ ] LayerNorm kernel + pybind11 demo
 - [ ] cs224n lec5-6 笔记 + A1 提交
 
@@ -215,7 +219,12 @@
 ## W7 (07.01–07.07)：二叉树收尾 + 回溯完成
 
 ### A 算法
-- [ ] 代码随想录：08-binary-tree 构造+BST 19 题（106→669）`A-tree-bst`
+- [ ] 代码随想录：08-binary-tree 修改+构造+BST+进阶 18 题 `A-tree-bst`
+  - 修改与构造（5）：226 翻转 + 106/105 构造 + 654 最大二叉树 + 617 合并
+  - BST 属性（5）：700 搜索 + 98 验证 + 530 最小差 + 501 众数 + 538 累加
+  - 公共祖先（2）：236 普通LCA + 235 BST-LCA
+  - BST 修改（5）：701 插入 + 450 删除 + 669 修剪 + 108 有序→BST + 1382 平衡
+  - 进阶（1）：129 求根到叶子节点数字之和
 - [ ] 代码随想录：09-backtracking 完成（131→37）`A-backtrack-finish`
 - [ ] 二叉树章节总结（重点：遍历、构造、BST）
 
@@ -235,7 +244,7 @@
 - [ ] Assignment 2 开始：Neural Dependency Parsing `D-cs224n-a2`
 
 ### 本周产出
-- [ ] 19 个二叉树 BST 题 + 10 个回溯题
+- [ ] 18 个二叉树 BST+构造题 + 10 个回溯题
 - [ ] Softmax kernel + GPU 架构笔记
 - [ ] cs224n lec7-8 笔记 + A2 开始
 
@@ -361,7 +370,7 @@
 
 ### A 算法
 - [ ] 子序列：392, 115, 583, 72（编辑距离重点！）`A-dp-editdist`
-- [ ] 回文：647, 516 `A-dp-palindrome`
+- [ ] 回文：647, 5, 516, 132 `A-dp-palindrome`
 - [ ] 动态规划章节总结（核心：五部曲、背包、编辑距离）
 
 ### B 基础 → [详细路径](fundamentals/plan.md#w12-0805-0811gemm-优化链2--miniinfer-v10)
@@ -376,7 +385,7 @@
 - [ ] A3 完成
 
 ### 本周产出
-- [ ] 5 个编辑距离+回文题
+- [ ] 6 个编辑距离+回文题
 - [ ] FlashAttention 完整 kernel + DP 章节总结
 - [ ] cs224n lec17-18 + A3 提交
 
@@ -385,7 +394,7 @@
 ## W13 (08.12–08.18)：图论开始 + LeetCode Hot100 启动
 
 ### A 算法
-- [ ] 代码随想录：12-graph DFS/BFS 部分 `A-graph-dfs-bfs`
+- [ ] 代码随想录：12-graph DFS/BFS 岛屿系列（卡码网 0098→0106）`A-graph-dfs-bfs`
 - [ ] LeetCode Hot100：01-hash（1, 49, 128）+ 02-two-pointers（283, 11, 15, 42）`A-hot100-start`
 - [ ] 图论 DFS/BFS 章节总结
 
@@ -531,7 +540,7 @@
 ### A 算法
 - [ ] Hot100：16-tricks 5 题 `A-hot100-tricks`
 - [ ] Hot100 错题回顾 + 时间复盘 `A-hot100-review`
-- [ ] 代码随想录：12-graph 并查集 + 最短路部分 `A-graph-adv`
+- [ ] 代码随想录：12-graph 并查集 + 最短路（卡码网 0107→0119）`A-graph-adv`
 
 ### B 基础 → [详细路径](fundamentals/plan.md#w24w25-1028-1110awq-实现--vllm-worker)
 - [ ] 🚀 MiniQuant：AWQ 核心算法（salient channel + per-channel scaling）`B-project-w19`
