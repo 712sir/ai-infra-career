@@ -52,7 +52,7 @@
 ### C llm.c-learning（Week 1 继续）
 - [x] Day 1：环境搭建 + 首次训练（Shakespeare, 100 iters）✅
 - [x] Day 2：超参实验（block_size / n_layer / lr 对照）✅
-- [ ] Day 3：换 OpenWebText 数据集 + `sample.py` 生成文本 `C-w1-d3`
+- [x] Day 3：Temperature 生成对比 + 100→1000 步续训 ✅（OpenWebText 国内网络不可达）`C-w1-d3`
 - [ ] Day 4-5：Wandb 可视化 + 5000 步完整训练 `C-w1-d4`
 
 ### D cs224n ⏸️ 下周开始
