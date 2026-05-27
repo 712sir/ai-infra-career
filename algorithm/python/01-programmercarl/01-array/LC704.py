@@ -26,13 +26,14 @@ from typing import List
 
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
+        # 左闭右闭区间：[left, right]
         left, right = 0, len(nums) - 1
-        while left <= right:
-            mid = left + (right - left) // 2
+        while left <= right:  # 等号可取：left==right 时区间还有一个元素
+            mid = left + (right - left) // 2  # 防溢出，等价于 (l+r)//2
             if nums[mid] == target:
                 return mid
             elif nums[mid] < target:
-                left = mid + 1
+                left = mid + 1   # target 在右半区，缩左边界
             else:
-                right = mid - 1
-        return -1
+                right = mid - 1  # target 在左半区，缩右边界
+        return -1  # 未找到

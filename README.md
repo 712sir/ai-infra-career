@@ -234,12 +234,31 @@ ai-infra-career/
 | **CUDA Kernel 合集** | `cuda-kernels` | GEMM/FlashAttention/LayerNorm/RoPE，含正确性测试和性能对比 | ⭐⭐ |
 | **Triton Kernel 实验** | `triton-kernels` | 用 Triton DSL 实现和对比各种 Attention/GEMM kernel 性能 | ⭐⭐ |
 
-### 开源贡献清单
+### 开源贡献清单（vLLM 为核心 🆕）
 
-- [ ] vLLM：提 2-3 个 PR（bug fix / 文档 / 小功能）
+vLLM 是当前 AI Infra 方向性价比最高的开源贡献目标：
+- 不需要面试，代码说话
+- 社区活跃，Good First Issue 友好
+- 简历上「vLLM Contributor」含金量极高
+- 招聘方（字节/阿里/NVIDIA）都在用 vLLM
+
+| 阶段 | 内容 | 目标 |
+|:--:|------|------|
+| Phase 0 | fork + 环境搭建 + 通读 CONTRIBUTING.md | 1天 |
+| Phase 1 | Good First Issue（文档/翻译/Bug fix）→ 首个 PR | W8-W10 |
+| Phase 2 | 模型支持/功能增强 → 累计 3-5 个合并 PR | W10-W20 |
+| Phase 3 | CUDA kernel 优化/Attention 实现 | W20-W30 |
+| Phase 4 | 社区融入：参加双周会议 + 投递 talentpool@vllm.ai | 持续 |
+
+> Good First Issue：https://github.com/vllm-project/vllm/issues?q=label%3A%22good+first+issue%22  
+> 贡献指南：https://docs.vllm.ai/en/latest/contributing/
+
+其他开源贡献（次要优先级）：
+
 - [ ] DeepSpeed：提 1-2 个 PR
 - [ ] llama.cpp：了解 GGUF 量化实现
 - [ ] PyTorch：提 1 个 PR（了解 PyTorch 贡献流程）
+- [ ] SGLang：vLLM 竞品，了解差异化设计
 
 ---
 
@@ -317,6 +336,55 @@ resume/
 
 > 注：旷视、商汤同时覆盖大厂和端侧两类，文件共用。
 
+#### 第四类：大模型创业公司 🆕（推理引擎/训练框架核心团队）
+
+| 文件 | 厂商 | 方向 |
+|------|------|------|
+| `deepseek.md` | DeepSeek | 推理加速、CUDA 优化（门槛极高） |
+| `zhipu.md` | 智谱AI | GLM 训练/推理 Infra（明确岗位） |
+| `minimax.md` | MiniMax | vLLM/SGLang 推理社区协作、支持远程 |
+| `moonshot.md` | 月之暗面(Kimi) | 长文本推理、MoE 推理优化 |
+| `vllm.md` 🆕 | vLLM 开源社区 | 远程贡献、talentpool@vllm.ai 投递 |
+
+### 4.4 实习目标与优先级 🆕
+
+> 优先级按含金量和对口度排列，详细列表见 [studyplan.md](../../studyplan.md#实习目标清单)
+
+**第一档（推理引擎/训练框架核心团队，薪资天花板）：**
+
+| 优先级 | 公司 | 团队 | 方向 |
+|:--:|------|------|------|
+| 1 | 字节跳动 | Seed 豆包大模型 | 推理引擎优化、vLLM/SGLang、GPU集群调度 |
+| 2 | NVIDIA | TensorRT-LLM | CUDA 算子优化、推理引擎、AI Compiler |
+| 3 | 阿里云 | PAI / 通义实验室 | Agent Infra、推理优化、分布式训练 |
+| 4 | 华为 | 昇腾 CANN | AI编译器、推理引擎、算子迁移 |
+| 5 | vLLM | 开源社区 | 远程贡献 → 人才库 → 合作公司实习 |
+
+**第二档（成长快，scope好）：**
+
+| 优先级 | 公司 | 方向 |
+|:--:|------|------|
+| 6 | DeepSeek | 推理加速、CUDA 优化 |
+| 7 | 智谱AI | 训练/推理 Infra（明确岗位） |
+| 8 | MiniMax | vLLM/SGLang 推理框架协作、支持远程 |
+| 9 | 寒武纪 | AI芯片编译器、推理引擎（合肥有研发中心） |
+| 10 | 科大讯飞 | 星火大模型推理、讯飞+华为昇腾联合实验室（合肥总部） |
+
+**第三档（备选）：**
+
+| 公司 | 方向 |
+|------|------|
+| 月之暗面(Kimi) | 长文本推理引擎 |
+| 地平线 | BPU编译器/SDK |
+| 燧原 / 壁仞 | AI芯片软件栈 |
+| 腾讯混元 | 推理引擎、分布式训练 |
+| SGLang | 开源推理框架贡献（远程） |
+
+**投递策略：**
+1. 研一上学期：vLLM 贡献积累 GitHub 记录（随时可开始）
+2. 研一下学期（3-5月）：投第一档+第二档共 8-10 家
+3. 未拿到满意 offer：合肥本地保底（讯飞/寒武纪）+ 继续 vLLM 贡献，研二再战
+
 ---
 
 ## 硬件与环境
@@ -334,11 +402,12 @@ resume/
 ## 时间线总览
 
 ```
-Month 1-2  │ CUDA入门 + PMPP + 代码随想录刷题 + C++/Python复习 + llm.c收尾 + cs224n词向量/RNN
-Month 3-4  │ how-to-optimize-gemm + PyTorch autograd源码 + LeetCode Hot100 + cs224n Transformer/LLM + cs224n Final Project
-Month 5-6  │ MiniInfer + Triton DSL + DeepSpeed源码 + 灵神题单 + llm.c-learning 收尾
-Month 7-8  │ MiniQuant + vLLM笔记输出 + pybind11实践 + 整理八股
-Month 9-10 │ MiniMegatron + vLLM开源PR + 简历投递 + 面试
+Month 1-2  │ CUDA入门 + PMPP + 代码随想录刷题 + C++/Python复习 + llm.c收尾 + cs224n词向量/RNN + vLLM Good First Issue
+Month 3-4  │ how-to-optimize-gemm + PyTorch autograd源码 + LeetCode Hot100 + cs224n Transformer/LLM + vLLM 首个PR合并
+Month 5-6  │ MiniInfer + Triton DSL + DeepSpeed源码 + 灵神题单 + vLLM 累计3+ PR
+Month 7-8  │ MiniQuant + vLLM源码笔记 + pybind11实践 + 整理八股 + 暑期实习投递
+Month 9-10 │ MiniMegatron + vLLM CUDA性能PR + 研一末决策（申博 vs 就业）+ 简历v1
+Month 11-12│ 实习面试 + 实习进行中 + MiniInfer v1.0 开源发布
 ```
 
 ---
@@ -347,12 +416,38 @@ Month 9-10 │ MiniMegatron + vLLM开源PR + 简历投递 + 面试
 
 1. **先通后专**：CUDA 是底座，学好 CUDA 再决定推理/训练方向
 2. **双语言同等重视**：手撕算法每道题 C++ + Python 两个版本；引擎开发 C++ 是武器，Python 是胶水，两个都不可或缺
-3. **四线并行，主线优先**：A（算法）和 B（基础技术栈）不可压缩；C（llm.c-learning）和 D（cs224n）可灵活调整节奏
+3. **五线并行，主线优先**：A（算法）和 B（基础技术栈）不可压缩；C（llm.c）和 D（cs224n）可灵活调整；**E（vLLM）是简历杠杆最高的线**
 4. **造轮子**：手写推理引擎 > 只看源码，手写 GEMM > 只看书
 5. **理论与实践结合**：cs224n 学完 Transformer → 立刻看 llm.c 的 CUDA 实现；vLLM 源码读完后 → 立刻写 MiniInfer
 6. **开源 PR**：vLLM/PyTorch 提 PR，面试时比"我看过源码"强 10 倍
 7. **量化成果**：所有项目描述必须有数字对比（延迟降了 X%，吞吐提了 Y 倍）
 8. **芯片厂 + 大厂双线关注**：芯片厂 Compiler/SDK 岗位对 CUDA 要求更深，互联网厂对系统设计更看重
+9. **🆕 双轨并行，研一末决策**：研一科研试水→2027.06 判断申博 or 就业；AI Infra 实习经历是双赢筹码
+10. **🆕 vLLM 是当前最大杠杆**：每天投入 30 分钟，三个月就能写进简历；比任何校内项目都更接近工业界真实代码
+
+---
+
+## 路线决策树 🆕
+
+```
+研一（2026.09–2027.07）
+  │
+  ├─ 研一上学期：打基础 + vLLM 贡献 + MiniInfer v0
+  │
+  ├─ 研一下学期：MiniInfer v1 (GPU) + 投递暑期实习 + 论文投稿
+  │
+  └─ 研一末（2027.06）🔴 决策点
+        │
+        ├─ 产出论文 + 热爱研究 → 申博路线
+        │     │
+        │     ├─ 研二：完善论文 + 联系华五导师 + 参加复试
+        │     └─ 毕业：华五博 → 人才引进/选调
+        │
+        └─ 无产出 or 不爱研究 → 就业路线
+              │
+              ├─ 研二：全力冲 Infra 实习（字节/NVIDIA/阿里/智谱）
+              └─ 毕业：大厂 AI Infra SP（50-70万）
+```
 
 ---
 

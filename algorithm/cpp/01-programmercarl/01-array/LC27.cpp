@@ -9,8 +9,9 @@
 
 /*
  * 思路：
- *   快慢指针。快指针 fast 遍历数组，遇到不等于 val 的元素就拷贝到
- *   慢指针 slow 的位置，slow 前进。最终 slow 即新数组长度。
+ *   快慢指针。快指针 fast 遍历数组寻找"要保留"的元素（nums[fast] != val），
+ *   慢指针 slow 指向下一个要写入的位置，即新数组的尾部。
+ *   一层循环完成"删除 + 前移"两层工作，空间 O(1)。
  *
  * 时间复杂度：O(n)
  * 空间复杂度：O(1)
@@ -30,14 +31,15 @@ using namespace std;
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
-        int slow = 0;
+        int slow = 0;  // 慢指针：下一个要写入的位置，也是最终新数组长度
         for (int fast = 0; fast < static_cast<int>(nums.size()); fast++) {
-            if (nums[fast] != val) {
-                nums[slow] = nums[fast];
-                slow++;
+            if (nums[fast] != val) {       // 找到了要保留的元素
+                nums[slow] = nums[fast];    // 拷贝到 slow 位置
+                slow++;                     // slow 前进
             }
+            // 等于 val 时 slow 不动，相当于跳过（删除）
         }
-        return slow;
+        return slow;  // slow 即新数组长度
     }
 };
 

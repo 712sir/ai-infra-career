@@ -30,18 +30,19 @@ using namespace std;
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
+        // 左闭右闭区间：[left, right]
         int left = 0, right = static_cast<int>(nums.size()) - 1;
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
+        while (left <= right) {  // 等号可取：left==right 时区间还有一个元素
+            int mid = left + (right - left) / 2;  // 防溢出，等价于 (l+r)/2
             if (nums[mid] == target) {
                 return mid;
             } else if (nums[mid] < target) {
-                left = mid + 1;
+                left = mid + 1;   // target 在右半区，缩左边界
             } else {
-                right = mid - 1;
+                right = mid - 1;  // target 在左半区，缩右边界
             }
         }
-        return -1;
+        return -1;  // 未找到
     }
 };
 

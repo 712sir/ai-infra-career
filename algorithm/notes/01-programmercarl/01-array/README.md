@@ -1,10 +1,10 @@
 # 01-array — 数组
 
-> 刷题日期：2026-05-21 ～
+> 刷题日期：2026-05-21 ～ 2026-05-26
 >
 > 代码随想录数组篇：**核心 5 题** + **拓展 10 题**（按技巧分组）
 >
-> 已完成 2 题。
+> 核心 5 题全部完成 ✅，拓展题待做。
 
 ## 核心题（必刷 5 题）
 
@@ -12,9 +12,9 @@
 |---|------|------|----------|------|
 | 1 | 704 | 二分查找 | 二分法（区间不变量） | ✅ |
 | 2 | 27 | 移除元素 | 双指针（快慢指针） | ✅ |
-| 3 | 977 | 有序数组的平方 | 双指针（两端向中间） | ⬜ |
-| 4 | 209 | 长度最小的子数组 | 滑动窗口 | ⬜ |
-| 5 | 59 | 螺旋矩阵II | 模拟（循环不变量） | ⬜ |
+| 3 | 977 | 有序数组的平方 | 双指针（两端向中间） | ✅ |
+| 4 | 209 | 长度最小的子数组 | 滑动窗口 | ✅ |
+| 5 | 59 | 螺旋矩阵II | 模拟（循环不变量） | ✅ |
 
 ## 拓展题（按技巧分组）
 
@@ -304,3 +304,238 @@ class Solution {
     }
 }
 ```
+
+---
+
+## 977. 有序数组的平方
+
+### 核心思想：两端双指针
+
+数组本身是非递减有序的，但包含负数。负数平方后可能变得很大，导致**平方后的最大值只可能出现在数组两端**（最左负数平方 or 最右正数平方），不可能在中间。
+
+于是用两个指针 `l`（左端）、`r`（右端）向中间收缩，每次比较平方值，大的放入结果数组的**末尾**（`k` 指针倒序填充）。
+
+```
+原数组: [-4, -1, 0, 3, 10]
+平方后: [16, 1, 0, 9, 100]
+               ↑           ↑
+               l           r         100 最大 → 放末尾
+               l        r             16 次大 → 放倒数第二
+                   l    r              9 ...
+```
+
+### C++ 版
+
+```cpp
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& nums) {
+        int k = nums.size() - 1;
+        vector<int> res(nums.size(), 0);
+        for (int i = 0, j = nums.size() - 1; i <= j;) {
+            if (nums[i] * nums[i] < nums[j] * nums[j]) {
+                res[k--] = nums[j] * nums[j];
+                j--;
+            } else {
+                res[k--] = nums[i] * nums[i];
+                i++;
+            }
+        }
+        return res;
+    }
+};
+```
+
+### Python 版
+
+```python
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        l, r, k = 0, len(nums) - 1, len(nums) - 1
+        res = [0] * len(nums)   # 预分配固定大小
+        while l <= r:
+            if nums[l] ** 2 < nums[r] ** 2:
+                res[k] = nums[r] ** 2
+                r -= 1
+            else:
+                res[k] = nums[l] ** 2
+                l += 1
+            k -= 1
+        return res
+```
+
+---
+
+## 209. 长度最小的子数组
+
+### 核心思想：滑动窗口
+
+**关键认知**：只用一个 `for` 循环时，循环变量表示**窗口的终止位置**而不是起始位置（否则退回暴力解法）。
+
+```
+窗口 = 满足 sum >= target 的最短连续子数组
+右边界 j → for 循环自动扩张
+左边界 i → while 满足条件时持续收缩
+```
+
+**滑动窗口三要素**：
+
+| 要素 | 本题答案 |
+|------|---------|
+| 窗口是什么 | 满足 `sum >= target` 的最短连续子数组 |
+| 起始位置如何移动 | `sum >= target` 时缩小（`i++`） |
+| 结束位置如何移动 | 遍历数组 `j++` |
+
+### 复杂度分析
+
+虽然 `for` 里套了 `while`，但**时间复杂度是 O(n) 而非 O(n²)**。
+
+原因：每个元素在滑动窗口生命周期中被操作**恰好两次**——进窗口一次（`sum += nums[j]`），出窗口一次（`sum -= nums[i]`）。总操作次数 = 2n。
+
+```
+外层 for j=0..n-1     → 每个元素进窗口 1 次
+内层 while sum>=target → 每个元素出窗口最多 1 次
+总数：2n = O(n)
+```
+
+### C++ 版
+
+```cpp
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int res = INT32_MAX;
+        int sum = 0, i = 0, subL = 0;
+        for (int j = 0; j < nums.size(); j++) {
+            sum += nums[j];
+            while (sum >= target) {
+                subL = j - i + 1;
+                res = min(res, subL);
+                sum -= nums[i++];
+            }
+        }
+        return res == INT32_MAX ? 0 : res;
+    }
+};
+```
+
+### Python 版
+
+```python
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        left, cur_sum, min_len = 0, 0, float('inf')
+        for right in range(len(nums)):
+            cur_sum += nums[right]
+            while cur_sum >= target:
+                min_len = min(min_len, right - left + 1)
+                cur_sum -= nums[left]
+                left += 1
+        return min_len if min_len != float('inf') else 0
+```
+
+---
+
+## 59. 螺旋矩阵 II
+
+### 核心思想：模拟 + 循环不变量
+
+模拟顺时针填充过程，每圈分 上→右→下→左 四条边。关键原则：**每条边坚持「左闭右开」**，即每条边不填最后一个点，留给下一条边的起点。
+
+```
+n=3 时，只有 1 圈：
+  上边: (0,0)→(0,1)   填 1,2
+  右边: (0,2)→(1,2)   填 3,4
+  下边: (2,2)→(2,1)   填 5,6
+  左边: (2,0)→(1,0)   填 7,8
+  中心: (1,1)         填 9
+```
+
+### C++ 版
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> res(n, vector<int>(n, 0));
+        int startx = 0, starty = 0;
+        int loop = n / 2, mid = n / 2, count = 1, offset = 1;
+        int i, j;
+        while (loop--) {
+            i = startx, j = starty;
+            for (; j < n - offset; j++) res[i][j] = count++;
+            for (; i < n - offset; i++) res[i][j] = count++;
+            for (; j > starty; j--)    res[i][j] = count++;
+            for (; i > startx; i--)    res[i][j] = count++;
+            startx++; starty++; offset++;
+        }
+        if (n % 2) res[mid][mid] = count;
+        return res;
+    }
+};
+```
+
+### Python 版
+
+```python
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        nums = [[0] * n for _ in range(n)]   # 关键：每行独立
+        startx, starty = 0, 0
+        loop, mid, count = n // 2, n // 2, 1
+
+        for offset in range(1, loop + 1):
+            for i in range(starty, n - offset):
+                nums[startx][i] = count; count += 1
+            for i in range(startx, n - offset):
+                nums[i][n - offset] = count; count += 1
+            for i in range(n - offset, starty, -1):
+                nums[n - offset][i] = count; count += 1
+            for i in range(n - offset, startx, -1):
+                nums[i][starty] = count; count += 1
+            startx += 1; starty += 1
+
+        if n % 2 != 0:
+            nums[mid][mid] = count
+        return nums
+```
+
+---
+
+## Python 列表赋值陷阱
+
+### `[0] * n` 适用于一维，不适用于二维
+
+```python
+# ✅ 一维列表：[0]*n 没问题，n 个 0 是独立的不可变 int
+res = [0] * 5       # [0, 0, 0, 0, 0]  ← 每个都是独立的 0
+
+# ❌ 二维列表：[[0]*n] * n 有坑！
+nums = [[0] * 3] * 3
+# 看起来: [[0,0,0], [0,0,0], [0,0,0]]
+# 实际上: 三行指向同一行对象！
+nums[0][1] = 99
+# 结果: [[0,99,0], [0,99,0], [0,99,0]]  ← 三行全变了！
+```
+
+**原因**：`[[0]*3]` 先创建了一个行 `[0,0,0]`，外层 `*3` 把这一行的**引用**复制了 3 次。三行指向同一个 `list` 对象，改一行全部跟着变。
+
+### ✅ 正确写法
+
+```python
+# 列表推导式：每次循环重新创建一个新行
+nums = [[0] * n for _ in range(n)]    # 每行独立
+nums[0][1] = 99
+# 结果: [[0,99,0], [0,0,0], [0,0,0]]  ← 只变了第一行
+```
+
+### `[float('inf')] * n` 是否安全？
+
+```python
+# ✅ 安全：float('inf') 是不可变类型
+res = [float('inf')] * 5   # 5 个独立的哨兵值
+res[0] = 10                # 只改第一个
+# 结果: [10, inf, inf, inf, inf]  没问题
+```
+
+**判断规则**：`[x] * n` 中 `x` 是**不可变类型**（int / float / str / tuple）则安全；是**可变类型**（list / dict / set）则有引用共享问题，必须用列表推导式。
