@@ -2,15 +2,26 @@
 
 > **目标**：AI Infra 工程师（推理引擎 | 训练框架）上岸 | 备选：华五博→人才引进
 >
-> **开始**：2026-05-20 | **B线周期**：~12 个月（44 内容周 + 9 缓冲周） | **整体周期**：~13 个月（入学前热身）| **状态**：🟡 进行中
+> **开始**：Week 1 | **B线周期**：~12 个月（44 内容周 + 9 缓冲周） | **整体周期**：~13 个月（入学前热身）| **状态**：🟡 进行中
 >
 > **🛡️ 缓冲带规则**：每 4 周内容后跟 1 个「追赶周」——不排新内容，只补前面落下的；若没落下，提前推进后续内容。别把计划排成玻璃。
 >
 > **五线并行**：A 算法刷题 · B 基础技术栈（5轨+3项目）· C llm.c-learning · D cs224n-learning · **E vLLM 开源贡献**
 >
-> **关键决策点**：研一末（2027.06）判断 → 申博路线 or 就业路线
+> **关键决策点**：研一末（研一末）判断 → 申博路线 or 就业路线
 >
 > **B 线详细计划**：[→ fundamentals/plan.md](fundamentals/plan.md)
+
+## 核心学习资源 🆕
+
+> 四个主资源，贯穿全计划。详细索引见 [resources/README.md](resources/README.md)。
+
+| # | 资源 | 链接 | 对应线路 | 说明 |
+|---|------|------|----------|------|
+| ⭐1 | **CUDA 编程基础** | [飞书文档](https://tvle9mq8jh.feishu.cn/docx/BnqMdyaJ9oyXb1xwktgc7esMn4c) | B1 CUDA | CUDA 从入门到进阶的系统教程，B1 轨道主教材 |
+| ⭐2 | **AI Infra 配套课程 + 进阶** | [飞书文件夹](https://tvle9mq8jh.feishu.cn/drive/folder/B10Ff92fCl4IVHdH7U3cccAMn1V?from=from_copylink) | B1/B4 | CUDA 深入 + Triton/PyTorch 专题，Phase 1-2 全程配套 |
+| ⭐3 | **动手学深度学习 V2（李沐）** | [B站 171集](https://b23.tv/IjnkTRm) | C/D 补充 | PyTorch 版，覆盖 Transformer/Attention/GPT/BERT。与 cs224n（理论）+ llm.c（工程）形成三位一体：**理论学 cs224n → 实现看 llm.c → 上手跟 D2L** |
+| ⭐4 | **vLLM 配套课程** | [飞书文件夹](https://l0kzvikuq0w.feishu.cn/drive/folder/FEHnfpzWel2BVgdERTvcQ8oLnWh) | B5/E | vLLM 架构/源码/贡献指南系统教学，配合 E 线开源贡献推进 |
 
 ---
 
@@ -47,7 +58,7 @@
 
 | 方向 | 原因 |
 |------|------|
-| 纯模型炼丹（训新模型、刷 SOTA） | 合工大算力撑不起，就业用不上 |
+| 纯模型炼丹（训新模型、刷 SOTA） | 算力撑不起，就业用不上 |
 | 纯理论推导（收敛性证明、复杂度） | 数学门槛高，AI Infra 面试不考 |
 | 跟推理/训练框架无关的 CV/NLP 应用 | 面试没人关心你做过目标检测 |
 
@@ -62,7 +73,7 @@
 | 线 | 方向 | 目标 | 周期 |
 |----|------|------|------|
 | **A** | 手撕算法 | 代码随想录→Hot100→面试经典150→灵神题单 | Week 1–36 |
-| **B** | 基础技术栈 | B1 CUDA编程 · B2 C++/Python · B3 分布式 · B4 PyTorch/Triton · B5 框架源码<br>+ 3 项目：MiniInfer → MiniQuant → MiniMegatron<br>📖 详细路径见 [fundamentals/plan.md](fundamentals/plan.md) | Week 1–44 |
+| **B** | 基础技术栈 | B1 CUDA编程 · B2 C++/Python · B3 分布式 · B4 PyTorch/Triton · B5 框架源码<br>+ 3 项目：MiniInfer → MiniQuant → MiniMegatron<br>📖 详细路径见 [fundamentals/plan.md](fundamentals/plan.md)<br>🆕 配套：KuiperInfer（9讲·自制推理框架·MiniInfer 前置参考） | Week 1–44 |
 | **C** | llm.c-learning | 从 nanoGPT 到 CUDA kernel 级理解 GPT-2 训练 | Week 1–18 |
 | **D** | cs224n-learning | Stanford NLP 课程：词向量→RNN→Transformer→LLM | Week 4–24 |
 | **E** 🆕 | **vLLM 开源贡献** | Good First Issue → 提 PR → 成为 Contributor；简历硬通货，申博/就业双赢 | Week 8→持续 |
@@ -71,7 +82,7 @@
 
 # 周计划（Week 1–36）
 
-## W1 (05.20–05.26)：环境 + 算法预热 + llm.c Week1
+## W1：环境 + 算法预热 + llm.c Week1
 
 > 📅 每天 2-3 道算法题，llm.c 实际在 Week 1（非 Week 1-9 回顾）
 
@@ -80,8 +91,8 @@
 > 正确顺序按 代码随想录：先核心 5，再按技巧分组刷拓展。
 
 **核心 5 题**（Day A1–A2）
-- [x] **Day A1 (5/21 四)**：704 二分查找 + 27 移除元素 ✅
-- [x] **Day A2 (5/23 五→5/24 六)**：977 有序数组的平方 + 209 长度最小的子数组 + 59 螺旋矩阵II ✅
+- [x] **Day A1**：704 二分查找 + 27 移除元素 ✅
+- [x] **Day A2**：977 有序数组的平方 + 209 长度最小的子数组 + 59 螺旋矩阵II ✅
 
 **拓展题**（Day A3–A6，按技巧分组）
 - [ ] **Day A3**：35 搜索插入位置 + 34 排序数组查找边界 `A-ext-bsearch`
@@ -92,8 +103,8 @@
 - [x] 章节笔记：`algorithm/notes/01-programmercarl/01-array/` ✅（随进度更新）
 
 ### B 基础 → [详细路径](fundamentals/plan.md#w1-0520-0526cuda-编程模型--c-智能指针)
-- [ ] 安装 CUDA Toolkit 12.x（nvcc 可用）`B-cuda-env`
-- [ ] B1 CUDA：PMPP Ch1（异构计算概述）`B-cuda-w1`
+- [ ] ⭐ 安装 CUDA Toolkit 12.x（nvcc 可用）+ VSCode 调试环境 `B-cuda-env`
+- [ ] ⭐ B1 CUDA：**飞书课程 Ch1**（CUDA Toolkit 安装+验证）+ Ch2（线程模型+显存模型）`B-cuda-w1`
 - [ ] B2 C++：智能指针 + move 语义（Effective Modern C++ Item 17-29）`B-cpp-w1`
 - [ ] B2 Python：装饰器 + 生成器（Fluent Python Ch7, Ch14）`B-python-w1`
 
@@ -113,7 +124,7 @@
 
 ---
 
-## W2 (05.27–06.02)：链表 + PMPP 深入 + llm.c Week2
+## W2：链表 + PMPP 深入 + llm.c Week2
 
 ### A 算法（代码随想录 02-linked-list：核心 7 题）
 
@@ -135,7 +146,7 @@
 
 ---
 
-## W3 (06.03–06.09)：哈希表 + 字符串 + PMPP shared memory
+## W3：哈希表 + 字符串 + PMPP shared memory
 
 ### A 算法（代码随想录 03-hash-table 核心 8 题 + 04-string 开始）
 
@@ -169,7 +180,7 @@
 
 ---
 
-## W4 (06.10–06.16)：字符串收尾 + 栈队列 + cs224n 开始
+## W4：字符串收尾 + 栈队列 + cs224n 开始
 
 ### A 算法（04-string 收尾 + 06-stack-queue 开始）
 
@@ -211,7 +222,7 @@
 
 ---
 
-## W5 (06.17–06.23)：栈队列 + 单调栈 + 二叉树开始
+## W5：栈队列 + 单调栈 + 二叉树开始
 
 ### A 算法
 - [ ] 代码随想录：06-stack-queue 完成（239 滑动窗口最大值，347 前K高频）`A-stack-finish`
@@ -243,7 +254,7 @@
 
 ---
 
-## W6 (06.24–06.30)：二叉树 + 回溯基础
+## W6：二叉树 + 回溯基础
 
 ### A 算法
 - [ ] 代码随想录：08-binary-tree 属性题 13 题（101→113）`A-tree-prop`
@@ -274,7 +285,7 @@
 
 ---
 
-## W7 (07.01–07.07)：二叉树收尾 + 回溯完成
+## W7：二叉树收尾 + 回溯完成
 
 ### A 算法
 - [ ] 代码随想录：08-binary-tree 修改+构造+BST+进阶 18 题 `A-tree-bst`
@@ -308,7 +319,7 @@
 
 ---
 
-## W8 (07.08–07.14)：贪心算法
+## W8：贪心算法
 
 ### A 算法
 - [ ] 代码随想录：10-greedy 全部 17 题 `A-greedy`
@@ -348,7 +359,7 @@
 
 ---
 
-## W9 (07.15–07.21)：DP 基础 + 背包问题
+## W9：DP 基础 + 背包问题
 
 ### A 算法
 - [ ] 代码随想录：11-dynamic-programming 基础DP 7 题 `A-dp-basic`
@@ -379,7 +390,7 @@
 
 ---
 
-## W10 (07.22–07.28)：DP 完全背包 + 股票问题
+## W10：DP 完全背包 + 股票问题
 
 ### A 算法
 - [ ] 代码随想录：完全背包理论 + 518, 377, 322, 279, 139 `A-dp-fullknap`
@@ -409,7 +420,7 @@
 
 ---
 
-## W11 (07.29–08.04)：DP 股票问题
+## W11：DP 股票问题
 
 ### A 算法
 - [ ] 股票系列：121, 122, 123, 188, 309, 714 `A-dp-stock`
@@ -434,7 +445,7 @@
 
 ---
 
-## W12 (08.05–08.11)：DP 子序列收尾 + 回文
+## W12：DP 子序列收尾 + 回文
 
 ### A 算法
 - [ ] 子序列：392, 115, 583, 72（编辑距离重点！）`A-dp-editdist`
@@ -469,7 +480,7 @@
 
 ---
 
-## W13 (08.12–08.18)：图论开始 + LeetCode Hot100 启动
+## W13：图论开始 + LeetCode Hot100 启动
 
 ### A 算法
 - [ ] 代码随想录：12-graph DFS/BFS 岛屿系列（卡码网 0098→0106）`A-graph-dfs-bfs`
@@ -493,7 +504,7 @@
 
 ---
 
-## W14 (08.19–08.25)：Hot100 推进
+## W14：Hot100 推进
 
 ### A 算法
 - [ ] Hot100：03-sliding-window（3, 438, 560, 239, 76）`A-hot100-sliding`
@@ -517,7 +528,7 @@
 
 ---
 
-## W15 (08.26–09.01)：Hot100 链表 + 二叉树
+## W15：Hot100 链表 + 二叉树
 
 ### A 算法
 - [ ] Hot100：06-linked-list 14 题 `A-hot100-linkedlist`
@@ -541,7 +552,7 @@
 
 ---
 
-## W16 (09.02–09.08)：Hot100 二叉树收尾 + 图论 + 回溯
+## W16：Hot100 二叉树收尾 + 图论 + 回溯
 
 ### A 算法
 - [ ] Hot100：07-binary-tree 后 7 题 `A-hot100-tree-finish`
@@ -576,7 +587,7 @@
 
 ---
 
-## W17 (09.09–09.15)：Hot100 二分 + 栈 + 堆
+## W17：Hot100 二分 + 栈 + 堆
 
 ### A 算法
 - [ ] Hot100：10-binary-search 6 题 `A-hot100-bsearch`
@@ -600,7 +611,7 @@
 
 ---
 
-## W18 (09.16–09.22)：Hot100 DP 全部
+## W18：Hot100 DP 全部
 
 ### A 算法
 - [ ] Hot100：13-greedy 4 题 `A-hot100-greedy`
@@ -623,7 +634,7 @@
 
 ---
 
-## W19 (09.23–09.29)：Hot100 技巧题 + 代码随想录图论收尾
+## W19：Hot100 技巧题 + 代码随想录图论收尾
 
 ### A 算法
 - [ ] Hot100：16-tricks 5 题 `A-hot100-tricks`
@@ -645,7 +656,7 @@
 
 ---
 
-## W20 (09.30–10.06)：面试经典150题 启动
+## W20：面试经典150题 启动
 
 ### A 算法
 - [ ] 面试经典150：01-array-string 前 12 题 `A-top150-arr1`
@@ -667,11 +678,11 @@
 
 - [ ] 检查面试经典150启动进度 + MiniQuant AWQ 论文是否精读完
 - [ ] 重点补漏：vLLM 源码阅读是否按计划推进？E 线 vLLM PR 进展？
-- [ ] 全局对账：对标「2027.01 实习投递门槛」，三个硬指标目前各完成了多少？
+- [ ] 全局对账：对标「研一上·Month 5 实习投递门槛」，三个硬指标目前各完成了多少？
 
 ---
 
-## W21 (10.07–10.13)：面试经典150题 继续
+## W21：面试经典150题 继续
 
 ### A 算法
 - [ ] 面试经典150：01-array-string 后 12 题 `A-top150-arr2`
@@ -687,7 +698,7 @@
 
 ---
 
-## W22–W26 (10.14–11.17)：面试经典150 全部完成
+## W22–W26 ：面试经典150 全部完成
 
 > 以下 5 周以约每周一个专题的速度，完成面试经典150题的剩余 21 章（约 126 题）
 
@@ -742,11 +753,11 @@
 - [ ] 面试经典150 全部完成了吗？没完成的部分标出优先级
 - [ ] MiniQuant AWQ 实现 + INT4 GEMM kernel 进度对账
 - [ ] 八股文档（cuda/cpp/python/inference）写了几个了？
-- [ ] **对标「2027.01 实习投递门槛」**：CUDA kernel / MiniInfer v1.0 / vLLM PR 各到哪了？
+- [ ] **对标「研一上·Month 5 实习投递门槛」**：CUDA kernel / MiniInfer v1.0 / vLLM PR 各到哪了？
 
 ---
 
-## W27–W31 (11.18–12.22)：灵神题单冲刺 + 简历准备
+## W27–W31 ：灵神题单冲刺 + 简历准备
 
 ### A 算法：灵神题单核心专题
 - [ ] W27：滑动窗口专题（20 题，难度分 1400–1700）`A-lingshen-sliding`
@@ -778,7 +789,7 @@
 
 ---
 
-## W32–W36 (2027.01.06–02.09)：MiniMegatron 核心
+## W32–W36 ：MiniMegatron 核心
 
 ### A 算法冲刺
 - [ ] 各厂高频真题（字节/腾讯/阿里/百度/华为）`A-company`
@@ -806,7 +817,7 @@
 
 ---
 
-## W37–W44 (2027.02.10–04.06)：MiniMegatron 冲刺 + 收尾 → [详细路径](fundamentals/plan.md#phase-4minimegatron--冲刺w30w46)
+## W37–W44 ：MiniMegatron 冲刺 + 收尾 → [详细路径](fundamentals/plan.md#phase-4minimegatron--冲刺w30w46)
 
 ### W37–W38：混合精度 + ZeRO
 - [ ] 🚀 MiniMegatron v2：FP16/BF16 混合精度训练（AMP + loss scaling）`B-project-w37`
@@ -836,32 +847,32 @@
 
 | 时间 | 里程碑 | 状态 |
 |------|--------|------|
-| 2026.05.20 | 仓库初始化 + 五线启动 | ✅ |
-| 2026.06.20 | B1 CUDA：PMPP Ch1-7 + Reducation 7版优化；B2 C++：智能指针/模板/多线程 | ⬜ |
-| 2026.07.15 | B1 GEMM naive→shared memory + B2 CPython内部 + B4 PyTorch Tensor/autograd | ⬜ |
-| 2026.08.10 | B1 Tensor Core GEMM + B3 MPI/AllReduce + MiniInfer v0 (CPU推理) | ⬜ |
-| 2026.08.31 | FlashAttention forward kernel + B3 NCCL/Ring AllReduce + MiniInfer v1 (GPU+KV Cache) | ⬜ |
-| 2026.09.30 | CUTLASS 基础 + Triton GEMM/FlashAttn + ZeRO 1/2/3 + MiniInfer v2 (PagedAttn+ContBatch) | ⬜ |
-| 2026.10.31 | PTX/SASS + PyTorch nn.Module 源码 + vLLM 源码 2 模块 + MiniInfer v3 (TP) | ⬜ |
-| 2026.11.30 | AWQ 实现 + INT4 GEMM kernel + DeepSpeed ZeRO 源码 + MiniQuant 完成 | ⬜ |
-| 2026.12.31 | FlashAttention-2/3 + CUTLASS 进阶 + Megatron-LM TP/PP 源码 + MiniMegatron DP训练 | ⬜ |
-| 2027.01.31 | 3D 并行 + 混合精度 + ZeRO 集成 + MiniMegatron TP+PP 训练跑通 | ⬜ |
-| 2027.02.28 | Kernel Fusion + FSDP/MoE + 源码收尾 + MiniMegatron 完整版 + 八股全部 | ⬜ |
-| 2027.03.31 | 简历 v2.0 + 面试开始 | ⬜ |
-| 2027.04.30 | 第一个 offer | ⬜ |
+| Week 1 | 仓库初始化 + 五线启动 | ✅ |
+| Week 5 | B1 CUDA：PMPP Ch1-7 + Reduction 7版优化；B2 C++：智能指针/模板/多线程 | ⬜ |
+| Week 10 | B1 GEMM naive→shared memory + B2 CPython内部 + B4 PyTorch Tensor/autograd | ⬜ |
+| Week 13 | B1 Tensor Core GEMM + B3 MPI/AllReduce + MiniInfer v0 (CPU推理) | ⬜ |
+| Week 16 | FlashAttention forward kernel + B3 NCCL/Ring AllReduce + MiniInfer v1 (GPU+KV Cache) | ⬜ |
+| Week 20 | CUTLASS 基础 + Triton GEMM/FlashAttn + ZeRO 1/2/3 + MiniInfer v2 (PagedAttn+ContBatch) | ⬜ |
+| Week 24 | PTX/SASS + PyTorch nn.Module 源码 + vLLM 源码 2 模块 + MiniInfer v3 (TP) | ⬜ |
+| Week 28 | AWQ 实现 + INT4 GEMM kernel + DeepSpeed ZeRO 源码 + MiniQuant 完成 | ⬜ |
+| Week 32 | FlashAttention-2/3 + CUTLASS 进阶 + Megatron-LM TP/PP 源码 + MiniMegatron DP训练 | ⬜ |
+| Week 36 | 3D 并行 + 混合精度 + ZeRO 集成 + MiniMegatron TP+PP 训练跑通 | ⬜ |
+| Week 40 | Kernel Fusion + FSDP/MoE + 源码收尾 + MiniMegatron 完整版 + 八股全部 | ⬜ |
+| Week 43 | 简历 v2.0 + 面试开始 | ⬜ |
+| Week 46 | 第一个 offer | ⬜ |
 
 ## E 线 vLLM 开源贡献里程碑 🆕
 
 | 时间 | 里程碑 | 状态 |
 |------|--------|------|
-| W8 (2026.07) | 环境搭建 + fork vLLM + 通读贡献指南 + 加入 Slack `#contributors` | ⬜ |
-| W10 (2026.08) | 认领首个 Good First Issue（文档/翻译/Bug修复），提交第一个 PR | ⬜ |
-| W14 (2026.09) | 首个 PR 合并 🎉 + 开始认领第二个 Issue（功能增强/模型支持） | ⬜ |
-| W20 (2026.10) | 累计 3+ 合并 PR，简历标注「vLLM Contributor」 | ⬜ |
-| W30 (2027.01) | 累计 5+ 合并 PR，尝试提交 CUDA kernel 相关性能优化 PR | ⬜ |
+| W8  | 环境搭建 + fork vLLM + 通读贡献指南 + 加入 Slack `#contributors` | ⬜ |
+| W10  | 认领首个 Good First Issue（文档/翻译/Bug修复），提交第一个 PR | ⬜ |
+| W14  | 首个 PR 合并 🎉 + 开始认领第二个 Issue（功能增强/模型支持） | ⬜ |
+| W20  | 累计 3+ 合并 PR，简历标注「vLLM Contributor」 | ⬜ |
+| W30  | 累计 5+ 合并 PR，尝试提交 CUDA kernel 相关性能优化 PR | ⬜ |
 | 持续 | 保持活跃，参与社区会议，投递 talentpool@vllm.ai | ⬜ |
 
-## 🎯 研一上学期末 · 实习投递门槛（2027.01）
+## 🎯 研一上学期末 · 实习投递门槛（研一上·Month 5）
 
 > **目标**：研一上学期结束时，以下三项必须完成，缺一项不投简历。
 > 达不到就继续积累，不凑数、不碰运气。
@@ -872,7 +883,7 @@
 | **2** | **MiniInfer v1.0 GitHub 开源** | GPU 推理 + KV Cache，README 含 benchmark vs PyTorch 基线，代码规范、有单元测试 | B 线项目 |
 | **3** | **vLLM 1–2 个 PR 合入** | 至少 1 个 merged PR（文档/翻译/Bug fix 起步），简历可标注「vLLM Contributor」 | E 线 |
 
-> 三项全达标 = 研一寒假投第一批实习（NVIDIA / 百度昆仑芯 / 淘天T-Star / 科大讯飞 / 寒武纪）
+> 三项全达标 = 研一寒假投第一批实习（NVIDIA / 智谱AI / 科大讯飞 / 寒武纪）
 
 ---
 
@@ -880,15 +891,15 @@
 
 | 时间 | 节点 | 说明 |
 |------|------|------|
-| 2026.09 | 研一入学，确定导师 | 优先选放实习的导师 or 跟企业有合作的导师 |
-| 2027.01 | **🔴 实习投递门槛检查** | 10+ CUDA kernel + MiniInfer v1.0 + vLLM PR 合入 → 达标即投 |
-| 2027.03 | 暑期实习投递窗口打开 | 目标：字节Seed/NVIDIA/阿里PAI/智谱/MiniMax |
-| 2027.06 | **🔴 决策点：申博 vs 就业** | 申博条件：1+ 论文发表 or 1+ 顶会投稿 + 对研究有热情 |
-| 2027.09 | MiniInfer GPU版 v1.0 + 开源发布 | 实习面试/申博的核心筹码 |
-| 2028.01 | 拿到第一段 AI Infra 实习 offer | 研二寒假/暑期实习 |
-| 2028.06 | 实习完成 → 申博结果 / 秋招投递 | 双轨切换点 |
-| 2028.09 | 博导入围结果 / 秋招 offer | 最终选择 |
-| 2029.06 | 硕士毕业 | 入职 or 博导入学 |
+| 研一开学 | 研一入学，确定导师 | 优先选放实习的导师 or 跟企业有合作的导师 |
+| 研一上·Month 5 | **🔴 实习投递门槛检查** | 10+ CUDA kernel + MiniInfer v1.0 + vLLM PR 合入 → 达标即投 |
+| 研一下·Month 1 | 暑期实习投递窗口打开 | 目标：字节Seed/NVIDIA/阿里PAI/智谱/MiniMax |
+| 研一末 | **🔴 决策点：申博 vs 就业** | 申博条件：1+ 论文发表 or 1+ 顶会投稿 + 对研究有热情 |
+| 研二上 | MiniInfer GPU版 v1.0 + 开源发布 | 实习面试/申博的核心筹码 |
+| 研二上·Month 2 | 拿到第一段 AI Infra 实习 offer | 研二寒假/暑期实习 |
+| 研二末 | 实习完成 → 申博结果 / 秋招投递 | 双轨切换点 |
+| 研三上 | 博导入围结果 / 秋招 offer | 最终选择 |
+| 研三末 | 硕士毕业 | 入职 or 博导入学 |
 
 ---
 
@@ -900,31 +911,31 @@
 ## 时间线总览
 
 ```
-研一上（2026.09–2027.01）
+研一上（研一开学–研一上·Month 5）
 ├── 9月：入学，选导师
 ├── 10–12月：推进44周计划，攒实习筹码
-├── 2027年1月：🔴 实习投递门槛检查 → 达标即投
+├── Month 5：🔴 实习投递门槛检查 → 达标即投
 
-研一下（2027.02–2027.08）
+研一下
 ├── 2–3月：暑期实习投递窗口（字节/NVIDIA/阿里等集中开岗）
 ├── 3–5月：面试 + 同步继续推进学习计划
 ├── 6月：🔴 申博 vs 就业决策
 ├── 7–8月：第一段暑期实习 → or → 继续推进项目/论文
 
-研二上（2027.09–2028.01）
-├── 9–12月：继续日常实习 or 回校做论文/项目
-├── 2028年1月：第二段实习投递（寒假/日常）
+研二上（研二上–研二上·Month 2）
+├── Month 1-4：继续日常实习 or 回校做论文/项目
+├── Month 2：第二段实习投递（寒假/日常）
 
-研二下（2028.02–2028.08）
+研二下
 ├── 2–4月：暑期实习面试（第二次窗口）
 ├── 5–6月：实习结束 → 申博结果揭晓 or 准备秋招
 ├── 7–8月：最后一段实习 → or → 全力秋招
 
-研三上（2028.09–2029.01）
+研三上
 ├── 9–10月：秋招正式批（投递 + 笔试 + 面试）
 ├── 11–12月：offer 比较 + 签三方
 
-研三下（2029.02–2029.06）
+研三下
 ├── 春招补录（如果秋招不理想）
 └── 6月：毕业，入职
 ```
@@ -933,9 +944,9 @@
 
 | 段位 | 时间 | 类型 | 目标 | 目标公司 |
 |------|------|------|------|------|
-| **🥉 第一段** | 研一暑假（2027.07–08） | 暑期实习 | 攒 AI Infra 经历，简历破冰 | 科大讯飞、寒武纪合肥、合工大合作企业 |
-| **🥈 第二段** | 研二日常（2028.01–06） | 日常/寒假实习 | 技术深度，拿 return offer | NVIDIA、百度昆仑芯、字节Seed、阿里PAI |
-| **🥇 第三段** | 研二暑假（2028.07–08） | 暑期实习 | 冲转正 SP offer，锁定毕业去向 | 字节 Seed / NVIDIA / 华为昇腾 / 智谱 |
+| **🥉 第一段** | 研一暑假 | 暑期实习 | 攒 AI Infra 经历，简历破冰 | 科大讯飞、寒武纪合肥、合工大合作企业 |
+| **🥈 第二段** | 研二日常 | 日常/寒假实习 | 技术深度，拿 return offer | NVIDIA、智谱AI、字节AML、阿里PAI、无问芯穹 |
+| **🥇 第三段** | 研二暑假 | 暑期实习 | 冲转正 SP offer，锁定毕业去向 | NVIDIA / 智谱 / 月之暗面 / 字节AML / 华为昇腾 |
 
 ## 关键认知
 
@@ -949,7 +960,7 @@
 
 **别等到研二暑假才投第一份实习。** 研一混过去 → 简历空的 → CUDA 没写过、项目没做过、开源没贡献 → 研二补来不及 → 一步慢步步慢。
 
-2027 年 1 月「实习投递门槛」不达标 → 整个时间线往后推半年。
+研一上·Month 5「实习投递门槛」不达标 → 整个时间线往后推半年。
 
 ---
 
@@ -1015,6 +1026,8 @@
 
 ## vLLM 开源贡献进度 🆕
 
+> ⭐ **配套课程**：[vLLM 飞书课程](https://l0kzvikuq0w.feishu.cn/drive/folder/FEHnfpzWel2BVgdERTvcQ8oLnWh) — 18 课时源码级深度解析，覆盖 PagedAttention、Continuous Batching、Prefix Caching、Speculative Decoding、量化推理、分布式推理（TP/PP/EP）、社区贡献全流程
+
 | 阶段 | 内容 | 状态 |
 |------|------|------|
 | Phase 0: 环境搭建 | fork repo + uv 环境 + pre-commit + 通读 CONTRIBUTING.md | ⬜ |
@@ -1033,7 +1046,7 @@
 | 风险 | 应对 |
 |------|------|
 | GTX 1650 4GB 跑不动大模型 | W10 起租云 GPU（AutoDL/恒源云/Vast.ai）；MiniInfer 早期用 CPU+小模型 |
-| CUDA 学习曲线陡峭 | PMPP → how-to-optimize-gemm → CUTLASS 渐进式；Plan B 五轨并行可跳转 |
+| CUDA 学习曲线陡峭 | 飞书 CUDA 课程（Softmax→Reduce→MatMul→FlashAttn 渐进式）→ how-to-optimize-gemm → CUTLASS；五轨并行可跳转 |
 | 五轨并行时间不够 | B1 不可压缩；B2–B5 按需调整节奏；项目驱动确保产出 |
 | cs224n 数学要求高 | Assignment 慢慢做，重点是 Lecture 的直觉理解 |
 | 面试时间与预期冲突 | 每 4 周评估进度（见 plan.md 检查点），动态调整里程碑 |

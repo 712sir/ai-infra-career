@@ -55,9 +55,9 @@ algorithm/
 
 | 阶段 | 资源 | 预计完成 |
 |------|------|----------|
-| 基础 | [代码随想录](https://programmercarl.com/) 全部（200+ 题） | 2026.08 |
-| 巩固 | [Hot 100](https://leetcode.cn/problem-list/2cktkvj/) + [面试经典 150 题](https://leetcode.cn/studyplan/top-interview-150/) | 2026.10 |
-| 冲刺 | [灵神题单](https://leetcode.cn/discuss/post/3141566/ru-he-ke-xue-shua-ti-by-endlesscheng-q3yd/) + 高频 Hard | 2026.12 |
+| 基础 | [代码随想录](https://programmercarl.com/) 全部（200+ 题） | Month N |
+| 巩固 | [Hot 100](https://leetcode.cn/problem-list/2cktkvj/) + [面试经典 150 题](https://leetcode.cn/studyplan/top-interview-150/) | Month N |
+| 冲刺 | [灵神题单](https://leetcode.cn/discuss/post/3141566/ru-he-ke-xue-shua-ti-by-endlesscheng-q3yd/) + 高频 Hard | Month N |
 
 ## 进度统计
 

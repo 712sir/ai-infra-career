@@ -4,7 +4,20 @@
 >
 > **总周期**：W1–W44 | **每日投入**：~2h | **硬件**：GTX 1650 4GB + 云 GPU（W10 起）
 >
-> **当前日期**：2026-05-20 | **状态**：🟡 规划完成
+> **当前日期**：Week 1 | **状态**：🟡 规划完成
+
+---
+
+## 🔨 手搓代码双模式
+
+> 每项学习任务标注推荐模式，按重要程度分配
+
+| 模式 | 做法 | B1 CUDA 占比 | B2 C++/Python 占比 | B3-B5 源码 占比 |
+|------|------|:--:|:--:|:--:|
+| 🥇 **白板手搓** | 关掉参考，从零独立思考写出完整实现 | 80%（GEMM/FlashAttn/Reduction 核心kernel） | 50%（智能指针/多线程/模板） | 40%（TP/PP 通信从论文推导） |
+| 🥈 **临摹手搓** | 边看参考边敲，理解意图后重写 | 20%（vecAdd入门/cuBLAS胶水代码） | 50%（CMake/pybind11/装饰器模板） | 60%（vLLM/DeepSpeed 源码复现简化版） |
+
+> 核心原则：不是你「看懂」了代码，是你「能写出来」。面试白板编程考的就是这个。
 
 ---
 
@@ -35,328 +48,340 @@
 
 ---
 
-## W1 (05.20–05.26)：CUDA 编程模型 + C++ 智能指针
+## W1：CUDA 编程模型 + C++ 智能指针
 
 ### B1 CUDA — CUDA 编程模型入门
 
 | 项目 | 内容 |
 |------|------|
-| **资源** | 《PMMP》Ch1：Introduction（异构并行计算、CPU vs GPU 架构差异、CUDA 平台概述） |
-|  | 《PMMP》Ch2：Heterogeneous Data Parallel Computing（数据并行的概念、CUDA C 程序结构、kernel launch 语义） |
-|  | 代码：手写第一个 Vector Addition kernel（编译 → 运行 → 验证正确性） |
+| **主资源** | ⭐ [**CUDA 编程基础（飞书教程）**](https://tvle9mq8jh.feishu.cn/docx/BnqMdyaJ9oyXb1xwktgc7esMn4c) — B1 轨道主教材 |
+| **配套** | [AI Infra 配套课程（飞书）](https://tvle9mq8jh.feishu.cn/drive/folder/B10Ff92fCl4IVHdH7U3cccAMn1V?from=from_copylink) + 进阶课程 |
+| **参考书** | 《PMMP》Ch1：Introduction（异构并行计算、CPU vs GPU 架构差异、CUDA 平台概述） |
+| | 《PMMP》Ch2：Heterogeneous Data Parallel Computing（数据并行概念、CUDA C 程序结构、kernel launch 语义） |
+| | 代码：手写第一个 Vector Addition kernel（编译 → 运行 → 验证正确性） |
 | **验收** | 能说出 host/device 代码的区别，理解 `<<<grid, block>>>` 语法，能写一个正确的 vecAdd kernel |
 | **产出** | `fundamentals/cuda/pmpp-notes/ch01-heterogeneous-computing.md` |
-|  | `fundamentals/cuda/pmpp-notes/ch02-data-parallel.md` |
-|  | `fundamentals/cuda/kernels/01-vec-add/vec_add.cu` |
+| | `fundamentals/cuda/pmpp-notes/ch02-data-parallel.md` |
+| | `fundamentals/cuda/kernels/01-vec-add/vec_add.cu` |
 
 ### B2 C++ — 智能指针 + 移动语义
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | 《Effective Modern C++》Item 17–25：`unique_ptr`、`shared_ptr`、`weak_ptr`、自定义 deleter |
-|  | 《Effective Modern C++》Item 23–29：`std::move`、`std::forward`、万能引用、完美转发 |
-|  | 代码：写一个自定义 `make_unique`，写一个使用 `shared_ptr` 的循环引用场景并用 `weak_ptr` 解决 |
+| | 《Effective Modern C++》Item 23–29：`std::move`、`std::forward`、万能引用、完美转发 |
+| | 代码：写一个自定义 `make_unique`，写一个使用 `shared_ptr` 的循环引用场景并用 `weak_ptr` 解决 |
 | **验收** | 能解释 `shared_ptr` 控制块结构、`weak_ptr::lock()` 实现原理、`move` vs `forward` 的区别 |
 | **产出** | `fundamentals/cpp/smart-pointers.md` |
-|  | `fundamentals/cpp/move-semantics.md` |
-|  | `fundamentals/cpp/code/smart-ptr-demo.cpp` |
+| | `fundamentals/cpp/move-semantics.md` |
+| | `fundamentals/cpp/code/smart-ptr-demo.cpp` |
 
 ### B2 Python — 装饰器 + 生成器
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | 《Fluent Python》Ch7：Decorators and Closures（装饰器语法糖、闭包原理、`functools.wraps`、参数化装饰器） |
-|  | 《Fluent Python》Ch14：Iterables, Iterators, and Generators（`__iter__`/`__next__`、`yield from`、生成器表达式） |
-|  | 代码：实现 `@timer`、`@retry` 装饰器；用生成器实现 lazy 文件读取 |
+| | 《Fluent Python》Ch14：Iterables, Iterators, and Generators（`__iter__`/`__next__`、`yield from`、生成器表达式） |
+| | 代码：实现 `@timer`、`@retry` 装饰器；用生成器实现 lazy 文件读取 |
 | **验收** | 能手写带参数和不带参数的装饰器，能用 `yield` 实现协程风格的消费者-生产者 |
 | **产出** | `fundamentals/python/decorators.md` |
-|  | `fundamentals/python/generators.md` |
+| | `fundamentals/python/generators.md` |
 
 ---
 
-## W2 (05.27–06.02)：Grid/Block/Thread + C++ 模板
+## W2：Grid/Block/Thread + C++ 模板
 
-### B1 CUDA — 线程组织 + 内存层次
+### B1 CUDA — 线程组织 + 内存层次 + Softmax 入门
 
 | 项目 | 内容 |
 |------|------|
-| **资源** | 《PMMP》Ch2（续）：Grid、Block、Thread 的三层组织，`threadIdx`/`blockIdx`/`blockDim`/`gridDim` |
-|  | 《PMMP》Ch3：多维 Grid/Block 组织方式，边界处理 |
-|  | CUDA C++ Programming Guide §3.2：Memory Hierarchy（global/local/shared/register/constant/texture） |
-|  | 代码：手写 grid-stride loop 版 Vector Addition |
-| **验收** | 能画出 Grid→Block→Thread→Warp 的层级图，理解 grid-stride loop 为什么能处理任意大数组 |
-| **产出** | `fundamentals/cuda/pmpp-notes/ch03-thread-organization.md` |
-|  | `fundamentals/cuda/kernels/02-grid-stride/grid_stride_vec_add.cu` |
+| **主资源** | ⭐ **飞书 CUDA 课程 Ch2**：CUDA 线程模型和显存模型（GPU 硬件结构 SM/CUDA Core/Warp Scheduler、三级线程组织、内存层次、cudaMalloc/cudaMemcpy、归约算子性能对比） |
+| | ⭐ **飞书 CUDA 课程 Ch3（前半）**：Softmax CPU 基线 → CUDA 单线程块实现 |
+| **参考书** | 《PMMP》Ch2-3：Grid/Block/Thread 补充 + 多维组织 + 边界处理 |
+| | CUDA C++ Programming Guide §3.2：Memory Hierarchy |
+| | 代码：手写 grid-stride loop 版 Vector Addition；手写 CPU baseline Softmax |
+| **验收** | 能画出 Grid→Block→Thread→Warp 的层级图；理解 grid-stride loop；理解 Softmax 数值稳定性（平移技巧） |
+| **产出** | `fundamentals/cuda/course/ch02-thread-memory-model.md` |
+| | `fundamentals/cuda/kernels/02-grid-stride/grid_stride_vec_add.cu` |
+| | `fundamentals/cuda/kernels/03-softmax/softmax_cpu.cpp` |
 
 ### B2 C++ — 模板深入
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | 《C++ Templates: The Complete Guide》Part 1：函数模板、类模板、非类型模板参数、模板特化 |
-|  | CppCon Back to Basics: Templates (YouTube) |
-|  | 代码：实现一个 `Array<T, N>` 编译期固定大小数组；实现 `is_same<T, U>` type trait |
+| | CppCon Back to Basics: Templates (YouTube) |
+| | 代码：实现一个 `Array<T, N>` 编译期固定大小数组；实现 `is_same<T, U>` type trait |
 | **验收** | 能解释 SFINAE 的基本思想、模板特化和偏特化的区别 |
 | **产出** | `fundamentals/cpp/templates.md` |
-|  | `fundamentals/cpp/code/template-demo.cpp` |
+| | `fundamentals/cpp/code/template-demo.cpp` |
 
 ### B2 Python — GIL 与多线程/多进程
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | David Beazley: "Understanding the Python GIL" (YouTube) |
-|  | 《Fluent Python》Ch18：Concurrency with asyncio（event loop、coroutine、`await`、`asyncio.gather`） |
-|  | 代码：对比 CPU 密集型任务用 `threading` vs `multiprocessing` vs `asyncio` 的性能 |
+| | 《Fluent Python》Ch18：Concurrency with asyncio（event loop、coroutine、`await`、`asyncio.gather`） |
+| | 代码：对比 CPU 密集型任务用 `threading` vs `multiprocessing` vs `asyncio` 的性能 |
 | **验收** | 能解释 GIL 为什么在 IO 密集时影响小、在 CPU 密集时致命；知道何时用 `pool.map` 何时用 `asyncio.gather` |
 | **产出** | `fundamentals/python/gil-multiprocessing.md` |
-|  | `fundamentals/python/code/gil-benchmark.py` |
+| | `fundamentals/python/code/gil-benchmark.py` |
 
 ---
 
-## W3 (06.03–06.09)：Shared Memory + 多线程
+## W3：Shared Memory + Bank Conflict + Transpose + Softmax 优化
 
-### B1 CUDA — Shared Memory + Bank Conflict
+### B1 CUDA — Shared Memory + Softmax Warp 优化 + Transpose
 
 | 项目 | 内容 |
 |------|------|
-| **资源** | 《PMMP》Ch5：Memory Architecture and Locality（shared memory 详细、bank conflict、memory coalescing） |
-|  | 《PMMP》Ch6：Performance Considerations（occupancy、latency hiding、warp divergence） |
-|  | CUDA C++ Programming Guide §3.2.3 Shared Memory |
-|  | 代码：Matrix Multiply naive global version，用 `nvprof`/`nsys` profile |
-| **验收** | 能解释 bank conflict 的成因和解决方法（padding），理解 warp divergence 对性能的影响 |
-| **产出** | `fundamentals/cuda/pmpp-notes/ch05-memory-architecture.md` |
-|  | `fundamentals/cuda/pmpp-notes/ch06-performance.md` |
-|  | `fundamentals/cuda/kernels/03-matmul-naive/matmul_naive.cu` |
+| **主资源** | ⭐ **飞书 CUDA 课程 Ch3（后半）**：Softmax 共享内存块内归约→Warp Shuffle（`__shfl_sync`）→多 Warp + 共享内存混合优化 |
+| | ⭐ **飞书 CUDA 课程 Ch9**：Transpose 与数据排布优化（Bank 冲突 32 存储体机制、Padding 优化、循环展开、Nsight Compute 分析） |
+| **参考书** | 《PMMP》Ch5-6：Memory Architecture + Performance Considerations |
+| | CUDA C++ Programming Guide §3.2.3 Shared Memory |
+| | 代码：手写 4 版 Softmax kernel（单线程块→共享内存归约→Warp Shuffle→混合优化）；手写 Transpose naive→shared memory→padding 优化 |
+| **验收** | 能解释 bank conflict 成因和解决方法（padding）；理解 `__shfl_sync` 的广播/上移/下移操作；能对比 Softmax 各版本加速比 |
+| **产出** | `fundamentals/cuda/course/ch03-softmax-optimization.md` |
+| | `fundamentals/cuda/course/ch09-transpose-bank-conflict.md` |
+| | `fundamentals/cuda/kernels/03-softmax/softmax_v1_to_v4.cu` |
+| | `fundamentals/cuda/kernels/09-transpose/transpose_optimized.cu` |
 
 ### B2 C++ — 多线程编程
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | 《C++ Concurrency in Action》Ch1–4：`std::thread`、`std::mutex`、`std::lock_guard`、`std::unique_lock`、`std::atomic`、`std::condition_variable` |
-|  | 代码：线程安全的有界阻塞队列（`BoundedBlockingQueue<T>`）、用 `std::atomic` 实现无锁计数器 |
+| | 代码：线程安全的有界阻塞队列（`BoundedBlockingQueue<T>`）、用 `std::atomic` 实现无锁计数器 |
 | **验收** | 能写出正确的生产者-消费者队列，能解释 `atomic` 的 memory order（relaxed/acquire/release/seq_cst） |
 | **产出** | `fundamentals/cpp/multithreading.md` |
-|  | `fundamentals/cpp/code/bounded-queue.hpp` |
+| | `fundamentals/cpp/code/bounded-queue.hpp` |
 
 ### B2 Python — 异步编程
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | Real Python: "Async IO in Python: A Complete Walkthrough" |
-|  | 《Fluent Python》Ch19：Concurrency Models（future、executor、queue）|
-|  | 代码：用 `asyncio` 实现简易 HTTP 并发下载器 |
+| | 《Fluent Python》Ch19：Concurrency Models（future、executor、queue）|
+| | 代码：用 `asyncio` 实现简易 HTTP 并发下载器 |
 | **验收** | 能写出 `async`/`await` 的正确用法，理解 event loop 如何调度 coroutine |
 | **产出** | `fundamentals/python/async-io.md` |
-|  | `fundamentals/python/code/async-downloader.py` |
+| | `fundamentals/python/code/async-downloader.py` |
 
 ---
 
-## W4 (06.10–06.16)：Reduction + CMake + 内存管理
+## W4：Reduction + CMake + 内存管理
 
-### B1 CUDA — 并行规约（Reduction）
+### B1 CUDA — 并行规约（Reduction）⭐ 重点周
 
 | 项目 | 内容 |
 |------|------|
-| **资源** | 《PMMP》Ch7：Parallel Patterns — Reduction（naive interleaved addressing → sequential addressing → warp shuffle） |
-|  | Mark Harris: "Optimizing Parallel Reduction in CUDA" (NVIDIA Dev Blog) |
-|  | 代码：实现 7 个版本 reduction，profile 对比性能 |
-| **验收** | 能手写 share memory + warp shuffle 优化版 reduction kernel，理解 divergence 和 bank conflict 在各版本中如何变化 |
-| **产出** | `fundamentals/cuda/pmpp-notes/ch07-reduction-scan.md` |
-|  | `fundamentals/cuda/kernels/04-reduction/reduction_v1_to_v7.cu` |
-|  | `fundamentals/cuda/kernels/04-reduction/benchmark.md`（7 版性能对比图） |
+| **主资源** | ⭐ **飞书 CUDA 课程 Ch4**：Reduce 算子优化完整链（朴素归约→线程利用率提升+预归约→线程束分化消除→Warp 级展开 `__shfl_down_sync`→BlockReduce 两阶段模式→通用优化方法论） |
+| **参考** | Mark Harris: "Optimizing Parallel Reduction in CUDA" (NVIDIA) + 《PMMP》Ch7 |
+| | 代码：实现 7 个版本 reduction，`ncu` profile 对比性能 |
+| **验收** | 能手写 share memory + warp shuffle 优化版 reduction kernel；理解 divergence 和 bank conflict 在各版本中如何变化 |
+| **产出** | `fundamentals/cuda/course/ch04-reduce-optimization.md` |
+| | `fundamentals/cuda/kernels/04-reduction/reduction_v1_to_v7.cu` |
+| | `fundamentals/cuda/kernels/04-reduction/benchmark.md`（7 版性能对比图） |
 
 ### B2 C++ — CMake 工程化
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | "Professional CMake" Ch1–7：`add_executable`/`add_library`、`target_*` 系列、`find_package`、`FetchContent` |
-|  | Modern CMake (YouTube: "Effective Modern CMake" by Daniel Pfeifer) |
-|  | 代码：把之前写的 CUDA kernel 用 CMake 组织成项目（`enable_language(CUDA)`） |
+| | Modern CMake (YouTube: "Effective Modern CMake" by Daniel Pfeifer) |
+| | 代码：把之前写的 CUDA kernel 用 CMake 组织成项目（`enable_language(CUDA)`） |
 | **验收** | 能搭建一个包含 CUDA 源码 + C++ 测试的 CMake 项目 |
 | **产出** | `fundamentals/cpp/cmake.md` |
-|  | 重构 `fundamentals/cuda/kernels/` 目录，添加 `CMakeLists.txt` |
+| | 重构 `fundamentals/cuda/kernels/` 目录，添加 `CMakeLists.txt` |
 
 ### B2 Python — 内存管理
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | 《CPython Internals》Ch5：Memory Management（引用计数、GC 分代回收、`gc` 模块、循环引用检测、`__slots__`、weakref） |
-|  | Nina Zakharenko: "Memory Management in Python" (PyCon) |
-|  | 代码：用 `memory_profiler` 对比 `__slots__` vs `__dict__` 的内存占用 |
+| | Nina Zakharenko: "Memory Management in Python" (PyCon) |
+| | 代码：用 `memory_profiler` 对比 `__slots__` vs `__dict__` 的内存占用 |
 | **验收** | 能解释 CPython 的三色标记 GC、`__slots__` 如何节省内存、buffer protocol 的原理 |
 | **产出** | `fundamentals/python/memory-management.md` |
-|  | `fundamentals/python/code/memory-demo.py` |
+| | `fundamentals/python/code/memory-demo.py` |
 
 ---
 
-## W5 (06.17–06.23)：Scan + pybind11 + Profiling
+## W5：MatMul v1-v2 + 原子操作 + Profiling
 
-### B1 CUDA — 并行前缀和（Scan）
+### B1 CUDA — 矩阵乘法入门（v1→v2）
 
 | 项目 | 内容 |
 |------|------|
-| **资源** | 《PMMP》Ch7（续）：Scan（Blelloch scan vs Kogge-Stone、work-efficient parallel scan） |
-|  | CUDA Toolkit Samples：`scan` example |
-|  | 代码：实现 inclusive/exclusive scan |
-| **验收** | 能画出 Blelloch scan 各 step 的数据流，理解 work-efficient 的含义 |
-| **产出** | `fundamentals/cuda/pmpp-notes/ch07-scan-advanced.md` |
-|  | `fundamentals/cuda/kernels/05-scan/scan.cu` |
+| **主资源** | ⭐ **飞书 CUDA 课程 Ch5**：矩阵乘法基础 — Naive CUDA (v1)→共享内存分块 (v2)、cuBLAS 性能基准 |
+| | ⭐ **飞书 CUDA 课程 Ch8（前半）**：原子操作概述+数据竞争实例+atomicAdd/atomicCAS |
+| **参考** | 《PMMP》Ch4：Tiled Matrix Multiplication |
+| | 代码：手写 naive GEMM → shared memory tiled GEMM；手写并行直方图（原子操作版） |
+| **验收** | 能写出 tiled GEMM；理解 tile size 与 shared memory 使用量关系；会用 atomicAdd 解决并行写冲突 |
+| **产出** | `fundamentals/cuda/course/ch05-matmul-v1-v2.md` |
+| | `fundamentals/cuda/kernels/05-matmul/matmul_v1_naive.cu` |
+| | `fundamentals/cuda/kernels/05-matmul/matmul_v2_shared_mem.cu` |
+| | `fundamentals/cuda/kernels/08-atomic/histogram_atomic.cu` |
 
 ### B1 CUDA — Profiling 工具链
 
 | 项目 | 内容 |
 |------|------|
-| **资源** | NVIDIA: "NVIDIA Nsight Systems User Guide" §1–3 |
-|  | NVIDIA: "NVIDIA Nsight Compute User Guide" §1–3 |
-|  | 视频：cuda-mode Lecture: Introduction to Profiling (lecture 1) |
-|  | 代码：用 `nsys` profile reduction kernel，用 `ncu` 分析 stall reasons |
-| **验收** | 能用 `nsys` 看到 kernel launch timeline，用 `ncu` 看到 memory/compute throughput |
-| **产出** | `fundamentals/cuda/profiling/tools-overview.md` |
-|  | `fundamentals/cuda/profiling/nsys-quick-ref.md` |
-|  | `fundamentals/cuda/profiling/ncu-quick-ref.md` |
+| **资源** | NVIDIA Nsight Systems/Compute User Guide §1–3 |
+| | cuda-mode Lecture 1: Introduction to Profiling |
+| | 代码：用 `nsys` profile reduction kernel，用 `ncu` 分析 stall reasons |
+| **验收** | 能用 `nsys` 看 kernel launch timeline，用 `ncu` 看 memory/compute throughput |
+| **产出** | `fundamentals/cuda/profiling/nsys-ncu-overview.md` |
 
 ### B2 C++ — pybind11 基础
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | pybind11 官方文档：First Steps, Functions, Classes, Build Systems |
-|  | 视频：Robert Smallshire "Integrating Python and C++ with pybind11" |
-|  | 代码：将 Vector Addition kernel 封装为 Python 可调用的函数，实现 numpy array 零拷贝 |
+| | 视频：Robert Smallshire "Integrating Python and C++ with pybind11" |
+| | 代码：将 Vector Addition kernel 封装为 Python 可调用的函数，实现 numpy array 零拷贝 |
 | **验收** | 能从 Python 调用 C++ 函数并传入/返回 numpy 数组 |
 | **产出** | `fundamentals/python/pybind11-basics.md` |
-|  | `fundamentals/python/code/pybind11-demo/`（完整 CMake 项目） |
+| | `fundamentals/python/code/pybind11-demo/`（完整 CMake 项目） |
 
 ---
 
-## W6 (06.24–06.30)：CUDA C++ Guide + STL 深入
+## W6：MatMul v3 (Thread Tile + ILP) + 原子操作进阶
 
-### B1 CUDA — Programming Guide 精读（1）
+### B1 CUDA — 矩阵乘法 v3：Thread Tile + ILP
 
 | 项目 | 内容 |
 |------|------|
-| **资源** | CUDA C++ Programming Guide §1–3：Programming Model（SIMT、线程层级、内存层级、异构编程） |
-|  | CUDA C++ Programming Guide §5：Performance Guidelines（occupancy calculator、execution configuration） |
-|  | 代码：对比不同 block size 对 occupancy 和性能的影响 |
-| **验收** | 能根据 kernel 的 register/shared memory 使用量推算 occupancy |
-| **产出** | `fundamentals/cuda/prog-guide/01-programming-model.md` |
-|  |  occupancy 计算表格（Excel/CSV） |
-| **更新主题** ✅ CUDA Programming Guide 前 3 章
+| **主资源** | ⭐ **飞书 CUDA 课程 Ch5（续）**：Thread Tile 优化 (v3) — TM×TN 线程 Tiling、指令级并行 (ILP)、内存合并访问、计算/访存比优化，达到 cuBLAS ~50% |
+| | ⭐ **飞书 CUDA 课程 Ch8（后半）**：并行直方图 Shared Memory 加速版 |
+| **参考** | CUDA C++ Programming Guide §5：Performance Guidelines（occupancy calculator） |
+| | 代码：手写 v3 GEMM；手写直方图 shared memory 优化版；对比不同 block size 对 occupancy 影响 |
+| **验收** | 能解释 Thread Tile 为什么能提升 ILP；理解 occupancy 计算方法；会用 shared memory 加速直方图统计 |
+| **产出** | `fundamentals/cuda/course/ch05-matmul-v3-thread-tile.md` |
+| | `fundamentals/cuda/kernels/05-matmul/matmul_v3_thread_tile.cu` |
+| | `fundamentals/cuda/kernels/08-atomic/histogram_shared_mem.cu` |
+| | occupancy 计算表格 |
 
 ### B2 C++ — STL 内部原理
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | "Inside STL" 系列博客（或侯捷《STL 源码剖析》选读）：`vector` 扩容策略、`unordered_map` hash 表实现、`deque` 分段结构 |
-|  | cppreference：各容器的 iterator invalidation rules |
-|  | 代码：手写简易 `vector`、`unordered_map`（开链法） |
+| | cppreference：各容器的 iterator invalidation rules |
+| | 代码：手写简易 `vector`、`unordered_map`（开链法） |
 | **验收** | 能解释 `vector::push_back` 的 amortized O(1) 扩容、`unordered_map` 的 load_factor 和 rehash、`deque` 的 chunk 管理 |
 | **产出** | `fundamentals/cpp/stl-internals.md` |
-|  | `fundamentals/cpp/code/tiny-stl/vector.hpp` |
-|  | `fundamentals/cpp/code/tiny-stl/hashmap.hpp` |
+| | `fundamentals/cpp/code/tiny-stl/vector.hpp` |
+| | `fundamentals/cpp/code/tiny-stl/hashmap.hpp` |
 
 ---
 
-## W7 (07.01–07.07)：GEMM 入门 + CPython 内部
+## W7：MatMul v4 向量化 + RMSNorm 算子
 
-### B1 CUDA — GEMM naive + shared memory
+### B1 CUDA — 矩阵乘法 v4：向量化访存 + RMSNorm
 
 | 项目 | 内容 |
 |------|------|
-| **资源** | "how-to-optimize-gemm" (GitHub: /hwu-dev/how-to-optimize-gemm) README + naive 版 |
-|  | 《PMMP》Ch4（复习）：Tiled Matrix Multiplication |
-|  | 代码：手写 naive GEMM → shared memory tiled GEMM |
-| **验收** | 能写出 tiled GEMM，理解 tile size 如何影响 shared memory 使用量和 bank conflict |
-| **产出** | `fundamentals/cuda/optimize-gemm/01-naive/` |
-|  | `fundamentals/cuda/optimize-gemm/02-shared-mem/` |
-|  | `fundamentals/cuda/optimize-gemm/notes.md`（每一步的优化原理和性能数据）|
+| **主资源** | ⭐ **飞书 CUDA 课程 Ch6**：MatMul 向量化访存优化 (v4) — 向量访存指令、共享内存转置存储、外积计算+寄存器级向量化、SIMD 写入、达到 cuBLAS 75-80% |
+| | ⭐ **飞书 CUDA 课程 Ch10**：RMSNorm 算子 — BlockReduce + float4 向量化、Warp 级+块级两阶段归约、与 LayerNorm 对比 |
+| | 代码：手写 v4 GEMM；手写 RMSNorm CUDA kernel（BlockReduce + float4） |
+| **验收** | 能对比 v3 vs v4 在大矩阵（>1024）上的性能差异；理解 RMSNorm vs LayerNorm 的区别和适用场景 |
+| **产出** | `fundamentals/cuda/course/ch06-matmul-v4-vectorized.md` |
+| | `fundamentals/cuda/course/ch10-rmsnorm-blockreduce.md` |
+| | `fundamentals/cuda/kernels/05-matmul/matmul_v4_vectorized.cu` |
+| | `fundamentals/cuda/kernels/10-rmsnorm/rmsnorm_cuda.cu` |
 
 ### B2 Python — CPython 内部基础
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | 《CPython Internals》Ch1–3：编译过程（source → AST → bytecode → execution）、PyObject 结构、引用计数实现细节 |
-|  | Philip Guo: "CPython internals: A ten-hour codewalk through the Python interpreter source code" (选择前 3 小时) |
-|  | 代码：用 `dis` 模块拆解简单函数的 bytecode |
+| | Philip Guo: "CPython internals: A ten-hour codewalk through the Python interpreter source code" (选择前 3 小时) |
+| | 代码：用 `dis` 模块拆解简单函数的 bytecode |
 | **验收** | 能解释 Python 中 `a = 1` 这一行代码在解释器内部发生了什么 |
 | **产出** | `fundamentals/python/cpython-internals.md` |
-|  | `fundamentals/python/code/dis-demo.py` |
+| | `fundamentals/python/code/dis-demo.py` |
 
 ---
 
-## W8 (07.08–07.14)：GEMM 进阶 + PyTorch Tensor 源码
+## W8：MatMul v4 收尾 + Nsight 深度分析 + PyTorch Tensor
 
-### B1 CUDA — GEMM 优化链（1）
+### B1 CUDA — v4 性能剖析 + 阶段小结
 
 | 项目 | 内容 |
 |------|------|
-| **资源** | "how-to-optimize-gemm"：global memory coalescing、bank conflict fix、双缓冲 |
-|  | cuda-mode Lecture 4: "CUDA Mode: GEMM" |
-|  | 代码：实现 coalescing 优化版 + padding 消除 bank conflict |
-| **验收** | 能用 `ncu` 测出 l1/shared/l2 命中率 |
-| **产出** | `fundamentals/cuda/optimize-gemm/03-coalescing/` |
-|  | `fundamentals/cuda/optimize-gemm/04-bank-conflict-fix/` |
+| **主资源** | ⭐ **飞书 CUDA 课程 Ch6（续）**：Nsight Compute 深度剖析 v4 — 内存吞吐率、Cache 命中率、优化效果量化评估 |
+| | MatMul 阶段小结：v1→v2→v3→v4 完整优化链复盘，绘制 roofline 图 |
+| | 代码：用 `ncu` 对每个版本的 matmul 做详细 profile，输出对比报告 |
+| **验收** | 能画出 v1→v4 的性能提升曲线和 roofline 位置；理解每个版本消除的瓶颈是什么 |
+| **产出** | `fundamentals/cuda/course/matmul-v1-v4-benchmark.md`（完整性能对比报告+roofline） |
+| | `fundamentals/cuda/course/ch06-nsight-analysis.md` |
 
 ### B4 PyTorch — Tensor 内部
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | ezyang "PyTorch Internals" blog post (Part 1: Tensor) |
-|  | PyTorch 源码：`c10/core/TensorImpl.h`、`aten/src/ATen/core/TensorBase.h` |
-|  | 代码：理解 `stride`、`contiguous`、`view` vs `reshape`、`storage` offset 机制 |
+| | PyTorch 源码：`c10/core/TensorImpl.h`、`aten/src/ATen/core/TensorBase.h` |
+| | 代码：理解 `stride`、`contiguous`、`view` vs `reshape`、`storage` offset 机制 |
 | **验收** | 能解释为什么 `a.T.contiguous()` 会触发数据拷贝，而 `a.view(-1)` 不会（如果 contiguous） |
 | **产出** | `fundamentals/python/pytorch-internals/01-tensor.md` |
-|  | 示意图：stride 与 contiguous 的关系 |
+| | 示意图：stride 与 contiguous 的关系 |
 
 ---
 
-## W9 (07.15–07.21)：Warp-Level + PyTorch autograd
+## W9：Warp-Level + PyTorch autograd
 
 ### B1 CUDA — Warp 级原语 + Cooperative Groups
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | CUDA C++ Programming Guide §4.3：Warp Shuffle Functions（`__shfl_sync`、`__shfl_down_sync`） |
-|  | CUDA C++ Programming Guide §3.6：Cooperative Groups（`cooperative_groups::tiled_partition`、`thread_block_tile`） |
-|  | 代码：用 warp shuffle 实现 block-level reduction 最终版 |
+| | CUDA C++ Programming Guide §3.6：Cooperative Groups（`cooperative_groups::tiled_partition`、`thread_block_tile`） |
+| | 代码：用 warp shuffle 实现 block-level reduction 最终版 |
 | **验收** | 能解释 warp shuffle 相比 shared memory reduction 的优势，理解 `__syncwarp()` 的必要性 |
 | **产出** | `fundamentals/cuda/warp-shuffle.md` |
-|  | `fundamentals/cuda/kernels/06-warp-reduce/` |
+| | `fundamentals/cuda/kernels/06-warp-reduce/` |
 
 ### B4 PyTorch — autograd 源码
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | ezyang "PyTorch Internals" Part 2: autograd |
-|  | PyTorch 源码：`torch/csrc/autograd/engine.cpp`、`variable.cpp` |
-|  | 代码：手动追踪一个简单计算图的 backward，打印 `grad_fn` 链 |
+| | PyTorch 源码：`torch/csrc/autograd/engine.cpp`、`variable.cpp` |
+| | 代码：手动追踪一个简单计算图的 backward，打印 `grad_fn` 链 |
 | **验收** | 能解释 autograd 如何构建计算图、`retain_graph` 的用途、`saved_tensors` 在反向传播中的作用 |
 | **产出** | `fundamentals/python/pytorch-internals/02-autograd.md` |
-|  | `fundamentals/python/code/autograd-trace.py` |
+| | `fundamentals/python/code/autograd-trace.py` |
 
 ---
 
-## W10 (07.22–07.28)：Tensor Core 入门 + B3 分布式启动
+## W10：Tensor Core 入门 + B3 分布式启动
 
-### B1 CUDA — Tensor Core 编程
+### B1 CUDA — MatMul v5：双缓冲 + Tensor Core
 
 | 项目 | 内容 |
 |------|------|
-| **资源** | NVIDIA: "Programming Tensor Cores in CUDA 9" (Dev Blog) |
-|  | CUDA C++ Programming Guide §7.24：Warp Matrix Functions (`mma.sync`) |
-|  | 代码：用 `mma.sync.f16.f16.f32` 实现 16×16×16 GEMM micro-kernel |
-| **验收** | 能解释 Tensor Core 的矩阵分块方式（m16n8k16/m16n8k8），理解 FP16 accum 到 FP32 的数据流 |
-| **产出** | `fundamentals/cuda/optimize-gemm/05-tensor-core/` |
-|  | `fundamentals/gpu-arch/tensor-core-deep-dive.md` |
+| **主资源** | ⭐ **飞书 CUDA 课程 Ch7**：双缓冲流水优化 (v5) — 乒乓缓冲原理、共享内存+寄存器级两级流水线、数据预取与计算重叠、达到 cuBLAS ~92% |
+| | NVIDIA: "Programming Tensor Cores in CUDA 9" (Dev Blog) |
+| | CUDA C++ Programming Guide §7.24：Warp Matrix Functions (`mma.sync`) |
+| | 代码：手写 v5 GEMM（双缓冲）；用 `mma.sync.f16.f16.f32` 实现 Tensor Core micro-kernel |
+| **验收** | 能解释双缓冲如何隐藏访存延迟；理解 Tensor Core 矩阵分块方式 |
+| **产出** | `fundamentals/cuda/course/ch07-matmul-v5-double-buffer.md` |
+| | `fundamentals/cuda/kernels/05-matmul/matmul_v5_double_buffer.cu` |
+| | `fundamentals/cuda/optimize-gemm/05-tensor-core/` |
+| | `fundamentals/gpu-arch/tensor-core-deep-dive.md` |
 
 ### B3 分布式 — MPI + AllReduce 基础
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | MPI 教程：MPI Tutorial 前 5 章（`MPI_Send`/`Recv`、`MPI_Bcast`、`MPI_Reduce`、`MPI_Allreduce`、`MPI_Gather`） |
-|  | 论文：Thakur et al. "Optimization of Collective Communication Operations in MPICH" |
-|  | 代码：用 MPI 实现 Ring AllReduce 的简化版 |
+| | 论文：Thakur et al. "Optimization of Collective Communication Operations in MPICH" |
+| | 代码：用 MPI 实现 Ring AllReduce 的简化版 |
 | **验收** | 能画出 Ring AllReduce 的 2×(N-1) 步数据流，理解 Recursive Halving-Doubling |
 | **产出** | `fundamentals/distributed/mpi-basics.md` |
-|  | `fundamentals/distributed/code/ring-allreduce-mpi/`（C++ 实现） |
+| | `fundamentals/distributed/code/ring-allreduce-mpi/`（C++ 实现） |
 
 ---
 
@@ -372,7 +397,7 @@
 
 ---
 
-## W10 (07.22–07.28)：MiniInfer 启动
+## W10：MiniInfer 启动
 
 ### 🚀 MiniInfer v0.1 — CPU 单 token 推理（启动）
 
@@ -382,44 +407,33 @@
 | **资源** | karpathy/nanoGPT `model.py`（GPT-2 架构参考） |
 | **验收** | 给定 prompt "Hello, my name is"，能正确输出 logits 值（与 PyTorch Transformer 对比验证） |
 | **产出** | `projects/miniinfer/` 仓库初始化 |
-|  | `projects/miniinfer/model.py`（GPT-2 模型定义，纯 CPU numpy/Python） |
-|  | `projects/miniinfer/docs/00-overview.md`（架构设计文档） |
+| | `projects/miniinfer/model.py`（GPT-2 模型定义，纯 CPU numpy/Python） |
+| | `projects/miniinfer/docs/00-overview.md`（架构设计文档） |
 
 > **关键决策**：MiniInfer 第一阶段用 Python + NumPy 写，目的是理解 GPT-2 的计算流程（LayerNorm → Attention → FFN → Residual），第二阶段再逐步搬 GPU。
 
 ---
 
-## W11 (07.29–08.04)：CUDA Graph + NVTX + MiniInfer v0.2
+## W11：PyTorch CUDA 扩展 + CUDA Graph + MiniInfer v0.2
 
-### B1 CUDA — CUDA Graph
-
-| 项目 | 内容 |
-|------|------|
-| **资源** | CUDA C++ Programming Guide §3.2.5：CUDA Graphs（graph node types、`cudaGraphInstantiate`、`cudaGraphLaunch`） |
-|  | NVIDIA GTC Talk: "CUDA Graphs: Reducing Launch Overhead" |
-|  | 代码：将 GEMM kernel 用 CUDA Graph 封装，对比 launch overhead |
-| **验收** | 能解释 CUDA Graph 适合什么场景（重复执行的小 kernel），不适合什么场景（动态 shape 变化） |
-| **产出** | `fundamentals/cuda/cuda-graph.md` |
-|  | `fundamentals/cuda/kernels/07-cuda-graph/graph_demo.cu` |
-
-### B1 CUDA — NVTX
+### B1 CUDA — 自定义 PyTorch CUDA 算子 ⭐
 
 | 项目 | 内容 |
 |------|------|
-| **资源** | NVIDIA NVTX Documentation |
-|  | 代码：在 GEMM 各阶段插入 NVTX range，用 `nsys` 可视化 |
-| **验收** | 能用 NVTX 标记 kernel 的各个阶段并在 Nsight Systems 中清晰看到 timeline |
-| **产出** | `fundamentals/cuda/profiling/nvtx-guide.md` |
+| **主资源** | ⭐ **飞书 CUDA 课程 Ch12**：自定义 PyTorch CUDA 算子 — C++/CUDA Extension 开发全流程、Python 绑定+autograd 支持（forward/backward）、setup.py 编译安装、性能对比验证 |
+| | 代码：将之前写的 MatMul kernel 封装为 PyTorch Extension（`torch.autograd.Function`） |
+| **验收** | 能从 `import my_ops` 调用自己写的 CUDA kernel，支持 autograd 反向传播 |
+| **产出** | `fundamentals/cuda/course/ch12-pytorch-cuda-extension.md` |
+| | `fundamentals/cuda/kernels/12-pytorch-extension/`（完整 setup.py + cpp + cu + python 项目） |
 
-### B1 CUDA — cuBLAS/cuDNN 基础
+### B1 CUDA — CUDA Graph + cuBLAS（辅助）
 
 | 项目 | 内容 |
 |------|------|
-| **资源** | cuBLAS Documentation：`cublasSgemm`、`cublasGemmEx` API 用法 |
-|  | cuDNN Developer Guide：Convolution、Tensor ops 基础 API |
-|  | 代码：用 cuBLAS 调用 GEMM 和手写 kernel 对比性能 |
-| **验收** | 知道何时应该用 cuBLAS 而不是手写 GEMM kernel |
-| **产出** | `fundamentals/cuda/cublas-essentials.md` |
+| **资源** | CUDA C++ Programming Guide §3.2.5：CUDA Graphs；cuBLAS/cuBLASLt Documentation |
+| | 代码：将 GEMM kernel 用 CUDA Graph 封装；对比 cuBLAS vs 手写 kernel 性能 |
+| **验收** | 理解 CUDA Graph 适用场景（重复执行小 kernel）；知道何时用 cuBLAS 而非手写 |
+| **产出** | `fundamentals/cuda/cuda-graph-cublas.md` |
 
 ### 🚀 MiniInfer v0.2 — 完整模型前向
 
@@ -429,30 +443,30 @@
 | **资源** | nanoGPT `model.py` |
 | **验收** | 完整 forward pass 输出的 token 概率分布与 PyTorch 误差 < 1e-4 |
 | **产出** | `projects/miniinfer/model.py` 完整版 |
-|  | `projects/miniinfer/tests/test_forward.py`（数值验证） |
+| | `projects/miniinfer/tests/test_forward.py`（数值验证） |
 
 ---
 
-## W12 (08.05–08.11)：GEMM 优化链（2）+ MiniInfer v1.0
+## W12：GEMM 优化链（2）+ MiniInfer v1.0
 
 ### B1 CUDA — GEMM 优化链（2）
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | "how-to-optimize-gemm"：thread coarsening、register tiling、double buffering |
-|  | cuda-mode Lecture 8: "CUTLASS and the Fundamental Optimizations" |
-|  | 代码：实现 register tiling（每个 thread 计算 8×8 块） |
+| | cuda-mode Lecture 8: "CUTLASS and the Fundamental Optimizations" |
+| | 代码：实现 register tiling（每个 thread 计算 8×8 块） |
 | **验收** | 能说出 GEMM 优化链的所有阶段，并知道每个阶段的提升比例（相对 naive） |
 | **产出** | `fundamentals/cuda/optimize-gemm/06-register-tiling/` |
-|  | `fundamentals/cuda/optimize-gemm/complete-benchmark.md`（从 naive 到 tensor core 的全链性能对比图） |
+| | `fundamentals/cuda/optimize-gemm/complete-benchmark.md`（从 naive 到 tensor core 的全链性能对比图） |
 
 ### B3 分布式 — NCCL 通信原语
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | NCCL Documentation：AllReduce、AllGather、ReduceScatter、Broadcast |
-|  | 论文：NCCL: "Massively Scalable Distributed Deep Learning on the GPU" |
-|  | 代码：用 `nccl-tests` 测试各通信原语的 bandwidth |
+| | 论文：NCCL: "Massively Scalable Distributed Deep Learning on the GPU" |
+| | 代码：用 `nccl-tests` 测试各通信原语的 bandwidth |
 | **验收** | 能解释 NCCL 如何根据 topology（NVLink/PCIe/IB）自动选择最优算法 |
 | **产出** | `fundamentals/distributed/nccl-primitives.md` |
 
@@ -464,46 +478,47 @@
 | **资源** | vLLM paper §3 (PagedAttention), nanoGPT `generate()` |
 | **验收** | 能完成多 token 自回归生成，正确使用 KV Cache 避免重复计算 |
 | **产出** | `projects/miniinfer/gpu_ops/`（GEMM/Attention 的 CUDA kernel） |
-|  | `projects/miniinfer/kv_cache.py` |
-|  | `projects/miniinfer/docs/01-gpu-kvcache.md` |
+| | `projects/miniinfer/kv_cache.py` |
+| | `projects/miniinfer/docs/01-gpu-kvcache.md` |
 
 ---
 
 ## W13–W14 (08.12–08.25)：FlashAttention 完整推导 + Triton 入门
 
-### B1 CUDA — FlashAttention 完整推导与实现
+### B1 CUDA — FlashAttention 完整推导与实现 ⭐
 
 | 项目 | 内容 |
 |------|------|
-| **资源** | 论文：Dao et al. "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness" |
-|  | 博客：Tri Dao "FlashAttention Explained" |
-|  | Aleksa Gordic: "FlashAttention Explained" (YouTube) |
-|  | 代码：W13 手写 FlashAttention forward（tiling on Q, softmax rescaling, recomputation） |
-|  | 代码：W14 验证数值正确性 vs PyTorch naive attention，profile 对比 HBM access |
+| **主资源** | ⭐ **飞书 CUDA 课程 Ch11**：FlashAttention 实现 — 标准 Attention IO 瓶颈分析→分块计算+在线 Softmax→QKV 分块加载+共享内存布局优化→显存占用优化 |
+| | 论文：Dao et al. "FlashAttention" (2022) |
+| | Aleksa Gordic: "FlashAttention Explained" (YouTube) |
+| | 代码：W13 手写 FlashAttention forward（tiling on Q, softmax rescaling, recomputation） |
+| | 代码：W14 验证数值正确性 vs PyTorch naive attention，profile 对比 HBM access |
 | **验收** | 能手写完整的 FlashAttention forward kernel，能解释 tiling + recomputation 如何节省 HBM access |
-| **产出** | `fundamentals/cuda/kernels/08-flash-attention/fwd.cu` |
-|  | `fundamentals/cuda/kernels/08-flash-attention/fwd.md`（推导 + profile 数据） |
+| **产出** | `fundamentals/cuda/course/ch11-flash-attention.md` |
+| | `fundamentals/cuda/kernels/11-flash-attention/fwd.cu` |
+| | `fundamentals/cuda/kernels/11-flash-attention/fwd.md`（推导 + profile 数据） |
 
 ### B4 Triton — DSL 入门 + GEMM
 
 | 任务 | 内容 |
 |------|------|
 | **资源** | Triton 官方文档：Quick Start, Tutorial 1–3（Vector Add, Fused Softmax, Matrix Multiply） |
-|  | OpenAI Triton Conference Talk |
-|  | 代码：用 Triton 写 Matrix Multiply（对比 CUDA 版），理解 block-level programming model |
+| | OpenAI Triton Conference Talk |
+| | 代码：用 Triton 写 Matrix Multiply（对比 CUDA 版），理解 block-level programming model |
 | **验收** | 能写出正确的 Triton GEMM kernel，理解 `tl.program_id`、`tl.arange`、`tl.load`/`tl.store` |
 | **产出** | `fundamentals/python/triton/01-basics/` |
-|  | `fundamentals/python/triton/02-matmul/` |
+| | `fundamentals/python/triton/02-matmul/` |
 
 ### B3 分布式 — Ring AllReduce 深入
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | Horovod 论文：Sergeev & Del Balso "Horovod: fast and easy distributed deep learning in TensorFlow" |
-|  | 代码：用 MPI 实现完整 Ring AllReduce（send/recv pipeline），测试不同 tensor size 的带宽利用率 |
+| | 代码：用 MPI 实现完整 Ring AllReduce（send/recv pipeline），测试不同 tensor size 的带宽利用率 |
 | **验收** | 能推导 Ring AllReduce 的时间公式：`2(N-1) × (data/N + latency)` |
 | **产出** | `fundamentals/distributed/ring-allreduce-deep-dive.md` |
-|  | `fundamentals/distributed/code/ring-allreduce-bench/` |
+| | `fundamentals/distributed/code/ring-allreduce-bench/` |
 
 ---
 
@@ -514,7 +529,7 @@
 | 项目 | 内容 |
 |------|------|
 | **资源** | 论文：Dao "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning" |
-|  | 代码：理解 FlashAttention-2 的改进点（减少 non-matmul FLOPs、forward pass parallelism over seqlen、better warp scheduling） |
+| | 代码：理解 FlashAttention-2 的改进点（减少 non-matmul FLOPs、forward pass parallelism over seqlen、better warp scheduling） |
 | **验收** | 能说出 FlashAttention-2 相比 v1 的三个主要改进点 |
 | **产出** | `fundamentals/cuda/kernels/08-flash-attention/flashattn2-improvements.md` |
 
@@ -523,18 +538,18 @@
 | 项目 | 内容 |
 |------|------|
 | **资源** | Triton 官方教程：FlashAttention in Triton |
-|  | 代码：用 Triton 实现 FlashAttention forward，与 CUDA 手写版对比 |
+| | 代码：用 Triton 实现 FlashAttention forward，与 CUDA 手写版对比 |
 | **验收** | 能对比 Triton 版和 CUDA 手写版 FlashAttention 的代码量、性能和可维护性 |
 | **产出** | `fundamentals/python/triton/03-flash-attention/` |
-|  | `fundamentals/python/triton/03-flash-attention/benchmark.md` |
+| | `fundamentals/python/triton/03-flash-attention/benchmark.md` |
 
 ### B3 分布式 — NVLink/NVSwitch Topology
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | NVIDIA NVLink/NVSwitch Whitepaper |
-|  | NCCL Topology Detection：`nvidia-smi topo -m`、`nccl-topo` |
-|  | 代码：在 2/4 GPU 上测试 NCCL AllReduce bandwidth 随数据量的变化 |
+| | NCCL Topology Detection：`nvidia-smi topo -m`、`nccl-topo` |
+| | 代码：在 2/4 GPU 上测试 NCCL AllReduce bandwidth 随数据量的变化 |
 | **验收** | 能画出 8×A100 节点的拓扑图（NVSwitch + IB），理解 ring vs tree 算法在哪种拓扑下更优 |
 | **产出** | `fundamentals/distributed/gpu-topology.md` |
 
@@ -544,7 +559,7 @@
 |------|------|
 | **目标** | 集成 FlashAttention kernel 到 MiniInfer，性能 baseline |
 | **产出** | `projects/miniinfer/docs/02-flashattn-integration.md` |
-|  | `projects/miniinfer/benchmarks/baseline.md`（与 PyTorch/gpt2 对比） |
+| | `projects/miniinfer/benchmarks/baseline.md`（与 PyTorch/gpt2 对比） |
 
 ---
 
@@ -555,17 +570,17 @@
 | 项目 | 内容 |
 |------|------|
 | **资源** | CUTLASS Documentation：Quick Start, Fundamentals of GEMM, Epilogues |
-|  | 代码：用 CUTLASS 调用 FP16 GEMM（内置 kernel），理解 CUTLASS 的 template hierarchy（`GemmShape` → `Mainloop` → `Epilogue`） |
+| | 代码：用 CUTLASS 调用 FP16 GEMM（内置 kernel），理解 CUTLASS 的 template hierarchy（`GemmShape` → `Mainloop` → `Epilogue`） |
 | **验收** | 能用 CUTLASS 调用标准 GEMM，能说出 CUTLASS 的 4 层抽象（tile iterators → collective → kernel → host API） |
 | **产出** | `fundamentals/cuda/cutlass/basics.md` |
-|  | `fundamentals/cuda/cutlass/01-basic-gemm/` |
+| | `fundamentals/cuda/cutlass/01-basic-gemm/` |
 
 ### B4 Triton — autotuning
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | Triton 官方文档：`@triton.autotune` 教程 |
-|  | 代码：给 Triton GEMM kernel 添加 autotune，搜索最优 tile size / num_stages / num_warps |
+| | 代码：给 Triton GEMM kernel 添加 autotune，搜索最优 tile size / num_stages / num_warps |
 | **验收** | 能解释 autotune 如何通过 grid search 找到最优配置，理解 `prune_configs` 的用途 |
 | **产出** | `fundamentals/python/triton/04-autotune/` |
 
@@ -574,7 +589,7 @@
 | 项目 | 内容 |
 |------|------|
 | **资源** | 论文：Rajbhandari et al. "ZeRO: Memory Optimizations Toward Training Trillion Parameter Models" |
-|  | DeepSpeed ZeRO-1 源码：`deepspeed/runtime/zero/stage_1_and_2.py` |
+| | DeepSpeed ZeRO-1 源码：`deepspeed/runtime/zero/stage_1_and_2.py` |
 | **验收** | 能画出 ZeRO-1 的 optimizer state 分片 + AllGather 的数据流 |
 | **产出** | `fundamentals/distributed/zero-1.md` |
 
@@ -586,7 +601,7 @@
 | **资源** | vLLM paper §4, vLLM 源码 `vllm/core/block_manager.py` |
 | **验收** | KV Cache 能按 block 粒度动态分配，支持随机访问 |
 | **产出** | `projects/miniinfer/block_manager.py` |
-|  | `projects/miniinfer/docs/03-paged-attention.md` |
+| | `projects/miniinfer/docs/03-paged-attention.md` |
 
 ---
 
@@ -597,18 +612,18 @@
 | 项目 | 内容 |
 |------|------|
 | **资源** | NVIDIA: "PTX ISA" §1–5（并行执行模型、状态空间、类型、operand） |
-|  | NVIDIA: "CUDA Binary Utilities"（`cuobjdump`、`nvdisasm`） |
-|  | 代码：用 `cuobjdump -sass` 对比 naive GEMM vs tiled GEMM 生成指令的差异 |
+| | NVIDIA: "CUDA Binary Utilities"（`cuobjdump`、`nvdisasm`） |
+| | 代码：用 `cuobjdump -sass` 对比 naive GEMM vs tiled GEMM 生成指令的差异 |
 | **验收** | 能读懂简单的 SASS 指令（`LDG`、`STG`、`LDS`、`STS`、`FFMA`、`HADD2`），理解 compiled kernel 的 register spill 现象 |
 | **产出** | `fundamentals/cuda/ptx-sass-basics.md` |
-|  | `fundamentals/cuda/profiling/read-sass.md` |
+| | `fundamentals/cuda/profiling/read-sass.md` |
 
 ### B4 PyTorch — nn.Module 源码
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | PyTorch 源码：`torch/nn/modules/module.py`（`__setattr__`、`register_buffer`、`state_dict`、`load_state_dict`、`_apply`） |
-|  | 代码：手写一个简易版 `nn.Module` |
+| | 代码：手写一个简易版 `nn.Module` |
 | **验收** | 能解释 `model.cuda()` 如何把所有 parameter/buffer 移到 GPU（`_apply` 机制），`state_dict` 的 hook 机制 |
 | **产出** | `fundamentals/python/pytorch-internals/03-nn-module.md` |
 
@@ -617,7 +632,7 @@
 | 项目 | 内容 |
 |------|------|
 | **资源** | 论文 ZeRO（续）：ZeRO-2 gradient partitioning、ZeRO-3 parameter partitioning |
-|  | DeepSpeed 源码：`stage2.py`、`stage3.py` |
+| | DeepSpeed 源码：`stage2.py`、`stage3.py` |
 | **验收** | 能画出 ZeRO-1/2/3 的通信矩阵（各阶段有哪些 collective），知道 ZeRO-3 的通信量 |
 | **产出** | `fundamentals/distributed/zero-2-3.md` |
 
@@ -629,7 +644,7 @@
 | **资源** | vLLM paper §5, vLLM 源码 `vllm/core/scheduler.py` |
 | **验收** | 多个请求能共享一个 batch，按需加入/退出 |
 | **产出** | `projects/miniinfer/scheduler.py` |
-|  | `projects/miniinfer/docs/04-continuous-batching.md` |
+| | `projects/miniinfer/docs/04-continuous-batching.md` |
 
 ---
 
@@ -640,7 +655,7 @@
 | 项目 | 内容 |
 |------|------|
 | **资源** | CUDA C++ Programming Guide §3.2.6：Asynchronous Data Copies（`cuda::memcpy_async`、pipeline） |
-|  | 代码：用 async copy + pipeline 实现 GEMM 的 global→shared 数据搬运 overlap |
+| | 代码：用 async copy + pipeline 实现 GEMM 的 global→shared 数据搬运 overlap |
 | **验收** | 能写出带 pipeline 的 GEMM kernel，理解 producer-consumer 同步 |
 | **产出** | `fundamentals/cuda/kernels/09-async-copy/` |
 
@@ -649,17 +664,17 @@
 | 项目 | 内容 |
 |------|------|
 | **资源** | 论文：Shoeybi et al. "Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism" |
-|  | 代码：手写 column-parallel linear + row-parallel linear（PyTorch + NCCL） |
+| | 代码：手写 column-parallel linear + row-parallel linear（PyTorch + NCCL） |
 | **验收** | 能画出 Megatron TP 的 forward/backward 通信矩阵 |
 | **产出** | `fundamentals/distributed/tensor-parallelism.md` |
-|  | `fundamentals/distributed/code/tp-linear/` |
+| | `fundamentals/distributed/code/tp-linear/` |
 
 ### B5 框架源码 — vLLM（启动）
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | vLLM 源码：`vllm/entrypoints/llm.py`（LLM class 入口）、`vllm/engine/llm_engine.py`（LLMEngine） |
-|  | 代码：追踪一个请求从 `llm.generate()` 到返回 token 的完整生命周期 |
+| | 代码：追踪一个请求从 `llm.generate()` 到返回 token 的完整生命周期 |
 | **验收** | 能画出 vLLM 请求处理流程图 |
 | **产出** | `fundamentals/distributed/vllm-source/01-entrypoint-engine.md` |
 
@@ -670,8 +685,8 @@
 | **目标** | 实现 2/4 GPU 的 TP 推理 |
 | **验收** | 2 GPU TP 推理结果与单 GPU 一致，throughput 有提升 |
 | **产出** | `projects/miniinfer/tp_inference.py` |
-|  | `projects/miniinfer/docs/05-tensor-parallelism.md` |
-|  | `projects/miniinfer/benchmarks/tp-scaling.md` |
+| | `projects/miniinfer/docs/05-tensor-parallelism.md` |
+| | `projects/miniinfer/benchmarks/tp-scaling.md` |
 
 ---
 
@@ -682,27 +697,27 @@
 | 项目 | 内容 |
 |------|------|
 | **资源** | CUTLASS Examples: 自定义 Epilogue（bias + ReLU fuse）、自定义 layout |
-|  | 代码：用 CUTLASS 写一个 GEMM + Bias + GeLU 融合 kernel |
+| | 代码：用 CUTLASS 写一个 GEMM + Bias + GeLU 融合 kernel |
 | **验收** | 能用 CUTLASS 自定义 epilogue 实现算子融合 |
 | **产出** | `fundamentals/cuda/cutlass/02-custom-epilogue/` |
-|  | `fundamentals/cuda/cutlass/cutlass-fusion.md` |
+| | `fundamentals/cuda/cutlass/cutlass-fusion.md` |
 
 ### B5 框架源码 — vLLM BlockManager + Scheduler
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | vLLM 源码：`vllm/core/block_manager.py`、`vllm/core/scheduler.py` |
-|  | 代码：画出 BlockManager 的数据结构和 allocation/free 流程 |
+| | 代码：画出 BlockManager 的数据结构和 allocation/free 流程 |
 | **验收** | 能解释 copy-on-write 机制在 beam search 中的作用 |
 | **产出** | `fundamentals/distributed/vllm-source/02-blockmanager.md` |
-|  | `fundamentals/distributed/vllm-source/03-scheduler.md` |
+| | `fundamentals/distributed/vllm-source/03-scheduler.md` |
 
 ### 🚀 MiniInfer — 收尾 + Benchmark
 
 | 任务 | 内容 |
 |------|------|
 | **产出** | `projects/miniinfer/docs/06-final-benchmark.md`（性能对比 vLLM/pytorch baseline） |
-|  | `projects/miniinfer/README.md`（项目总结 + 技术亮点） |
+| | `projects/miniinfer/README.md`（项目总结 + 技术亮点） |
 
 ---
 
@@ -721,11 +736,11 @@
 | 项目 | 内容 |
 |------|------|
 | **资源** | NVIDIA: "Using INT8 GEMM for Fast Inference" |
-|  | 论文：Micikevicius et al. "FP8 Formats for Deep Learning" |
-|  | 代码：用 CUTLASS 调用 INT8 GEMM（内置 kernel），验证输出精度 |
+| | 论文：Micikevicius et al. "FP8 Formats for Deep Learning" |
+| | 代码：用 CUTLASS 调用 INT8 GEMM（内置 kernel），验证输出精度 |
 | **验收** | 能解释 INT8 量化/反量化的数据流，FP8 E4M3 vs E5M2 格式差异 |
 | **产出** | `fundamentals/cuda/quantization/int8-fp8-gemm.md` |
-|  | `fundamentals/cuda/quantization/code/int8-gemm/` |
+| | `fundamentals/cuda/quantization/code/int8-gemm/` |
 
 ### 🚀 MiniQuant — 量化工具 + AWQ 论文
 
@@ -733,10 +748,10 @@
 |------|------|
 | **目标** | 实现基础模型量化工具：Weight-only INT8/INT4 量化，校准方法 |
 | **资源** | 论文：Lin et al. "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration" |
-|  | GPTQ 论文：Frantar et al. "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers" |
+| | GPTQ 论文：Frantar et al. "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers" |
 | **验收** | 能解释 per-channel vs per-tensor 量化、对称 vs 非对称量化的差异 |
 | **产出** | `projects/miniquant/quantize.py`（INT8/INT4 weight packing） |
-|  | `projects/miniquant/docs/01-awq-gptq-papers.md` |
+| | `projects/miniquant/docs/01-awq-gptq-papers.md` |
 
 ---
 
@@ -750,7 +765,7 @@
 | **资源** | AWQ 官方实现：`mit-han-lab/llm-awq` |
 | **验收** | 量化后的模型在 WikiText-2 上的 PPL 退化 < 0.5 |
 | **产出** | `projects/miniquant/awq/`（salient channel detection + scaling） |
-|  | `projects/miniquant/docs/02-awq-implementation.md` |
+| | `projects/miniquant/docs/02-awq-implementation.md` |
 
 ### B5 框架源码 — vLLM Worker + ModelRunner
 
@@ -770,21 +785,21 @@
 |------|------|
 | **目标** | 手写 INT4 GEMM kernel（CUTLASS 或纯 CUDA） |
 | **资源** | CUTLASS: `cutlass/gemm/kernel/gemm_universal.h` INT4 specialization |
-|  | 代码：dequant 逻辑（INT4 → FP16）+ 计算 + requant 的融合 kernel |
+| | 代码：dequant 逻辑（INT4 → FP16）+ 计算 + requant 的融合 kernel |
 | **验收** | INT4 GEMM 推理速度达到 FP16 GEMM 的 1.5x+ |
 | **产出** | `projects/miniquant/kernels/int4_gemm.cu` |
-|  | `projects/miniquant/docs/03-int4-kernel.md` |
+| | `projects/miniquant/docs/03-int4-kernel.md` |
 
 ### B3 分布式 — Pipeline Parallelism
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | 论文：Huang et al. "GPipe: Efficient Training of Large Neural Networks using Pipeline Parallelism" |
-|  | 论文：Narayanan et al. "PipeDream: Generalized Pipeline Parallelism for DNN Training" |
-|  | 代码：用 PyTorch RPC 实现一个简化的 1F1B pipeline schedule |
+| | 论文：Narayanan et al. "PipeDream: Generalized Pipeline Parallelism for DNN Training" |
+| | 代码：用 PyTorch RPC 实现一个简化的 1F1B pipeline schedule |
 | **验收** | 能画出 GPipe vs 1F1B 的 timeline，计算 pipeline bubble ratio |
 | **产出** | `fundamentals/distributed/pipeline-parallelism.md` |
-|  | `fundamentals/distributed/code/pp-demo/` |
+| | `fundamentals/distributed/code/pp-demo/` |
 
 ---
 
@@ -803,10 +818,10 @@
 | 项目 | 内容 |
 |------|------|
 | **资源** | NVIDIA GTC Talks on Kernel Fusion |
-|  | 代码：实现 GeLU + Dropout + Residual 三合一 kernel |
+| | 代码：实现 GeLU + Dropout + Residual 三合一 kernel |
 | **验收** | 能分析 kernel fusion 减少 HBM access 的次数 |
 | **产出** | `fundamentals/cuda/kernel-fusion.md` |
-|  | `fundamentals/cuda/kernels/10-fusion/` |
+| | `fundamentals/cuda/kernels/10-fusion/` |
 
 ### B5 框架源码 — DeepSpeed 启动
 
@@ -818,7 +833,7 @@
 
 ---
 
-## W31–W34 (12.16–2027.01.12)：MiniQuant 收尾 + CUTLASS 完稿
+## W31–W34 (12.16–Week N)：MiniQuant 收尾 + CUTLASS 完稿
 
 ### 🚀 MiniQuant — Integration + Benchmark
 
@@ -826,14 +841,14 @@
 |------|------|
 | **目标** | 将 MiniQuant 的 INT4 GEMM 集成到 MiniInfer，端到端推理 |
 | **产出** | `projects/miniquant/docs/04-integration-benchmark.md` |
-|  | `projects/miniquant/README.md` |
+| | `projects/miniquant/README.md` |
 
 ### B1 CUDA — CUTLASS 总结 + GEMM 优化链完稿
 
 | 任务 | 内容 |
 |------|------|
 | **产出** | `fundamentals/cuda/cutlass/cutlass-cheatsheet.md`（CUTLASS 核心概念速查） |
-|  | `fundamentals/cuda/optimize-gemm/gemm-optimization-full.md`（完整优化链文档） |
+| | `fundamentals/cuda/optimize-gemm/gemm-optimization-full.md`（完整优化链文档） |
 
 ### B5 框架源码 — DeepSpeed ZeRO
 
@@ -864,7 +879,7 @@
 | 项目 | 内容 |
 |------|------|
 | **资源** | 论文：Narayanan et al. "Efficient Large-Scale Language Model Training on GPU Clusters Using Megatron-LM" |
-|  | 代码：画出 3D 并行（TP+PP+DP）的 device mesh 和通信组划分 |
+| | 代码：画出 3D 并行（TP+PP+DP）的 device mesh 和通信组划分 |
 | **验收** | 能解释在 3D 并行下，一个 allreduce 在哪个通信组执行，经过几次通信 |
 | **产出** | `fundamentals/distributed/3d-parallelism.md` |
 
@@ -876,11 +891,11 @@
 | **资源** | nanoGPT `train.py`、PyTorch DDP 文档 |
 | **验收** | 在 GTX 1650 上能训练 GPT-2 small（单 batch），loss 正常下降 |
 | **产出** | `projects/minimegatron/train.py` |
-|  | `projects/minimegatron/docs/01-single-gpu-train.md` |
+| | `projects/minimegatron/docs/01-single-gpu-train.md` |
 
 ---
 
-## W33–W35 (12.30–2027.01.19)：TP + Megatron 源码
+## W33–W35 (12.30–Week N)：TP + Megatron 源码
 
 ### 🚀 MiniMegatron v1 — Tensor Parallelism
 
@@ -890,7 +905,7 @@
 | **资源** | Megatron-LM 源码：`megatron/core/tensor_parallel/layers.py` |
 | **验收** | 2 GPU TP 训练的 loss 曲线与单卡一致 |
 | **产出** | `projects/minimegatron/tp/`（TP 层实现） |
-|  | `projects/minimegatron/docs/02-tp-training.md` |
+| | `projects/minimegatron/docs/02-tp-training.md` |
 
 ### B5 框架源码 — Megatron-LM TP
 
@@ -912,7 +927,7 @@
 | **资源** | Megatron-LM 源码：`megatron/core/pipeline_parallel/` |
 | **验收** | 4 GPU TP+PP 训练能跑通，pipeline bubble 占比在合理范围 |
 | **产出** | `projects/minimegatron/pp/`（PP 实现） |
-|  | `projects/minimegatron/docs/03-pp-training.md` |
+| | `projects/minimegatron/docs/03-pp-training.md` |
 
 ### B5 框架源码 — Megatron-LM PP
 
@@ -926,7 +941,7 @@
 |------|------|
 | **目标** | 实现 FP16/BF16 混合精度训练（AMP + loss scaling） |
 | **资源** | NVIDIA: "Mixed Precision Training" (paper + blog) |
-|  | PyTorch AMP：`torch.cuda.amp` |
+| | PyTorch AMP：`torch.cuda.amp` |
 | **验收** | 混合精度训练的 loss 曲线与 FP32 一致，速度有 1.5x+ 提升 |
 | **产出** | `projects/minimegatron/docs/04-mixed-precision.md` |
 
@@ -942,14 +957,14 @@
 | **资源** | DeepSpeed ZeRO 源码 |
 | **验收** | ZeRO-2 训练内存占用比 DP-only 减少 ~50% |
 | **产出** | `projects/minimegatron/zero/` |
-|  | `projects/minimegatron/docs/05-zero-integration.md` |
+| | `projects/minimegatron/docs/05-zero-integration.md` |
 
 ### B3 分布式 — FSDP + Expert Parallelism
 
 | 项目 | 内容 |
 |------|------|
 | **资源** | PyTorch FSDP 文档 + 论文 |
-|  | Fedus et al. "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity" |
+| | Fedus et al. "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity" |
 | **验收** | 理解 FSDP vs ZeRO-3 的异同，MoE 通信量分析 |
 | **产出** | `fundamentals/distributed/fsdp-moe.md` |
 
@@ -970,22 +985,22 @@
 | **目标** | 在云 GPU（4×A100）上完成 GPT-2 Medium 的 3D 并行训练，输出 scaling report |
 | **验收** | 能跑出正确的 GPT-2 训练 loss + 下游任务评测 |
 | **产出** | `projects/minimegatron/docs/06-scaling-report.md` |
-|  | `projects/minimegatron/README.md` |
+| | `projects/minimegatron/README.md` |
 
 ### B5 框架源码收尾
 
 | 任务 | 内容 |
 |------|------|
 | **产出** | `fundamentals/distributed/vllm-source/README.md`（vLLM 源码索引） |
-|  | `fundamentals/distributed/deepspeed-source/README.md`（DeepSpeed 源码索引） |
-|  | `fundamentals/distributed/megatron-source/README.md`（Megatron-LM 源码索引） |
+| | `fundamentals/distributed/deepspeed-source/README.md`（DeepSpeed 源码索引） |
+| | `fundamentals/distributed/megatron-source/README.md`（Megatron-LM 源码索引） |
 
 ### B 线全面复盘（W44）
 
 | 任务 | 内容 |
 |------|------|
 | **产出** | `fundamentals/retrospective.md`（学习回顾 + 知识盲区 + 面试常见考点总结） |
-|  | 更新简历项目经验描述 |
+| | 更新简历项目经验描述 |
 
 ---
 

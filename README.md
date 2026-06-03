@@ -2,7 +2,7 @@
 
 > 目标岗位：**大模型推理优化工程师（推理引擎开发）** | **分布式训练框架工程师（大模型训练系统）**
 >
-> 初始化：2026-05-20 | 状态：🟡 进行中
+> 初始化：Week 1 | 状态：🟡 进行中
 
 ---
 
@@ -68,6 +68,15 @@ ai-infra-career/
 | LeetCode Hot 100 | https://leetcode.cn/problem-list/2cktkvj/ |
 | 灵神题单 | https://leetcode.cn/u/endlesscheng/ |
 
+### 手搓代码双模式 🔨
+
+| 模式 | 做法 | 适用场景 |
+|------|------|----------|
+| 🥇 **白板手搓** | 关掉参考，从空白文件完全独立思考写出完整实现 | GEMM优化链、FlashAttention、KV Cache、PagedAttention、LeetCode中等题 |
+| 🥈 **临摹手搓** | 边看参考答案边敲，理解每行设计意图后用自己的风格重写 | CUDA入门(vecAdd)、Triton DSL、CMake模板、LeetCode简单题/模板题 |
+
+> 核心原则：不是你「看懂」了代码，是你「能写出来」。白板占比按重要度分配——CUDA Kernel 80% 白板，工具类代码 30% 白板。
+
 ---
 
 ## 板块2：核心技术栈
@@ -78,9 +87,9 @@ ai-infra-career/
 
 | 阶段 | 内容 | 资源 | 时间 |
 |------|------|------|------|
-| 入门 | Grid/Block/Thread/Warp 模型 | 《CUDA C++ Programming Guide》前5章 | 2周 |
-| 内存 | Global/Shared/Register/Constant Memory + Bank Conflict | PMPP 第3-5章 | 1周 |
-| 进阶 | Warp Shuffle、Warp Vote、Cooperative Groups | CUDA Programming Guide | 1周 |
+| 入门 | Grid/Block/Thread/Warp 模型 | ⭐ [CUDA 编程基础（飞书教程）](https://tvle9mq8jh.feishu.cn/docx/BnqMdyaJ9oyXb1xwktgc7esMn4c) + 《CUDA C++ Programming Guide》前5章 | 2周 |
+| 内存 | Global/Shared/Register/Constant Memory + Bank Conflict | 飞书教程 + PMPP 第3-5章 | 1周 |
+| 进阶 | Warp Shuffle、Warp Vote、Cooperative Groups | 飞书进阶 + CUDA Programming Guide | 1周 |
 | 实战 | Tensor Core（mma.sync）+ 手写 GEMM | [how-to-optimize-gemm](https://github.com/nicelyqin/how-to-optimize-gemm) | 2周 |
 | 实战 | 手写 FlashAttention forward | FlashAttention 论文 + Triton教程 | 2周 |
 
@@ -142,6 +151,8 @@ ai-infra-career/
 | **TensorRT-LLM** | Graph Optimization、Kernel Auto-Tuning、Quantization Toolkit | ⭐⭐ |
 
 学习路径：**vLLM → SGLang（理解改进点）→ TensorRT-LLM（理解编译优化）**
+
+> ⭐ **vLLM 配套课程**：[飞书深度学习课程](https://l0kzvikuq0w.feishu.cn/drive/folder/FEHnfpzWel2BVgdERTvcQ8oLnWh) — vLLM 架构/源码/贡献指南系统教学，配合 E 线 vLLM 开源贡献使用
 
 #### 必懂技术清单
 
@@ -276,6 +287,7 @@ vLLM 是当前 AI Infra 方向性价比最高的开源贡献目标：
 | `inference.md` | PagedAttention 原理、Continuous Batching、量化算法对比、vLLM 架构 |
 | `training.md` | NCCL 通信、ZeRO 各阶段对比、TP/PP 通信量计算、混合精度 |
 | `pytorch.md` | autograd 原理、DDP 实现、DataLoader、CUDA Stream |
+| `dl-systems.md` 🆕 | 自动微分原理、计算图优化（FX Graph）、混合精度 loss scaling、GPU 内存管理 |
 | `os-network.md` | 虚拟内存、页表、TCP/UDP、零拷贝、RDMA |
 
 **八股来源**：牛客面经、LeetCode 讨论区、各厂面经汇总
@@ -291,6 +303,15 @@ resume/
 └── latest/         ← 当前在用版本
 ```
 
+**简历核心原则：用工业界语言描述量化成果。**
+
+| ❌ 学生写法 | ✅ 工业界写法 |
+|------------|-------------|
+| 实现了 GEMM kernel | 优化 GEMM kernel，A100 上达到 cuBLAS 95% 利用率，FP16 算力 280 TFLOPS |
+| 学习了 FlashAttention | 从零实现 FlashAttention forward/backward，HBM access 降低 4.2x |
+| 做了 MiniInfer 项目 | 手写 LLM 推理引擎，集成 PagedAttention + Continuous Batching，throughput 达 vLLM 75% |
+| 参与了 vLLM 开源 | vLLM Contributor，3 个合并 PR，含 1 个 CUDA kernel 性能优化（+15%） |
+
 简历结构建议：
 1. 个人信息 + 求职意向
 2. **职业技能**（按方向分组：推理/训练/通用，标注熟练度）
@@ -302,87 +323,86 @@ resume/
 
 `interview/companies/` 下按三类厂商整理：
 
-#### 第一类：互联网大厂（推理引擎 / 端侧 AI SDK 团队）
+#### 第一类：互联网大厂 Infra 核心组
 
 | 文件 | 厂商 | AI Infra 相关团队 |
 |------|------|-------------------|
-| `bytedance.md` | 字节跳动 | 豆包推理引擎、AI Infra 团队，算法要求最高 |
-| `tencent.md` | 腾讯 | 混元大模型、腾讯云 AI 平台，底层原理问得深 |
-| `alibaba.md` | 阿里 | 通义千问、PAI 平台，重系统设计 |
-| `baidu.md` | 百度 | 文心一言、飞桨框架，AI 岗占比最高 |
-| `huawei.md` | 华为 | 昇腾生态、MindSpore、CANN，国产芯方向 |
-| `sensetime.md` | 商汤 | SenseNova 大模型、推理引擎、端侧 SDK |
-| `megvii.md` | 旷视 | 端侧 AI SDK、Brain++ 平台 |
-| `cloudwalk.md` | 云从 | 金融/安防 AI 推理 |
-| `yitu.md` | 依图 | 医疗 AI 推理引擎 |
+| `nvidia.md` | NVIDIA | TensorRT-LLM、CUDA Toolkit、AI Compiler |
+| `bytedance.md` | 字节跳动 | AML 豆包推理引擎、vLLM/SGLang、GPU集群调度 |
+| `alibaba.md` | 阿里 | 通义实验室、PAI 平台，重系统设计 |
+| `huawei.md` | 华为 | 昇腾 CANN、MindSpore、Ascend C 算子开发 |
+| `tencent.md` | 腾讯 | TEG 混元大模型、腾讯云 AI 平台 |
+| `baidu.md` | 百度 | AI Infra 部门、飞桨框架、文心一言推理引擎 |
 
-#### 第二类：AI 芯片厂（SDK / Compiler 团队）
+#### 第二类：大模型独角兽 Infra 组 🆕（成长快，scope好）
+
+| 文件 | 厂商 | 方向 |
+|------|------|------|
+| `zhipu.md` | 智谱AI | GLM 训练/推理 Infra（明确岗位） |
+| `moonshot.md` | 月之暗面(Kimi) | 长上下文推理、MoE 推理优化 |
+| `stepfun.md` 🆕 | 阶跃星辰（StepFun） | 大模型推理框架、分布式训练 |
+| `minimax.md` | MiniMax | vLLM/SGLang 推理社区协作、支持远程 |
+| `deepseek.md` | DeepSeek | 推理加速、CUDA 优化（门槛极高） |
+| `infinigence.md` 🆕 | 无问芯穹（Infinigence AI） | 大模型推理/训练基础设施、异构算力调度 |
+| `baichuan.md` 🆕 | 百川智能 | 大模型训练/推理 Infra |
+
+#### 第三类：AI 芯片厂（SDK / Compiler 团队）
 
 | 文件 | 厂商 | 方向 |
 |------|------|------|
 | `cambricon.md` | 寒武纪 | 思元 AI 芯片、Bangbang SDK、CNML/CNDRV |
+| `kunlunxin.md` 🆕 | 昆仑芯（百度） | AI芯片编译器、推理SDK |
 | `horizon.md` | 地平线 | 征程自动驾驶芯片、BPU 编译器、推理 SDK |
 | `enflame.md` | 燧原 | 云燧训练/推理芯片、TopsRider 软件栈 |
-| `bitmain.md` | 比特大陆（算能） | 算丰 AI 芯片、BMNNSDK |
 | `biren.md` | 壁仞 | BR100 通用 GPU、Biren Compiler |
+| `bitmain.md` | 比特大陆（算能） | 算丰 AI 芯片、BMNNSDK |
 
-#### 第三类：端侧 AI SDK 厂商
-
-| 文件 | 厂商 | 方向 |
-|------|------|------|
-| `arcsoft.md` | 虹软 | 端侧 AI 引擎（ArcSoft AI Engine）、手机影像 SDK |
-| `megvii.md` | 旷视 | MegEngine 端侧推理、手机/车载 SDK |
-| `sensetime.md` | 商汤 | SenseMARS 端侧方案 |
-
-> 注：旷视、商汤同时覆盖大厂和端侧两类，文件共用。
-
-#### 第四类：大模型创业公司 🆕（推理引擎/训练框架核心团队）
+#### 第四类：其他
 
 | 文件 | 厂商 | 方向 |
 |------|------|------|
-| `deepseek.md` | DeepSeek | 推理加速、CUDA 优化（门槛极高） |
-| `zhipu.md` | 智谱AI | GLM 训练/推理 Infra（明确岗位） |
-| `minimax.md` | MiniMax | vLLM/SGLang 推理社区协作、支持远程 |
-| `moonshot.md` | 月之暗面(Kimi) | 长文本推理、MoE 推理优化 |
-| `vllm.md` 🆕 | vLLM 开源社区 | 远程贡献、talentpool@vllm.ai 投递 |
+| `vllm.md` | vLLM 开源社区 | 远程贡献、talentpool@vllm.ai 投递 |
+| `sensetime.md` | 商汤 | SenseNova 大模型、推理引擎 |
+| `megvii.md` | 旷视 | MegEngine 端侧推理、Brain++ 平台 |
 
 ### 4.4 实习目标与优先级 🆕
 
-> 优先级按含金量和对口度排列，详细列表见 [studyplan.md](../../studyplan.md#实习目标清单)
+> 排序原则：NVIDIA > 大模型独角兽 Infra 组 > 大厂核心 Infra 组 > 其他
+> 详细列表见 [studyplan.md](../../studyplan.md#实习目标清单)
 
-**第一档（推理引擎/训练框架核心团队，薪资天花板）：**
+**第一档（最对口，薪资天花板）：**
 
 | 优先级 | 公司 | 团队 | 方向 |
 |:--:|------|------|------|
-| 1 | 字节跳动 | Seed 豆包大模型 | 推理引擎优化、vLLM/SGLang、GPU集群调度 |
-| 2 | NVIDIA | TensorRT-LLM | CUDA 算子优化、推理引擎、AI Compiler |
-| 3 | 阿里云 | PAI / 通义实验室 | Agent Infra、推理优化、分布式训练 |
-| 4 | 华为 | 昇腾 CANN | AI编译器、推理引擎、算子迁移 |
-| 5 | vLLM | 开源社区 | 远程贡献 → 人才库 → 合作公司实习 |
+| 1 | NVIDIA | TensorRT-LLM / CUDA Toolkit | CUDA 算子优化、推理引擎、AI Compiler |
+| 2 | 智谱AI | GLM Infra | 大模型训练/推理框架 |
+| 3 | 月之暗面(Kimi) | Infra 团队 | 长上下文推理、MoE 推理优化 |
+| 4 | 阶跃星辰（StepFun） | Infra 团队 | 大模型推理框架、分布式训练 |
+| 5 | MiniMax | Infra 团队 | vLLM/SGLang 社区协作、远程友好 |
 
-**第二档（成长快，scope好）：**
+**第二档（大厂核心 Infra 组，薪资+平台双高）：**
+
+| 优先级 | 公司 | 团队 | 方向 |
+|:--:|------|------|------|
+| 6 | 字节跳动 | AML | 豆包推理引擎、vLLM/SGLang、GPU集群调度 |
+| 7 | 阿里云 | PAI / 通义实验室 | Agent Infra、推理优化、分布式训练 |
+| 8 | 华为 | 昇腾 CANN | AI编译器、推理引擎、算子迁移 |
+| 9 | 无问芯穹 | Infra 团队 | 大模型推理/训练基础设施、异构算力调度 |
+
+**第三档（大厂其他 Infra 组 + 备选）：**
 
 | 优先级 | 公司 | 方向 |
 |:--:|------|------|
-| 6 | DeepSeek | 推理加速、CUDA 优化 |
-| 7 | 智谱AI | 训练/推理 Infra（明确岗位） |
-| 8 | MiniMax | vLLM/SGLang 推理框架协作、支持远程 |
-| 9 | 寒武纪 | AI芯片编译器、推理引擎（合肥有研发中心） |
-| 10 | 科大讯飞 | 星火大模型推理、讯飞+华为昇腾联合实验室（合肥总部） |
-
-**第三档（备选）：**
-
-| 公司 | 方向 |
-|------|------|
-| 月之暗面(Kimi) | 长文本推理引擎 |
-| 地平线 | BPU编译器/SDK |
-| 燧原 / 壁仞 | AI芯片软件栈 |
-| 腾讯混元 | 推理引擎、分布式训练 |
-| SGLang | 开源推理框架贡献（远程） |
+| 10 | 腾讯 TEG | 混元大模型推理/训练 |
+| 11 | 百度 AI Infra | 文心一言推理引擎、飞桨框架 |
+| 12 | DeepSeek | 推理加速、CUDA 优化（门槛极高） |
+| 13 | 寒武纪 | AI芯片编译器、推理引擎（合肥有研发） |
+| 14 | 科大讯飞 | 星火大模型推理（合肥总部） |
+| — | vLLM 开源社区 | 远程贡献 → 人才库 |
 
 **投递策略：**
 1. 研一上学期：vLLM 贡献积累 GitHub 记录（随时可开始）
-2. 研一下学期（3-5月）：投第一档+第二档共 8-10 家
+2. 研一下学期：投第一档+第二档共 8-10 家
 3. 未拿到满意 offer：合肥本地保底（讯飞/寒武纪）+ 继续 vLLM 贡献，研二再战
 
 ---
@@ -422,21 +442,34 @@ Month 11-12│ 实习面试 + 实习进行中 + MiniInfer v1.0 开源发布
 6. **开源 PR**：vLLM/PyTorch 提 PR，面试时比"我看过源码"强 10 倍
 7. **量化成果**：所有项目描述必须有数字对比（延迟降了 X%，吞吐提了 Y 倍）
 8. **芯片厂 + 大厂双线关注**：芯片厂 Compiler/SDK 岗位对 CUDA 要求更深，互联网厂对系统设计更看重
-9. **🆕 双轨并行，研一末决策**：研一科研试水→2027.06 判断申博 or 就业；AI Infra 实习经历是双赢筹码
+9. **🆕 双轨并行，研一末决策**：研一科研试水→研一末 判断申博 or 就业；AI Infra 实习经历是双赢筹码
 10. **🆕 vLLM 是当前最大杠杆**：每天投入 30 分钟，三个月就能写进简历；比任何校内项目都更接近工业界真实代码
+
+---
+
+## 补充学习资源 🆕
+
+> 这些资源贯穿整个学习周期，按需查阅，与各线并行推进。
+
+| 资源 | 链接 | 对应线路 | 说明 |
+|------|------|----------|------|
+| ⭐ **CUDA 编程基础** | [飞书文档](https://tvle9mq8jh.feishu.cn/docx/BnqMdyaJ9oyXb1xwktgc7esMn4c) | B1 CUDA | CUDA 从入门到进阶系统教程，替代 PMPP 作为主教材 |
+| ⭐ **AI Infra 配套课程** | [飞书文件夹](https://tvle9mq8jh.feishu.cn/drive/folder/B10Ff92fCl4IVHdH7U3cccAMn1V?from=from_copylink) | B1/B4 | 配套 + 进阶课程，含 CUDA 深入、Triton、PyTorch 专题 |
+| ⭐ **动手学深度学习 V2** | [B站 171集](https://b23.tv/IjnkTRm) | C/D 补充 | 李沐 2026 最新完结 PyTorch 版，覆盖 Transformer/Attention/GPT/BERT。与 cs224n（理论）+ llm.c（工程）形成「三位一体」 |
+| ⭐ **vLLM 配套课程** | [飞书文件夹](https://l0kzvikuq0w.feishu.cn/drive/folder/FEHnfpzWel2BVgdERTvcQ8oLnWh) | B5/E | vLLM 架构/源码/贡献指南深度学习 |
 
 ---
 
 ## 路线决策树 🆕
 
 ```
-研一（2026.09–2027.07）
+研一
   │
   ├─ 研一上学期：打基础 + vLLM 贡献 + MiniInfer v0
   │
   ├─ 研一下学期：MiniInfer v1 (GPU) + 投递暑期实习 + 论文投稿
   │
-  └─ 研一末（2027.06）🔴 决策点
+  └─ 研一末🔴 决策点
         │
         ├─ 产出论文 + 热爱研究 → 申博路线
         │     │

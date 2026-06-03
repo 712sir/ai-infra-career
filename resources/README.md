@@ -52,19 +52,23 @@
 
 | 序号 | 名称 | 链接 | 重点集 / 说明 | 使用周 |
 |------|------|------|---------------|--------|
-| 1 | cuda-mode Lectures | [youtube.com/@CUDAMODE](https://www.youtube.com/@CUDAMODE) | Lecture 1 (Profiling), 4 (GEMM), 8 (CUTLASS), 12 (Flash Attention) | W5, W8, W12+ |
-| 2 | David Beazley: Understanding the Python GIL | [youtu.be/Obt-vMVdM8s](https://www.youtube.com/watch?v=Obt-vMVdM8s) | PyCon 2010，~60min，GIL 经典必看 | W2 |
-| 3 | Philip Guo: CPython Internals (10-hour codewalk) | [pgbovine.net/cpython-internals.htm](http://pgbovine.net/cpython-internals.htm) | 9 集系列，基于 CPython 2.7.8，前 3 小时 | W7 |
-| 4 | Effective CMake (Daniel Pfeifer) | [youtu.be/bsXLMQ6WgIk](https://www.youtube.com/watch?v=bsXLMQ6WgIk) | C++Now 2017，现代 CMake 最佳实践 | W4 |
-| 5 | Integrating Python and C++ with pybind11 (Robert Smallshire) | [youtu.be/YReJ3pSnNDo](https://www.youtube.com/watch?v=YReJ3pSnNDo) | NDC Techtown 2018 | W5 |
-| 6 | CppCon Back to Basics: Templates | [youtube.com/@CppCon](https://www.youtube.com/@CppCon) | 搜索 "Back to Basics Templates" 最新版本 | W2 |
-| 7 | FlashAttention Explained (Aleksa Gordic) | [youtube.com/@TheAiEpiphany](https://www.youtube.com/@TheAiEpiphany) | 频道内搜索 "FlashAttention" / "ELI5 FlashAttention" | W13 |
-| 8 | CUDA Graphs: Reducing Launch Overhead | [nvidia.com/on-demand](https://www.nvidia.com/en-us/on-demand/) | GTC 搜索 "CUDA Graphs" | W11 |
-| 9 | NVIDIA GTC Talks on Kernel Fusion | [nvidia.com/on-demand](https://www.nvidia.com/en-us/on-demand/) | GTC 搜索 "Kernel Fusion" | W29 |
-| 10 | Triton Developer Conference 2023 | [YouTube playlist](https://youtube.com/playlist?list=PLc_vA1r0qoiRZfUC3o4_yjj0FtWvodKAz) | Phil Tillet keynote + 全部 talks | W13 |
-| 11 | Memory Management in Python (Nina Zakharenko) | [youtu.be/F6u5rhUQ6dU](https://www.youtube.com/watch?v=F6u5rhUQ6dU) | PyCon 2016，~30min | W4 |
-| 12 | NVIDIA Nsight Systems User Guide | [docs.nvidia.com/nsight-systems](https://docs.nvidia.com/nsight-systems/) | §1–3 入门 | W5 |
-| 13 | NVIDIA Nsight Compute User Guide | [docs.nvidia.com/nsight-compute](https://docs.nvidia.com/nsight-compute/) | §1–3 入门 | W5 |
+| 1 | ⭐ **CUDA 编程基础（飞书教程）** | [飞书文档](https://tvle9mq8jh.feishu.cn/docx/BnqMdyaJ9oyXb1xwktgc7esMn4c) | **B1 轨道主资源**：CUDA 从入门到进阶的系统教程 | W1–W10 |
+| 2 | ⭐ **AI Infra 配套课程 + 进阶** | [飞书文件夹](https://tvle9mq8jh.feishu.cn/drive/folder/B10Ff92fCl4IVHdH7U3cccAMn1V?from=from_copylink) | B1/B4 配套：含 CUDA 深入 + Triton/PyTorch 专题 | W1–W24 |
+| 3 | ⭐ **李沐「动手学深度学习 V2」PyTorch 版** | [B站 171集全](https://b23.tv/IjnkTRm) | **C/D 线补充**：171 集 PyTorch 实战，覆盖 Transformer/Attention/GPT/BERT 等。2026 最新完结版，配合 cs224n 理论 + llm.c 工程实现形成三位一体 | 长期 |
+| 4 | ⭐ **vLLM 配套课程** | [飞书文件夹](https://l0kzvikuq0w.feishu.cn/drive/folder/FEHnfpzWel2BVgdERTvcQ8oLnWh) | **B5/E 线主资源**：vLLM 架构/源码/贡献指南深度学习 | W8→持续 |
+| 5 | cuda-mode Lectures | [youtube.com/@CUDAMODE](https://www.youtube.com/@CUDAMODE) | Lecture 1 (Profiling), 4 (GEMM), 8 (CUTLASS), 12 (Flash Attention) | W5, W8, W12+ |
+| 6 | David Beazley: Understanding the Python GIL | [youtu.be/Obt-vMVdM8s](https://www.youtube.com/watch?v=Obt-vMVdM8s) | PyCon 2010，~60min，GIL 经典必看 | W2 |
+| 7 | Philip Guo: CPython Internals (10-hour codewalk) | [pgbovine.net/cpython-internals.htm](http://pgbovine.net/cpython-internals.htm) | 9 集系列，基于 CPython 2.7.8，前 3 小时 | W7 |
+| 8 | Effective CMake (Daniel Pfeifer) | [youtu.be/bsXLMQ6WgIk](https://www.youtube.com/watch?v=bsXLMQ6WgIk) | C++Now 2017，现代 CMake 最佳实践 | W4 |
+| 9 | Integrating Python and C++ with pybind11 (Robert Smallshire) | [youtu.be/YReJ3pSnNDo](https://www.youtube.com/watch?v=YReJ3pSnNDo) | NDC Techtown 2018 | W5 |
+| 10 | CppCon Back to Basics: Templates | [youtube.com/@CppCon](https://www.youtube.com/@CppCon) | 搜索 "Back to Basics Templates" 最新版本 | W2 |
+| 11 | FlashAttention Explained (Aleksa Gordic) | [youtube.com/@TheAiEpiphany](https://www.youtube.com/@TheAiEpiphany) | 频道内搜索 "FlashAttention" / "ELI5 FlashAttention" | W13 |
+| 12 | CUDA Graphs: Reducing Launch Overhead | [nvidia.com/on-demand](https://www.nvidia.com/en-us/on-demand/) | GTC 搜索 "CUDA Graphs" | W11 |
+| 13 | NVIDIA GTC Talks on Kernel Fusion | [nvidia.com/on-demand](https://www.nvidia.com/en-us/on-demand/) | GTC 搜索 "Kernel Fusion" | W29 |
+| 14 | Triton Developer Conference 2023 | [YouTube playlist](https://youtube.com/playlist?list=PLc_vA1r0qoiRZfUC3o4_yjj0FtWvodKAz) | Phil Tillet keynote + 全部 talks | W13 |
+| 15 | Memory Management in Python (Nina Zakharenko) | [youtu.be/F6u5rhUQ6dU](https://www.youtube.com/watch?v=F6u5rhUQ6dU) | PyCon 2016，~30min | W4 |
+| 16 | NVIDIA Nsight Systems User Guide | [docs.nvidia.com/nsight-systems](https://docs.nvidia.com/nsight-systems/) | §1–3 入门 | W5 |
+| 17 | NVIDIA Nsight Compute User Guide | [docs.nvidia.com/nsight-compute](https://docs.nvidia.com/nsight-compute/) | §1–3 入门 | W5 |
 
 ---
 
@@ -116,10 +120,10 @@
 
 | 序号 | 题单 | 链接 | 题目数 | 预计完成 |
 |------|------|------|--------|----------|
-| 1 | 代码随想录 | [programmercarl.com](https://programmercarl.com/) | 200+ | 2026.08 |
-| 2 | Hot 100 | [leetcode.cn/problem-list/2cktkvj](https://leetcode.cn/problem-list/2cktkvj/) | 100 | 2026.10 |
-| 3 | 面试经典 150 题 | [leetcode.cn/studyplan/top-interview-150](https://leetcode.cn/studyplan/top-interview-150/) | 150 | 2026.11 |
-| 4 | 灵神题单 | [leetcode.cn/discuss/post/3141566](https://leetcode.cn/discuss/post/3141566/ru-he-ke-xue-shua-ti-by-endlesscheng-q3yd/) | ~500+ | 2027.03 |
+| 1 | 代码随想录 | [programmercarl.com](https://programmercarl.com/) | 200+ | Month N |
+| 2 | Hot 100 | [leetcode.cn/problem-list/2cktkvj](https://leetcode.cn/problem-list/2cktkvj/) | 100 | Month N |
+| 3 | 面试经典 150 题 | [leetcode.cn/studyplan/top-interview-150](https://leetcode.cn/studyplan/top-interview-150/) | 150 | Month N |
+| 4 | 灵神题单 | [leetcode.cn/discuss/post/3141566](https://leetcode.cn/discuss/post/3141566/ru-he-ke-xue-shua-ti-by-endlesscheng-q3yd/) | ~500+ | Month N |
 
 ---
 
@@ -164,3 +168,65 @@
 | 1 | Tensor Parallel | `megatron/core/tensor_parallel/` | [github.com/NVIDIA/Megatron-LM/tree/main/megatron/core/tensor_parallel](https://github.com/NVIDIA/Megatron-LM/tree/main/megatron/core/tensor_parallel) | W33 |
 | 2 | Pipeline Parallel | `megatron/core/pipeline_parallel/` | [github.com/NVIDIA/Megatron-LM/tree/main/megatron/core/pipeline_parallel](https://github.com/NVIDIA/Megatron-LM/tree/main/megatron/core/pipeline_parallel) | W36 |
 | 3 | Dataset & Checkpoint | 相关模块 | 同上仓库按路径查找 | W39 |
+
+---
+
+## 九、⭐ CUDA 飞书课程 · 完整目录（B1 轨道主教材）
+
+> 链接：[CUDA 编程基础](https://tvle9mq8jh.feishu.cn/docx/BnqMdyaJ9oyXb1xwktgc7esMn4c) | 更新日期：2026-02-18
+> 
+> 涵盖从 Toolkit 安装到 FlashAttention 的完整 CUDA 算子优化链，12 章系统教学。
+
+| 章 | 标题 | 核心内容 | 对应计划周 |
+|:--:|------|----------|:--:|
+| 1 | **CUDA Toolkit 安装** | Toolkit 概述、系统环境准备、安装配置、VSCode 调试 CUDA、nvcc/gdb、deviceQuery 验证 | W1 |
+| 2 | **CUDA 线程模型和显存模型** | GPU 硬件结构（SM/CUDA Core/Warp Scheduler）、三级线程组织（Thread→Block→Grid）、内存层次（寄存器/共享内存/全局内存）、cudaMalloc/cudaMemcpy、`__syncthreads`、归约算子性能对比 | W1–W2 |
+| 3 | **Softmax 算子实现与优化** | 数值稳定性（平移技巧）、CPU 基线→CUDA 单线程块→共享内存块内归约→Warp Shuffle（`__shfl_sync`）→混合优化（多 Warp + 共享内存协同） | W2–W3 |
+| 4 | **Reduce 算子优化** | 朴素归约→线程利用率提升（预归约）→线程束分化消除→Warp 级展开（`__shfl_down_sync`）→BlockReduce 两阶段模式→通用优化方法论 | W4 |
+| 5 | **矩阵乘法基础实现和优化** | Naive CUDA (v1)→共享内存分块 (v2)→Thread Tile + ILP (v3)→达到 cuBLAS ~50% | W5–W7 |
+| 6 | **矩阵乘法向量化访存优化** | 向量化加载 (v4)、共享内存转置存储、外积计算、SIMD 写入、达到 cuBLAS 75-80% | W7–W8 |
+| 7 | **矩阵乘法双缓冲流水优化** | 乒乓缓冲、数据预取与计算重叠 (v5)、寄存器级+共享内存级两级流水线、达到 cuBLAS ~92% | W10–W12 |
+| 8 | **CUDA 原子操作** | 数据竞争、atomicAdd/atomicCAS、并行直方图计算（Shared Memory 加速） | W5–W6 |
+| 9 | **Transpose 与数据排布优化** | Bank 冲突机制（32 存储体）、Padding 优化、循环展开、Nsight Compute 分析 | W3 |
+| 10 | **RMSNorm 算子** | BlockReduce + float4 向量化优化、Warp 级+块级归约、与 LayerNorm 对比 | W7–W8 |
+| 11 | **FlashAttention 实现** | 标准 Attention IO 瓶颈分析、分块计算+在线 Softmax、QKV 分块加载+共享内存布局、显存占用优化 | W13–W14 |
+| 12 | **自定义 PyTorch CUDA 算子** | C++/CUDA Extension 开发流程、Python 绑定+autograd 支持、setup.py 编译安装 | W11–W12 |
+
+---
+
+## 十、⭐ KuiperInfer · 自制深度学习推理框架（B 线项目配套）
+
+> 开源项目：[GitHub - KuiperInfer](https://github.com/) | 9 讲视频教程
+> 
+> 从零手写推理框架，与 MiniInfer 项目高度互补。**建议在 MiniInfer 之前或并行学习。**
+
+| 讲 | 内容 | 对应 MiniInfer 阶段 |
+|:--:|------|---------------------|
+| 1 | 项目预览和环境配置 | 环境搭建 |
+| 2 | 张量（Tensor）的设计与实现 | MiniInfer v0：Tensor 基础 |
+| 3 | 计算图的定义 | 模型表示 |
+| 4 | 构建计算图关系和执行顺序 | 拓扑排序 + 内存规划 |
+| 5 | KuiperInfer 中的算子和注册工厂 | 算子注册机制 |
+| 6 | 卷积和池化算子的实现 | CV 推理（可选） |
+| 7 | 表达式层的词法分析和语法分析 | ONNX/模型解析 |
+| 8 | 动手支持 ResNet 网络的推理 | 完整模型推理 |
+| 9 | 自制一个支持 YOLOv5 的推理框架 | 端到端实战 |
+
+---
+
+## 十一、⭐ vLLM 飞书课程（B5/E 线主资源）
+
+> 链接：[vLLM 配套课程](https://l0kzvikuq0w.feishu.cn/drive/folder/FEHnfpzWel2BVgdERTvcQ8oLnWh)
+>
+> 18 课时源码级深度解析，全方位覆盖 vLLM 核心模块。
+
+| 主题 | 内容 | 对应 E 线阶段 |
+|------|------|:--:|
+| **PagedAttention 内存管理** | BlockManager 设计、Page 分配/回收/复制、KV Cache 生命周期 | Phase 1–2 |
+| **Scheduler & Continuous Batching** | 请求队列调度、抢占策略、Chunked Prefill | Phase 1–2 |
+| **Worker & ModelRunner** | 模型加载、forward 执行、CUDA Graph 加速 | Phase 2 |
+| **Prefix Caching** | Radix Tree 实现、相同前缀 KV Cache 复用 | Phase 2 |
+| **Speculative Decoding** | 小模型 Draft + 大模型 Verify 流水线 | Phase 2–3 |
+| **量化推理** | AWQ/GPTQ/FP8 在 vLLM 中的集成方式 | Phase 3 |
+| **分布式推理** | Tensor Parallelism + Pipeline Parallelism + Expert Parallelism 负载均衡 | Phase 3–4 |
+| **社区贡献** | CONTRIBUTING 指南、Good First Issue 认领、PR 规范、Review 流程 | Phase 1→持续 |

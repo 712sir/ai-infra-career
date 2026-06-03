@@ -1,6 +1,10 @@
 # 项目索引
 
 > 每个项目有独立仓库，本文件仅做索引和进度跟踪
+>
+> 🔨 **手搓模式说明**：每个项目标注推荐手搓模式
+> - 🥇 **白板** = 关掉参考从零手写，核心能力必须内化
+> - 🥈 **临摹** = 边看边敲理解意图后重写，工具类/入门级
 
 ---
 
@@ -38,8 +42,9 @@
 
 ## 规划项目
 
-### MiniInfer — 手写 LLM 推理引擎 ⭐⭐⭐
+### MiniInfer — 手写 LLM 推理引擎 ⭐⭐⭐ 🥇 白板
 - **计划仓库名**：`mini-infer`
+- **手搓模式**：🥇 白板为主 — BlockManager/Scheduler 从零设计，GEMM/Attention kernel 白板手写
 - **目标**：用 C++/CUDA 实现一个极简 LLM 推理引擎
 - **技术栈**：C++、CUDA、PyTorch（模型导出）
 - **里程碑**：
@@ -51,8 +56,9 @@
   - [ ] Milestone 6：TP 分布式推理
 - **预计工期**：2 个月
 
-### MiniQuant — 手写量化工具 ⭐⭐⭐
+### MiniQuant — 手写量化工具 ⭐⭐⭐ 🥇 白板
 - **计划仓库名**：`mini-quant`
+- **手搓模式**：🥇 白板为主 — AWQ 算法核心从论文推导实现，INT4 GEMM kernel 白板手写
 - **目标**：实现 AWQ/GPTQ 的核心量化算法
 - **技术栈**：CUDA、Python、PyTorch
 - **里程碑**：
@@ -62,8 +68,9 @@
   - [ ] Milestone 4：精度 + 速度 benchmark 对比
 - **预计工期**：1.5 个月
 
-### vLLM 源码阅读笔记 ⭐⭐⭐
+### vLLM 源码阅读笔记 ⭐⭐⭐ 🥈 临摹
 - **计划仓库名**：`vllm-notes`
+- **手搓模式**：🥈 临摹 — 阅读源码后复现简化版，重在理解设计模式而非逐行复刻
 - **目标**：输出系统化的 vLLM 源码阅读笔记 + 开源 PR
 - **内容**：
   - [ ] 模块级架构图 + 数据流图
@@ -72,8 +79,9 @@
   - [ ] vLLM PR × 2-3
 - **预计工期**：持续 2-3 个月
 
-### MiniMegatron — 手写分布式训练 ⭐⭐
+### MiniMegatron — 手写分布式训练 ⭐⭐ 🥇 白板
 - **计划仓库名**：`mini-megatron`
+- **手搓模式**：🥇 白板为主 — TP/PP 通信模式从论文推导，训练 loop 从零搭建
 - **目标**：PyTorch 手写 TP + PP + DP 训练 GPT-2
 - **技术栈**：PyTorch、NCCL、torch.distributed
 - **里程碑**：
@@ -84,8 +92,9 @@
   - [ ] Milestone 5：ZeRO 优化器状态分片
 - **预计工期**：1.5 个月
 
-### CUDA Kernel 合集 ⭐⭐
+### CUDA Kernel 合集 ⭐⭐ 🥇 白板
 - **计划仓库名**：`cuda-kernels`
+- **手搓模式**：🥇 白板核心 kernel（GEMM/FlashAttention），🥈 临摹变体 kernel（LayerNorm/RoPE/SwiGLU）
 - **目标**：高质量 CUDA kernel 实现合集
 - **技术栈**：CUDA C++
 - **Kernel 列表**：
