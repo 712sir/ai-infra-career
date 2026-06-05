@@ -54,7 +54,7 @@
 |------|------|------|---------------|--------|
 | 1 | ⭐ **CUDA 编程基础（飞书教程）** | [飞书文档](https://tvle9mq8jh.feishu.cn/docx/BnqMdyaJ9oyXb1xwktgc7esMn4c) | **B1 轨道主资源**：CUDA 从入门到进阶的系统教程 | W1–W10 |
 | 2 | ⭐ **AI Infra 配套课程 + 进阶** | [飞书文件夹](https://tvle9mq8jh.feishu.cn/drive/folder/B10Ff92fCl4IVHdH7U3cccAMn1V?from=from_copylink) | B1/B4 配套：含 CUDA 深入 + Triton/PyTorch 专题 | W1–W24 |
-| 3 | ⭐ **李沐「动手学深度学习 V2」PyTorch 版** | [B站 171集全](https://b23.tv/IjnkTRm) | **C/D 线补充**：171 集 PyTorch 实战，覆盖 Transformer/Attention/GPT/BERT 等。2026 最新完结版，配合 cs224n 理论 + llm.c 工程实现形成三位一体 | 长期 |
+| 3 | ⭐ **李沐「动手学深度学习 V2」PyTorch 版** | [B站 171集全](https://b23.tv/IjnkTRm) | **C/D 线补充**：171 集 PyTorch 实战，覆盖 Transformer/Attention/GPT/BERT 等。最新完结版，配合 cs224n 理论 + llm.c 工程实现形成三位一体 | 长期 |
 | 4 | ⭐ **vLLM 配套课程** | [飞书文件夹](https://l0kzvikuq0w.feishu.cn/drive/folder/FEHnfpzWel2BVgdERTvcQ8oLnWh) | **B5/E 线主资源**：vLLM 架构/源码/贡献指南深度学习 | W8→持续 |
 | 5 | cuda-mode Lectures | [youtube.com/@CUDAMODE](https://www.youtube.com/@CUDAMODE) | Lecture 1 (Profiling), 4 (GEMM), 8 (CUTLASS), 12 (Flash Attention) | W5, W8, W12+ |
 | 6 | David Beazley: Understanding the Python GIL | [youtu.be/Obt-vMVdM8s](https://www.youtube.com/watch?v=Obt-vMVdM8s) | PyCon 2010，~60min，GIL 经典必看 | W2 |
@@ -173,7 +173,7 @@
 
 ## 九、⭐ CUDA 飞书课程 · 完整目录（B1 轨道主教材）
 
-> 链接：[CUDA 编程基础](https://tvle9mq8jh.feishu.cn/docx/BnqMdyaJ9oyXb1xwktgc7esMn4c) | 更新日期：2026-02-18
+> 链接：[CUDA 编程基础](https://tvle9mq8jh.feishu.cn/docx/BnqMdyaJ9oyXb1xwktgc7esMn4c) | 课程持续更新中
 > 
 > 涵盖从 Toolkit 安装到 FlashAttention 的完整 CUDA 算子优化链，12 章系统教学。
 

@@ -455,7 +455,7 @@ Month 11-12│ 实习面试 + 实习进行中 + MiniInfer v1.0 开源发布
 |------|------|----------|------|
 | ⭐ **CUDA 编程基础** | [飞书文档](https://tvle9mq8jh.feishu.cn/docx/BnqMdyaJ9oyXb1xwktgc7esMn4c) | B1 CUDA | CUDA 从入门到进阶系统教程，替代 PMPP 作为主教材 |
 | ⭐ **AI Infra 配套课程** | [飞书文件夹](https://tvle9mq8jh.feishu.cn/drive/folder/B10Ff92fCl4IVHdH7U3cccAMn1V?from=from_copylink) | B1/B4 | 配套 + 进阶课程，含 CUDA 深入、Triton、PyTorch 专题 |
-| ⭐ **动手学深度学习 V2** | [B站 171集](https://b23.tv/IjnkTRm) | C/D 补充 | 李沐 2026 最新完结 PyTorch 版，覆盖 Transformer/Attention/GPT/BERT。与 cs224n（理论）+ llm.c（工程）形成「三位一体」 |
+| ⭐ **动手学深度学习 V2** | [B站 171集](https://b23.tv/IjnkTRm) | C/D 补充 | 李沐最新完结 PyTorch 版，覆盖 Transformer/Attention/GPT/BERT。与 cs224n（理论）+ llm.c（工程）形成「三位一体」 |
 | ⭐ **vLLM 配套课程** | [飞书文件夹](https://l0kzvikuq0w.feishu.cn/drive/folder/FEHnfpzWel2BVgdERTvcQ8oLnWh) | B5/E | vLLM 架构/源码/贡献指南深度学习 |
 
 ---
