@@ -81,7 +81,7 @@ s1.clear();         // ✓ 重置状态
 s1 = "world";       // ✓ 赋值新值
 // std::cout << s1; // 可以，但不知道输出什么
 
-// 规则 2：析构函数标记 noexcept 很重要！
+// 规则 2：移动构造函数标记 noexcept 很重要！
 std::vector<MyType> v;
 v.push_back(MyType());  // vector 扩容时，如果移动构造是 noexcept 的
                         // 就用移动，否则用拷贝！所以：
@@ -92,8 +92,8 @@ public:
 
 // 规则 3：不要对 const 对象 move
 const std::string s3 = "hello";
-std::string s4 = std::move(s3);  // 调用的是拷贝构造！因为 const T&&
-                                  // 不能绑定到非 const 的移动构造
+std::string s4 = std::move(s3);  // 调用的是拷贝构造！因为 const T&& 不能绑定到 T&&
+                                  // （无法丢弃 const），回退匹配 const T& → 拷贝构造
 ```
 
 ---

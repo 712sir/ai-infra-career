@@ -48,6 +48,11 @@ kernel_name<<<gridDim, blockDim, sharedMemBytes, stream>>>(args...);
 //            ^^^^^^^  ^^^^^^^^  ^^^^^^^^^^^^^^  ^^^^^^
 //            grid 大小  block 大小  shared mem    CUDA stream
 //            必须指定    必须指定    可选          可选
+
+// Kernel launch 后必须检查错误！
+kernel_name<<<gridDim, blockDim>>>(args...);
+CUDA_CHECK(cudaGetLastError());        // 检查 launch 错误（配置参数等）
+CUDA_CHECK(cudaDeviceSynchronize());   // 检查运行中错误（内存越界等）
 ```
 
 **计算全局索引**：
@@ -114,7 +119,7 @@ __global__ void vecAdd(float* A, float* B, float* C, int N) {
 
 - **1 Warp = 32 个连续的 Thread**
 - Warp 是 SM 上的调度单元
-- Warp 内的 thread 执行同一条指令（SIMD 模式）
+- Warp 内的 thread 执行同一条指令（SIMT 模式，非 SIMD——SIMT 每个 Thread 有独立寄存器和程序计数器）
 - **线程束分化（Warp Divergence）**：Warp 内 thread 走不同的 if-else 分支时，两部分串行执行
 
 ```
@@ -145,7 +150,7 @@ cudaError_t cudaMalloc(void** devPtr, size_t size);
 cudaError_t cudaMemcpy(void* dst, const void* src,
                        size_t count, cudaMemcpyKind kind);
 // kind: cudaMemcpyHostToDevice, cudaMemcpyDeviceToHost,
-//       cudaMemcpyDeviceToDevice
+//       cudaMemcpyDeviceToDevice, cudaMemcpyDefault (推荐，自动推断方向)
 
 // 释放 GPU 内存
 cudaError_t cudaFree(void* devPtr);

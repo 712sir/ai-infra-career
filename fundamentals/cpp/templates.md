@@ -150,7 +150,8 @@ template<
 >
 struct GemmKernel {
     // 编译期就能计算出 shared memory 大小、寄存器数量等
-    static constexpr int smem_size = TileM * TileK + TileN * TileK;
+    static constexpr int smem_elements = TileM * TileK + TileN * TileK;
+    // 实际 Shared Memory 字节数 = smem_elements * sizeof(ElementA)
 
     __device__ void operator()(/*...*/) {
         // 所有 tile 大小在编译期已知 → 循环可以被完全展开
@@ -180,8 +181,8 @@ py::class_<MyCppClass>(m, "MyCppClass")     // 类模板
 
 | 问题 | 答案 |
 |------|------|
-| 模板特化 vs 偏特化？ | 全特化：所有参数都确定；偏特化：部分参数确定 |
+| 全特化 vs 偏特化？ | 全特化：所有参数都确定；偏特化：部分参数确定 |
 | SFINAE 是什么？ | 模板替换失败时不报错，继续尝试其他候选 |
 | 为什么 CUTLASS 用那么多模板？ | 编译期确定 tile/类型/布局 → 编译器生成最优指令 |
-| `typename` vs `class` 在模板参数？ | 99% 场景完全等价，用 `typename` 更语义准确 |
+| `typename` vs `class` 在模板参数？ | 基本等价（C++17 起完全等价），用 `typename` 更语义准确；C++14 及之前 template template parameter 须用 `class` |
 | 模板代码为什么放头文件？ | 模板在实例化点才编译，定义必须对编译器可见 |

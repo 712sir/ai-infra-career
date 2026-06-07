@@ -136,11 +136,11 @@ def generate_stream(model, prompt, max_tokens=100):
     """推理引擎流式输出：每生成一个 token 就 yield"""
     tokens = model.encode(prompt)
     for _ in range(max_tokens):
-        logits = model.forward(tokens[-model.context_len:])
+        logits = model(tokens[-model.context_len:])  # __call__ 而非 forward()（触发 hooks）
         next_token = sample(logits)          # 采样
         yield model.decode([next_token])     # 产出文本片段
         tokens.append(next_token)
-        if next_token == model.eos_token:
+        if next_token == model.config.eos_token_id:
             break
 
 # 使用：打字机效果
@@ -151,6 +151,9 @@ for chunk in generate_stream(model, "Once upon a time"):
 ### 2. 惰性数据集加载
 
 ```python
+import numpy as np
+import glob
+
 def load_sharded_dataset(pattern, batch_size):
     """分片加载训练数据——不用全读到内存"""
     for shard_path in sorted(glob.glob(pattern)):

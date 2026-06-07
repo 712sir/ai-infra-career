@@ -100,6 +100,7 @@ with Pool(processes=4) as pool:
 
 ```python
 import asyncio
+import aiohttp
 
 # 单线程 + 事件循环 → 不涉及 GIL 竞争
 async def fetch(url):
@@ -140,28 +141,41 @@ Py_END_ALLOW_THREADS
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 
+# 假设 model 是一个 C 扩展对象（内部用 Py_BEGIN_ALLOW_THREADS 释放 GIL）
+# 如果 model 是纯 Python 对象，请改用 ProcessPoolExecutor
+from transformers import AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained("gpt2")
+model = load_cpp_inference_engine("model.bin")  # C++ 推理引擎
+
 executor = ThreadPoolExecutor(max_workers=4)
 
-async def handle_request(prompt: str) -> str:
+async def handle_client(reader, writer):
+    """asyncio.start_server 要求的回调签名"""
+    data = await reader.read(4096)
+    prompt = data.decode('utf-8')
+
     # tokenize 在 Python 中（轻量）
     tokens = tokenizer.encode(prompt)
 
-    # 推理在 C++/CUDA 中（重量，GIL 释放）
+    # 推理在 C++/CUDA 中（重量，GIL 释放 → 可真正并行）
     loop = asyncio.get_event_loop()
-    result = await loop.run_in_executor(
-        executor,
-        model.generate,  # C 扩展中会释放 GIL
-        tokens
-    )
+    result = await loop.run_in_executor(executor, model.generate, tokens)
 
     # detokenize 在 Python 中
-    return tokenizer.decode(result)
+    response = tokenizer.decode(result)
+    writer.write(response.encode('utf-8'))
+    await writer.drain()
+    writer.close()
+    await writer.wait_closed()
 
 # 启动服务
 async def main():
-    server = await asyncio.start_server(
-        handle_request, '0.0.0.0', 8080)
-    await server.serve_forever()
+    server = await asyncio.start_server(handle_client, '0.0.0.0', 8080)
+    async with server:
+        await server.serve_forever()
+
+asyncio.run(main())
 ```
 
 ### 为什么推理引擎用 C++ 写而不是纯 Python？

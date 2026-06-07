@@ -198,7 +198,7 @@ std::shared_ptr<T> lock() const {
 
 | 问题 | 答案 |
 |------|------|
-| unique_ptr 大小？ | 等于裸指针（通常 8 字节），自定义 deleter 可能变大 |
+| unique_ptr 大小？ | 默认 deleter 时等于裸指针（通常 8 字节），自定义 deleter（函数指针/lambda 捕获）可能变大 |
 | shared_ptr 大小？ | 两个裸指针大小（通常 16 字节） |
 | weak_ptr 大小？ | 同 shared_ptr（16 字节） |
 | make_shared 优势？ | 一次分配（对象+控制块），异常安全，更好的局部性 |
