@@ -22,6 +22,15 @@
 | ⭐2 | **AI Infra 配套课程 + 进阶** | [飞书文件夹](https://tvle9mq8jh.feishu.cn/drive/folder/B10Ff92fCl4IVHdH7U3cccAMn1V?from=from_copylink) | B1/B4 | CUDA 深入 + Triton/PyTorch 专题，Phase 1-2 全程配套 |
 | ⭐3 | **动手学深度学习 V2（李沐）** | [B站 171集](https://b23.tv/IjnkTRm) | C/D 补充 | PyTorch 版，覆盖 Transformer/Attention/GPT/BERT。与 cs224n（理论）+ llm.c（工程）形成三位一体：**理论学 cs224n → 实现看 llm.c → 上手跟 D2L** |
 | ⭐4 | **vLLM 配套课程** | [飞书文件夹](https://l0kzvikuq0w.feishu.cn/drive/folder/FEHnfpzWel2BVgdERTvcQ8oLnWh) | B5/E | vLLM 架构/源码/贡献指南系统教学，配合 E 线开源贡献推进 |
+| ⭐5 | **ZOMI AI-Infra 开源课** | [GitHub](https://github.com/Aaaqiu1/AI-Infra) | B3/B5 | 04 分布式训练（Megatron/DeepSpeed/ZeRO）+ 05 推理优化。PPT+视频+代码 |
+| ⭐6 | **AIInfraGuide** | [网站](https://caomaolufei.github.io/AIInfraGuide/) | 面试 | 61篇文章 + 181道面试真题。CUDA模块当B1辅助教材，面试宝典每周2道 |
+| ⭐7 | **ai-infra-performance-learning** | [GitHub](https://github.com/ai-infra-curriculum/ai-infra-performance-learning) | B1/B4/B5 | 250h性能工程师路线，每个Phase结束时对标检查覆盖度 |
+| ⭐8 | **CUDA-Learn-Notes** | [GitHub](https://github.com/DefTruth/CUDA-Learn-Notes) | B1 | 200+ kernel含GEMM/FlashAttention，写白板GEMM时的对照参考 |
+| ⭐9 | **how-to-optim-algorithm-in-cuda** | [GitHub](https://github.com/BBuf/how-to-optim-algorithm-in-cuda) | B1 | Reduce/Attention优化实战 + CUDA-MODE中文笔记，W3-W4 Reduction参考 |
+| ⭐10 | **KuiperInfer** | [GitHub](https://github.com/zjhellofss/KuiperInfer) | MiniInfer | 9讲从零写推理引擎，支持Llama2/Qwen2.5。MiniInfer主参考 |
+| ⭐11 | **yalm** | [GitHub](https://github.com/andrewkchan/yalm) | MiniInfer | 纯C++/CUDA推理引擎，零依赖。MiniInfer第二参考，代码更简洁 |
+| ⭐12 | **Nano-vLLM** | GitHub搜索 | B5/E | 1200行纯Python，覆盖PagedAttention/Continuous Batching/Prefix Caching。vLLM源码前置理解 |
+| ⭐13 | **tiny-vllm** | [GitHub](https://github.com/jmaczan/tiny-vllm) | MiniInfer | C++/CUDA手写mini-vLLM，PagedAttention实现参考 |
 
 ---
 
@@ -81,6 +90,8 @@
 ## W1：环境 + 算法预热 + llm.c Week1
 
 > 📅 每天 2-3 道算法题，llm.c 实际在 Week 1（非 Week 1-9 回顾）
+>
+> 📖 **外部参考**：[AIInfraGuide CUDA 环境搭建](https://caomaolufei.github.io/AIInfraGuide/cuda) · [ZOMI 课程 00 概述](https://github.com/Aaaqiu1/AI-Infra) 了解 AI Infra 全貌
 
 ### A 算法（代码随想录数组篇：核心 5 + 拓展 10，每天 2-3 题）
 
@@ -144,6 +155,8 @@
 
 ## W3：哈希表 + 字符串 + PMPP shared memory
 
+> 📖 **外部参考**：MatMul 临摹用 [CUDA-Learn-Notes](https://github.com/DefTruth/CUDA-Learn-Notes) GEMM 基础版 · [how-to-optim-algorithm-in-cuda](https://github.com/BBuf/how-to-optim-algorithm-in-cuda) Reduce 章节（W4 提前看）
+
 ### A 算法（代码随想录 03-hash-table 核心 8 题 + 04-string 开始）
 
 - [ ] 242 有效的字母异位词（数组作哈希表）`A-hash`
@@ -177,6 +190,8 @@
 ---
 
 ## W4：字符串收尾 + 栈队列 + cs224n 开始
+
+> 📖 **外部参考**：[how-to-optim-algorithm-in-cuda](https://github.com/BBuf/how-to-optim-algorithm-in-cuda) Reduce 7 版优化链 · [ZOMI 04 分布式训练](https://github.com/Aaaqiu1/AI-Infra) 概览（B3 预热）
 
 ### A 算法（04-string 收尾 + 06-stack-queue 开始）
 
@@ -215,6 +230,8 @@
 - [ ] 检查 W1–W4 所有 `[ ]` 项，未完成的标 `⚠️`
 - [ ] 补漏优先：B1 CUDA kernel 没写的补写，算法题没刷的补刷
 - [ ] 复盘：4 周学习节奏可持续吗？每天几小时？需要调整什么？
+- [ ] 🆕 **面试对标**：看 2 道 [AIInfraGuide T3 芯片厂面经](https://caomaolufei.github.io/AIInfraGuide/interview)（英伟达/寒武纪/壁仞），检验 CUDA 基础能不能答
+- [ ] 🆕 **覆盖率检查**：对比 [ai-infra-performance-learning](https://github.com/ai-infra-curriculum/ai-infra-performance-learning) Module 2（CUDA编程），检查自己覆盖了哪些、漏了哪些
 
 ---
 
@@ -283,6 +300,8 @@
 
 ## W7：二叉树收尾 + 回溯完成
 
+> 📖 **外部参考**：[CUDA-Learn-Notes](https://github.com/DefTruth/CUDA-Learn-Notes) GEMM naive→shared memory · [cuda_hgemm](https://github.com/Bruce-Lee-LY/cuda_hgemm) WMMA 入门
+
 ### A 算法
 - [ ] 代码随想录：08-binary-tree 修改+构造+BST+进阶 18 题 `A-tree-bst`
   - 修改与构造（5）：226 翻转 + 106/105 构造 + 654 最大二叉树 + 617 合并
@@ -316,6 +335,8 @@
 ---
 
 ## W8：贪心算法
+
+> 📖 **外部参考**：[CUDA-Learn-Notes](https://github.com/DefTruth/CUDA-Learn-Notes) GEMM shared memory → Tensor Core · [cuda_hgemm](https://github.com/Bruce-Lee-LY/cuda_hgemm) MMA PTX 进阶
 
 ### A 算法
 - [ ] 代码随想录：10-greedy 全部 17 题 `A-greedy`
@@ -352,6 +373,8 @@
 - [ ] 检查 W5–W8 所有产出项完成度
 - [ ] 重点检查：FlashAttention/GEMM kernel 进度 + 贪心/二叉树算法正确率
 - [ ] 决策：如果 CUDA kernel 连续两周落后 → 调整 B 线每日投入比例
+- [ ] 🆕 **面试对标**：看 2 道 [AIInfraGuide T0 大厂面经](https://caomaolufei.github.io/AIInfraGuide/interview)（字节/阿里），感受大厂面试深度
+- [ ] 🆕 对照 [CUDA-Learn-Notes](https://github.com/DefTruth/CUDA-Learn-Notes) GEMM 完整链，检查自己的 kernel 到哪个版本了
 
 ---
 
@@ -387,6 +410,8 @@
 ---
 
 ## W10：DP 完全背包 + 股票问题
+
+> 📖 **外部参考**：[KuiperInfer](https://github.com/zjhellofss/KuiperInfer) 第1-3讲（算子注册+计算图）· [yalm](https://github.com/andrewkchan/yalm) 源码 + [博客](https://andrewkchan.dev/posts/yalm.html) · [Nano-VLLM](https://github.com) 理解 PagedAttention 概念
 
 ### A 算法
 - [ ] 代码随想录：完全背包理论 + 518, 377, 322, 279, 139 `A-dp-fullknap`
@@ -473,10 +498,14 @@
 - [ ] 检查 DP 章节掌握度 + MiniInfer v1.0 是否跑通
 - [ ] 重点补漏：编辑距离/回文 DP 题正确率 < 70% → 重刷
 - [ ] 里程碑对账：W12 原计划 MiniInfer v1.0 GPU+KV Cache，完成了吗？
+- [ ] 🆕 **面试对标**：看 2 道 [AIInfraGuide T2 独角兽面经](https://caomaolufei.github.io/AIInfraGuide/interview)（MiniMax/智谱），检验推理引擎理解
+- [ ] 🆕 对照 [KuiperInfer](https://github.com/zjhellofss/KuiperInfer) 第1-5讲，检查 MiniInfer 的设计是否合理
 
 ---
 
 ## W13：图论开始 + LeetCode Hot100 启动
+
+> 📖 **外部参考**：[FlashAttention-PyTorch-Triton](https://github.com/nguyenhuykhang/FlashAttention-PyTorch-Triton) 9 阶段教程 · [CUDA-Learn-Notes](https://github.com/DefTruth/CUDA-Learn-Notes) FlashAttention MMA 版
 
 ### A 算法
 - [ ] 代码随想录：12-graph DFS/BFS 岛屿系列（卡码网 0098→0106）`A-graph-dfs-bfs`
@@ -526,6 +555,8 @@
 
 ## W15：Hot100 链表 + 二叉树
 
+> 📖 **外部参考**：[cutlass-learning](https://github.com/shizhengLi/cutlass-learning) 中文解析 · [tiny-vllm](https://github.com/jmaczan/tiny-vllm) BlockManager 设计（MiniInfer v2 参考）
+
 ### A 算法
 - [ ] Hot100：06-linked-list 14 题 `A-hot100-linkedlist`
   - **重点**：146 LRU缓存（必考设计题）
@@ -549,6 +580,8 @@
 ---
 
 ## W16：Hot100 二叉树收尾 + 图论 + 回溯
+
+> 📖 **外部参考**：[vLLM_SGLang_cuteDSL_tutorial](https://github.com/RussWong/vLLM_SGLang_cuteDSL_tutorial) Jupyter Notebook 实战 · [ZOMI 05 推理优化](https://github.com/Aaaqiu1/AI-Infra) PPT+视频
 
 ### A 算法
 - [ ] Hot100：07-binary-tree 后 7 题 `A-hot100-tree-finish`
@@ -580,10 +613,14 @@
 - [ ] 检查 Hot100 进度（计划完成 54 题，实际？）+ FlashAttention/Triton 进度
 - [ ] 重点补漏：MiniInfer v2.0 PagedAttention+Continuous Batching 是否跑通？
 - [ ] 节奏决策：如果 Hot100 + B 线项目同时落后 → 暂时降频 D 线 cs224n
+- [ ] 🆕 **面试对标**：看 2 道 [AIInfraGuide T0 大厂面经](https://caomaolufei.github.io/AIInfraGuide/interview)（腾讯/百度），检验分布式/推理知识
+- [ ] 🆕 对照 [ai-infra-performance-learning](https://github.com/ai-infra-curriculum/ai-infra-performance-learning) Module 4-6，检查 Transformer 优化 + 分布式推理覆盖度
 
 ---
 
 ## W17：Hot100 二分 + 栈 + 堆
+
+> 📖 **外部参考**：[ZOMI 04 分布式训练](https://github.com/Aaaqiu1/AI-Infra) 精读（Megatron/DeepSpeed/ZeRO）· [flashinfer](https://github.com/flashinfer-ai/flashinfer) 工业级 kernel 参考
 
 ### A 算法
 - [ ] Hot100：10-binary-search 6 题 `A-hot100-bsearch`
@@ -675,6 +712,8 @@
 - [ ] 检查面试经典150启动进度 + MiniQuant AWQ 论文是否精读完
 - [ ] 重点补漏：vLLM 源码阅读是否按计划推进？E 线 vLLM PR 进展？
 - [ ] 全局对账：对标「研一上·Month 5 实习投递门槛」，三个硬指标目前各完成了多少？
+- [ ] 🆕 刷 [llm-interview](https://github.com/yuyouyu32/llm-interview) 推理部署部分（KV Cache/vLLM/量化），检查能否答出
+- [ ] 🆕 对照 [ZOMI 05 推理优化](https://github.com/Aaaqiu1/AI-Infra)，检查推理知识体系完整性
 
 ---
 
@@ -728,13 +767,14 @@
 - [ ] CUTLASS 进阶（自定义 Epilogue）+ GEMM 优化链完稿 `B-cuda-w22-24`
 - [ ] 🚀 MiniQuant：AWQ 实现 + INT4 GEMM + integration benchmark `B-project-w22-26`
 - [ ] 🚀 MiniInfer 收尾：完整 benchmark + 项目总结 `B-project-miniinfer-final`
+- [ ] 🆕 用 [flashinfer](https://github.com/flashinfer-ai/flashinfer) 做 MiniInfer 性能对标，记录数据用于简历
 
 ### 八股整理（并行推进）
-- [ ] W22：`interview/bajin/cuda.md` 初版
+- [ ] W22：`interview/bajin/cuda.md` 初版（参考 [AIInfraGuide CUDA 模块](https://caomaolufei.github.io/AIInfraGuide/cuda) + [CUDA-Learn-Notes](https://github.com/DefTruth/CUDA-Learn-Notes)）
 - [ ] W23：`interview/bajin/cpp.md` 初版
 - [ ] W24：`interview/bajin/python.md` 初版
-- [ ] W25：`interview/bajin/inference.md` 初版
-- [ ] W26：`interview/bajin/training.md` + `pytorch.md` 初版
+- [ ] W25：`interview/bajin/inference.md` 初版（参考 [AIInfraGuide 推理模块](https://caomaolufei.github.io/AIInfraGuide/inference) + [ZOMI 05](https://github.com/Aaaqiu1/AI-Infra)）
+- [ ] W26：`interview/bajin/training.md` + `pytorch.md` 初版（参考 [ZOMI 04 分布式训练](https://github.com/Aaaqiu1/AI-Infra)）
 
 ### 开源贡献（备用）
 - [ ] vLLM：浏览 Issues 找 beginner-friendly `B-oss-vllm-issue`
@@ -748,6 +788,8 @@
 
 - [ ] 面试经典150 全部完成了吗？没完成的部分标出优先级
 - [ ] MiniQuant AWQ 实现 + INT4 GEMM kernel 进度对账
+- [ ] 🆕 **面试冲刺**：刷 [AIInfraGuide](https://caomaolufei.github.io/AIInfraGuide/interview) T0+T1 大厂面经 5 道，模拟面试场景
+- [ ] 🆕 对照 [ai-infra-performance-learning](https://github.com/ai-infra-curriculum/ai-infra-performance-learning) Module 7-8（生产部署+高级主题），查漏补缺
 - [ ] 八股文档（cuda/cpp/python/inference）写了几个了？
 - [ ] **对标「研一上·Month 5 实习投递门槛」**：CUDA kernel / MiniInfer v1.0 / vLLM PR 各到哪了？
 
@@ -782,6 +824,8 @@
 - [ ] 简历 v2.0 写完了吗？让师兄/朋友 review 过吗？
 - [ ] MiniMegatron DP 训练跑通了吗？没跑通卡在哪？
 - [ ] W32 启动前的硬性前置：简历 + 八股 + MiniMegatron v0
+- [ ] 🆕 刷 [llm-interview](https://github.com/yuyouyu32/llm-interview) 全量面经，查漏补缺
+- [ ] 🆕 用 [flashinfer](https://github.com/flashinfer-ai/flashinfer) 做 MiniInfer 性能对标，确认简历上的数字
 
 ---
 
@@ -810,6 +854,7 @@
 - [ ] 达标 → 投第一批简历（NVIDIA/昆仑芯/科大讯飞/寒武纪）
 - [ ] 未达标 → 哪项差多少？推迟投递 to W40，W37-W40 集中补齐
 - [ ] **申博决策前置**：有论文产出吗？对研究有热情吗？→ 做初步判断
+- [ ] 🆕 简历 v2.0 用 [AIInfraGuide 面经](https://caomaolufei.github.io/AIInfraGuide/interview) 高频考点反向检查，确保每个关键词都能讲清楚
 
 ---
 
@@ -859,9 +904,12 @@
 
 ## E 线 vLLM 开源贡献里程碑 🆕
 
+> 📖 **外部参考**：[Nano-VLLM](https://github.com) 1200行纯Python理解核心概念（W8前置）→ [vLLM_SGLang_cuteDSL_tutorial](https://github.com/RussWong/vLLM_SGLang_cuteDSL_tutorial) Notebook实战（W10+）→ [ZOMI 05 推理优化](https://github.com/Aaaqiu1/AI-Infra) 系统理解（W16+）
+
 | 时间 | 里程碑 | 状态 |
 |------|--------|------|
 | W8  | 环境搭建 + fork vLLM + 通读贡献指南 + 加入 Slack `#contributors` | ⬜ |
+| W8  | 🆕 先跑通 [Nano-VLLM](https://github.com)，用 1200 行代码理解 PagedAttention/Continuous Batching | ⬜ |
 | W10  | 认领首个 Good First Issue（文档/翻译/Bug修复），提交第一个 PR | ⬜ |
 | W14  | 首个 PR 合并 🎉 + 开始认领第二个 Issue（功能增强/模型支持） | ⬜ |
 | W20  | 累计 3+ 合并 PR，简历标注「vLLM Contributor」 | ⬜ |

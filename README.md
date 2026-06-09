@@ -457,6 +457,14 @@ Month 11-12│ 实习面试 + 实习进行中 + MiniInfer v1.0 开源发布
 | ⭐ **AI Infra 配套课程** | [飞书文件夹](https://tvle9mq8jh.feishu.cn/drive/folder/B10Ff92fCl4IVHdH7U3cccAMn1V?from=from_copylink) | B1/B4 | 配套 + 进阶课程，含 CUDA 深入、Triton、PyTorch 专题 |
 | ⭐ **动手学深度学习 V2** | [B站 171集](https://b23.tv/IjnkTRm) | C/D 补充 | 李沐最新完结 PyTorch 版，覆盖 Transformer/Attention/GPT/BERT。与 cs224n（理论）+ llm.c（工程）形成「三位一体」 |
 | ⭐ **vLLM 配套课程** | [飞书文件夹](https://l0kzvikuq0w.feishu.cn/drive/folder/FEHnfpzWel2BVgdERTvcQ8oLnWh) | B5/E | vLLM 架构/源码/贡献指南深度学习 |
+| ⭐ **ZOMI AI-Infra 开源课** | [GitHub](https://github.com/Aaaqiu1/AI-Infra) | 全部 | 最系统的中文 AI Infra 课程，PPT+视频+代码，04 分布式训练 / 05 推理优化 |
+| ⭐ **AIInfraGuide** | [网站](https://caomaolufei.github.io/AIInfraGuide/) | 面试 | 61篇文章 + 181道真题 + 65家公司，每周看2道校准方向 |
+| ⭐ **ai-infra-performance-learning** | [GitHub](https://github.com/ai-infra-curriculum/ai-infra-performance-learning) | B1/B4/B5 | 250h 性能工程师路线，对标检查覆盖度 |
+| ⭐ **CUDA-Learn-Notes** | [GitHub](https://github.com/DefTruth/CUDA-Learn-Notes) | B1 | 200+ kernel，GEMM/FlashAttention 参考实现 |
+| ⭐ **how-to-optim-algorithm-in-cuda** | [GitHub](https://github.com/BBuf/how-to-optim-algorithm-in-cuda) | B1 | Reduce/Attention 优化实战 + CUDA-MODE 中文笔记 |
+| ⭐ **KuiperInfer** | [GitHub](https://github.com/zjhellofss/KuiperInfer) | MiniInfer | 9讲从零写推理引擎，MiniInfer 主参考 |
+| ⭐ **yalm** | [GitHub](https://github.com/andrewkchan/yalm) | MiniInfer | 纯 C++/CUDA 推理引擎，零依赖，第二参考 |
+| ⭐ **Nano-vLLM / tiny-vllm** | GitHub 搜索 | B5/E | vLLM 前置理解 + PagedAttention 实现参考 |
 
 ---
 
