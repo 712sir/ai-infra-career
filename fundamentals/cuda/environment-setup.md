@@ -13,7 +13,7 @@
 | CUDA Toolkit | 12.4.131 |
 | nvcc 路径 | `D:\NVIDIA\bin\nvcc.exe` |
 | CUDA_PATH | `D:\NVIDIA` |
-| C++ 编译器 | MSVC 14.44.35207 (BuildTools 2022, `C:\Program Files (x86)\...`) |
+| C++ 编译器 | MSVC 14.44.35207 (BuildTools 2022, `D:\MicrosoftVisualStudioTools`) |
 | 编译目标 | `-arch=sm_75` (Turing, compute capability 7.5) |
 | 操作系统 | Windows 10 x64 |
 | 内核产出 | [kernels/](../kernels/)：vecAdd / Softmax v1-v4 / MatMul naive+tiled |
@@ -95,7 +95,7 @@ nvcc fatal: Cannot find compiler 'cl.exe' in PATH
 
 **解决**：编译前先激活 MSVC 环境：
 ```batch
-call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+call "D:\MicrosoftVisualStudioTools\VC\Auxiliary\Build\vcvars64.bat"
 ```
 
 > **踩坑**：VS Code ≠ Visual Studio。VS Code 是编辑器，不含 cl.exe。需要的是 BuildTools（~3GB，含 MSVC 编译器 + Windows SDK）。完整 Visual Studio Community 不需要，BuildTools 就够。
@@ -133,7 +133,7 @@ nvcc -O2 -arch=sm_75 -Xcompiler "/utf-8" source.cu -o output.exe
 
 ```batch
 :: 1. 设置 MSVC 环境
-call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+call "D:\MicrosoftVisualStudioTools\VC\Auxiliary\Build\vcvars64.bat"
 
 :: 2. 确保 nvcc 在 PATH 中
 set PATH=D:\NVIDIA\bin;%PATH%
