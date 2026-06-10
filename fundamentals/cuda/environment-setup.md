@@ -125,7 +125,7 @@ nvcc -O2 -arch=sm_75 -Xcompiler "/utf-8" source.cu -o output.exe
 
 **原因**：微软 CDN 在国内被墙。
 
-**解决**：安装器 GUI 勾选组件后 → 安装 → 如果下载失败，打开 VPN 全局模式重试。**重启后残留的 BuildTools 目录如果包含 cl.exe 即可直接使用**，无需重装。
+**解决**：安装器 GUI 勾选组件后 → 安装 → 如果下载失败，打开 VPN 全局模式重试。
 
 ---
 
