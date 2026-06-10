@@ -1,1 +1,5 @@
 *.exe
+*.exp
+*.lib
+*.exp
+*.lib

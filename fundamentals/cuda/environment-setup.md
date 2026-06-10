@@ -13,9 +13,10 @@
 | CUDA Toolkit | 12.4.131 |
 | nvcc 路径 | `D:\NVIDIA\bin\nvcc.exe` |
 | CUDA_PATH | `D:\NVIDIA` |
-| C++ 编译器 | MSVC 14.44.35207 (VS2022, `D:\vs`) |
+| C++ 编译器 | MSVC 14.44.35207 (BuildTools 2022, `C:\Program Files (x86)\...`) |
 | 编译目标 | `-arch=sm_75` (Turing, compute capability 7.5) |
 | 操作系统 | Windows 10 x64 |
+| 内核产出 | [kernels/](../kernels/)：vecAdd / Softmax v1-v4 / MatMul naive+tiled |
 
 ---
 
@@ -90,29 +91,41 @@ D:\NVIDIA\
 nvcc fatal: Cannot find compiler 'cl.exe' in PATH
 ```
 
-**原因**：nvcc 需要 MSVC C++ 编译器作为 host compiler。VS2022 虽已安装，但 `cl.exe` 不在系统 PATH 中，需要先运行 `vcvars64.bat` 设置环境。
+**原因**：nvcc 需要 MSVC C++ 编译器作为 host compiler。需安装 VS 2022 Build Tools（勾选「使用 C++ 的桌面开发」），`cl.exe` 不在系统 PATH 中，需先运行 `vcvars64.bat`。
 
-**解决**：编译前先调用 vcvars：
+**解决**：编译前先激活 MSVC 环境：
 ```batch
-call "D:\vs\VC\Auxiliary\Build\vcvars64.bat"
+call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
 ```
 
----
+> **踩坑**：VS Code ≠ Visual Studio。VS Code 是编辑器，不含 cl.exe。需要的是 BuildTools（~3GB，含 MSVC 编译器 + Windows SDK）。完整 Visual Studio Community 不需要，BuildTools 就够。
 
-### 问题 5：源码编码导致编译警告和运行时异常
+### 问题 5：中文注释编译错误 + GPU 结果全零
 
 **现象**：
 ```
-warning C4819: The file contains a character that cannot be represented
-in the current code page (936)
+error: this declaration has no storage class or type specifier
 ```
-且编译后的程序 GPU 计算结果全为 0。
+且 kernel 运行后 GPU 输出全为零。
 
-**原因**：中文 Windows 系统默认代码页为 GBK (936)，`.cu` 文件中包含的 Unicode 字符（如 ✓ ✗、中文注释）与 GBK 不兼容，导致 MSVC 处理异常。
+**原因**：
+1. MSVC 默认代码页 GBK (936)，UTF-8 中文注释导致编译器解析混乱
+2. 未指定 `-arch=sm_75`，nvcc 编译的 cubin 不匹配 GTX 1650
 
 **解决**：
-1. 源码使用纯 ASCII 字符（中文注释 → 英文注释）
-2. 或保存为 UTF-8 with BOM 格式
+```batch
+nvcc -O2 -arch=sm_75 -Xcompiler "/utf-8" source.cu -o output.exe
+```
+- `-arch=sm_75`：为 GTX 1650 (Turing) 生成正确的 GPU 代码
+- `-Xcompiler "/utf-8"`：告诉 MSVC 源码是 UTF-8，支持中文注释
+
+### 问题 6：VS Installer 因网络被墙无法下载
+
+**现象**：安装器卡住，日志显示 `go.microsoft.com 无法解析`。
+
+**原因**：微软 CDN 在国内被墙。
+
+**解决**：安装器 GUI 勾选组件后 → 安装 → 如果下载失败，打开 VPN 全局模式重试。**重启后残留的 BuildTools 目录如果包含 cl.exe 即可直接使用**，无需重装。
 
 ---
 
@@ -120,20 +133,27 @@ in the current code page (936)
 
 ```batch
 :: 1. 设置 MSVC 环境
-call "D:\vs\VC\Auxiliary\Build\vcvars64.bat"
+call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
 
 :: 2. 确保 nvcc 在 PATH 中
 set PATH=D:\NVIDIA\bin;%PATH%
 
-:: 3. 编译（指定目标架构 sm_75 = GTX 1650）
-nvcc -arch=sm_75 source.cu -o output.exe
+:: 3. 编译（sm_75 + UTF-8 编码支持）
+nvcc -O2 -arch=sm_75 -Xcompiler "/utf-8" source.cu -o output.exe
 ```
 
-## 验证结果
+或使用一键编译脚本：[compile_all.bat](../kernels/compile_all.bat)
 
-| 测试 | 结果 |
-|------|:--:|
-| `__nvcc_device_query` | 75 (sm_75) ✅ |
-| `test_cuda.cu` (setOne kernel, N=1024) | PASS ✅ |
-| vecAdd small (N=256) | PASS ✅ |
-| vecAdd large (N=16M, 65536 blocks) | PASS ✅ |
+## 验证结果（2026-06-10）
+
+| 测试 | 结果 | 关键数据 |
+|------|:--:|------|
+| `__nvcc_device_query` | ✅ | sm_75 |
+| vecAdd naive (N=16M, 65536 blocks) | ✅ | - |
+| vecAdd grid-stride (128 blocks) | ✅ | - |
+| **Softmax v1** (单 Block + 共享内存归约) | ✅ | smem 1024B |
+| **Softmax v2** (Warp Shuffle + 跨 Warp smem) | ✅ | smem 32B (↓97%) |
+| **Softmax v4** (Online Softmax, 单 pass) | ✅ | FlashAttention 核心思想 |
+| **MatMul naive** (C[256×128]=A×B) | ✅ | 4.2M FLOPs, 未合并访问 |
+| **MatMul tiled v1** (Shared Memory Tile) | ✅ | C[512×512], 2KB smem |
+| **MatMul tiled v2** (+ `#pragma unroll`) | ✅ | 同上 + 循环展开 |
