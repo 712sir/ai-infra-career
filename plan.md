@@ -8,6 +8,8 @@
 >
 > **五线并行**：A 算法刷题 · B 基础技术栈（5轨+3项目）· C llm.c-learning · D cs224n-learning · **E vLLM 开源贡献**
 >
+> **每日基石**：D2L 李沐《动手学深度学习 V2》+ B2 C++/Python 进阶 → 每天必碰，不打折扣
+>
 > **关键决策点**：研一末（研一末）判断 → 申博路线 or 就业路线
 >
 > **B 线详细计划**：[→ fundamentals/plan.md](fundamentals/plan.md)
@@ -34,7 +36,7 @@
 
 ---
 
-# 论文研究方向（入学前确定）
+# 研究方向
 
 > **策略**：选能复用 44 周计划代码的方向。论文 = 项目的学术化包装，不另起炉灶。
 
@@ -89,67 +91,73 @@
 
 ## W1：环境 + 算法预热 + llm.c Week1
 
-> 📅 每天 2-3 道算法题，llm.c 实际在 Week 1（非 Week 1-9 回顾）
->
-> 📖 **外部参考**：[AIInfraGuide CUDA 环境搭建](https://caomaolufei.github.io/AIInfraGuide/cuda) · [ZOMI 课程 00 概述](https://github.com/Aaaqiu1/AI-Infra) 了解 AI Infra 全貌
+### A 算法（代码随想录：数组）
 
-### A 算法（代码随想录数组篇：核心 5 + 拓展 10，每天 2-3 题）
+**核心 5 题**
+- [x] 704 二分查找 + 27 移除元素 ✅
+- [x] 977 有序数组的平方 + 209 长度最小的子数组 + 59 螺旋矩阵II ✅
 
-> 正确顺序按 代码随想录：先核心 5，再按技巧分组刷拓展。
-
-**核心 5 题**（Day A1–A2）
-- [x] **Day A1**：704 二分查找 + 27 移除元素 ✅
-- [x] **Day A2**：977 有序数组的平方 + 209 长度最小的子数组 + 59 螺旋矩阵II ✅
-
-**拓展题**（Day A3–A6，按技巧分组）
-- [ ] **Day A3**：35 搜索插入位置 + 34 排序数组查找边界 `A-ext-bsearch`
-- [ ] **Day A4**：26 删除重复项 + 283 移动零 + 844 比较含退格 `A-ext-twoptr`
-- [ ] **Day A5**：69 x平方根 + 367 完全平方数 `A-ext-bsearch2`
-- [ ] **Day A6**：904 水果成篮 + 76 最小覆盖子串 `A-ext-sliding`
-- [ ] **Day A7**：54 螺旋矩阵 `A-ext-sim`
-- [x] 章节笔记：`algorithm/notes/01-programmercarl/01-array/` ✅（随进度更新）
+**拓展题**（核心优先，拓展暂缓）
+- [ ] 35 搜索插入位置 + 34 排序数组查找边界
+- [ ] 26 删除重复项 + 283 移动零 + 844 比较含退格
+- [ ] 69 x平方根 + 367 完全平方数
+- [ ] 904 水果成篮 + 76 最小覆盖子串
+- [ ] 54 螺旋矩阵
 
 ### B 基础 → [详细路径](fundamentals/plan.md#w1-0520-0526cuda-编程模型--c-智能指针)
-- [ ] ⭐ 安装 CUDA Toolkit 12.x（nvcc 可用）+ VSCode 调试环境 `B-cuda-env`
-- [ ] ⭐ B1 CUDA：**飞书课程 Ch1**（CUDA Toolkit 安装+验证）+ Ch2（线程模型+显存模型）`B-cuda-w1`
-- [ ] B2 C++：智能指针 + move 语义（Effective Modern C++ Item 17-29）`B-cpp-w1`
-- [ ] B2 Python：装饰器 + 生成器（Fluent Python Ch7, Ch14）`B-python-w1`
+- [x] CUDA Toolkit 12.x 安装 + 环境验证 ✅
+- [ ] B1 CUDA：飞书课程 Ch1-Ch2（线程模型+显存模型）
+- [ ] B2 C++：智能指针 + move 语义
+- [ ] B2 Python：装饰器 + 生成器
+- [ ] F D2L 李沐：每天 1 集
 
-### C llm.c-learning（Week 1 继续）
-- [x] Day 1：环境搭建 + 首次训练（Shakespeare, 100 iters）✅
-- [x] Day 2：超参实验（block_size / n_layer / lr 对照）✅
-- [x] Day 3：Temperature 生成对比 + 100→1000 步续训 ✅（OpenWebText 国内网络不可达）`C-w1-d3`
-- [ ] Day 4-5：Wandb 可视化 + 5000 步完整训练 `C-w1-d4`
+### C llm.c-learning
+- [x] Day 1：环境搭建 + 首次训练 ✅
+- [x] Day 2：超参实验 ✅
+- [x] Day 3：Temperature 生成对比 + 续训 ✅
+- [ ] Day 4-5：Wandb 可视化 + 完整训练（暂缓）
 
-### D cs224n ⏸️ 下周开始
+### D cs224n ⏸️
 
 ### 本周产出
-- [ ] `algorithm/cpp/01-programmercarl/01-array/` 下 7 个 .cpp 文件
-- [ ] `algorithm/python/01-programmercarl/01-array/` 下 7 个 .py 文件
-- [ ] `fundamentals/cuda/` 下 PMPP ch1 笔记
-- [ ] llm.c Week 1 笔记完整（含超参实验数据 + 完整训练结果）
+- [x] 数组核心 5 题 ✅
+- [ ] 数组拓展题（暂缓）
+- [ ] PMPP ch1 笔记
+- [x] llm.c Week 1 训练跑通 ✅
 
 ---
 
 ## W2：链表 + PMPP 深入 + llm.c Week2
 
-### A 算法（代码随想录 02-linked-list：核心 7 题）
+### A 算法（代码随想录：链表）
 
-> 每天 2-3 题，核心 7 题分 3 天完成。
-
-- [ ] 203 移除链表元素（虚拟头节点）`A-linked-list`
-- [ ] 707 设计链表（基本操作）
-- [ ] 206 反转链表（双指针/头插法）
+**核心 7 题**（先核心，再拓展）
+- [x] 203 移除链表元素 ✅
+- [x] 707 设计链表 ✅
+- [x] 206 反转链表 ✅
 - [ ] 24 两两交换链表中的节点
-- [ ] 19 删除链表的倒数第 N 个节点（快慢指针）
-- [ ] 160 链表相交（双指针换轨）
-- [ ] 142 环形链表 II（快慢指针 + 数学推导）
-- [ ] 链表章节总结
+- [ ] 19 删除链表的倒数第 N 个节点
+- [ ] 160 链表相交
+- [ ] 142 环形链表 II
 
-> 拓展题（后续穿插）：141 环形链表 / 234 回文链表 / 143 重排链表
+拓展：141 环形链表 / 234 回文链表 / 143 重排链表
+
+### B 基础（每日：CUDA + C++ + Python + D2L）
+- [ ] B1 CUDA：Grid/Block/Thread + vecAdd kernel
+- [ ] B2 C++：智能指针 + 手撕练习
+- [ ] B2 Python：装饰器 + 生成器 + 手撕练习
+- [ ] F D2L 李沐：每天 1 集
+
+### C llm.c-learning（Week 2：nanoGPT 精读）
+- [ ] model.py CausalSelfAttention / MLP / Block / GPT 精读
+- [ ] Karpathy "Let's build GPT" 视频对照
+- [ ] week3 自测题 + week4 对照表
 
 ### 本周产出
-- [ ] 7 个链表题双版本代码
+- [ ] 链表核心 7 题
+- [ ] model.py 四个类中文注释
+- [ ] vecAdd kernel 白板手写
+- [ ] C++/Python 手撕练习各 2 道
 
 ---
 
@@ -171,14 +179,13 @@
 - [ ] 哈希章节总结
 
 ### B 基础 → [详细路径](fundamentals/plan.md#w3-0603-0609shared-memory--多线程)
-- [ ] B1 CUDA：Shared Memory + Bank Conflict + MatMul naive `B-cuda-w3`
-- [ ] B2 C++：多线程编程（mutex/atomic/condition_variable/有界阻塞队列）`B-cpp-w3`
-- [ ] B2 Python：asyncio 实战 `B-python-w3`
+- [ ] B1 CUDA：Shared Memory + Bank Conflict + MatMul naive
+- [ ] B2 C++：多线程编程
+- [ ] B2 Python：asyncio 实战
+- [ ] F D2L 李沐：每天 1 集
 
 ### C llm.c-learning
-- [ ] Week 11：多层 Transformer 的 CUDA 实现 `C-llmc-w11`
-  - encoder block 的完整 CUDA 实现
-  - LayerNorm / GeLU 的 CUDA kernel
+- [ ] Week 3：week3 自测题 + week4 对照表
 
 ### D cs224n ⏸️
 
@@ -1008,20 +1015,17 @@
 
 ---
 
-# 每日时间分配（参考）
+# 每日时间分配
 
-| 时段 | 内容 |
-|------|------|
-| 上午 2h | A 线：算法刷题（C++ + Python） |
-| 下午 45min | B1 CUDA/GPU（kernel 实现 + 笔记） |
-| 下午 45min | B2/B3/B4/B5 轮流（语言/分布式/Triton/源码） |
-| 下午 30min | 项目推进（MiniInfer/MiniQuant/MiniMegatron） |
-| 下午 1h | C 或 D 线：llm.c-learning / cs224n（交替进行） |
-| 晚上 30min | **E 线 🆕：vLLM 开源贡献**（读 Issue / 写 PR / review 讨论） |
-| 晚上 30min | 复习 + 笔记 + 八股 + 论文精读 |
-
-> 每天 5.5-6.5 小时，vLLM 贡献每天 30 分钟即可——重在持续，不在一日之功
-> B 线详细时间分配见 [fundamentals/plan.md](fundamentals/plan.md#每日时间分配b-线专属-2h)
+| 块 | 内容 | 时间 |
+|----|------|:--:|
+| 1 | 🥇 B1 CUDA | 45min |
+| 2 | 🥇 B2 C++ | 25min |
+| 3 | 🥇 B2 Python | 25min |
+| 4 | 🥇 D2L 李沐 | 25min |
+| 5 | 🥈 A 算法 | 30min |
+| 6 | 🥉 C llm.c | 35min |
+| 晚 | E vLLM（W8 启动） | 30min |
 
 ---
 
@@ -1051,10 +1055,19 @@
 | 周 | 主题 | 状态 |
 |----|------|------|
 | W1 Day1 | 环境搭建 + 首次训练（Shakespeare） | ✅ 已完成 |
-| W1 Day2 | 超参实验 | 🟡 进行中 |
-| W1 Day3-5 | 换数据集 + wandb + 完整训练 | ⬜ 待完成 |
-| W2–W9 | 模型前向→自测→主循环→matmul→反向→perf→kernel→GEMM | ⬜ 待完成 |
-| W10–W18 | attention kernel→多层→训练循环→自定义kernel→性能优化→Multi-GPU→总结 | ⬜ 待完成 |
+| W1 Day2 | 超参实验 | ✅ 已完成 |
+| W1 Day3 | Temperature 生成对比 + 续训 | ✅ 已完成 |
+| W1 Day4-5 | Wandb + 完整训练 | ⬜ 暂缓 |
+| W2 | nanoGPT model.py 精读 | 🟡 进行中（CausalSelfAttention 读了一半） |
+| W3 | 关键问题自测 + week4 对照表 | ⬜ 待完成 |
+| W4-W18 | 主循环→matmul→反向→perf→kernel→GEMM→... | ⬜ 待完成 |
+
+## D2L 李沐 当前进度
+
+| 内容 | 状态 |
+|------|------|
+| 第 1 集 | ✅ 已完成 |
+| 每天 1 集继续 | 🟡
 
 ## cs224n 规划进度
 
