@@ -36,59 +36,35 @@
 
 ---
 
-## C++（每天 25min）
+## 初级工程师课程（每天 90min）
 
-> 目标：系统编程能力，能读懂和贡献推理引擎（vLLM/TensorRT-LLM 全是 C++）
+> M001-M003（Python/Linux/Git）CS 科班已掌握 ⏭️。M004 开始正课。
+> 
+> 项目与模块穿插进行，学完对应模块立即做项目巩固。
 
-### 学习资源
+| 模块 | 主题 | 学时 | 状态 |
+|------|------|:--:|:--:|
+| M004 | ML 基础（PyTorch/TensorFlow + LLM + GPU） | 20h | 🟡 进行中 |
+| M005 | Docker 容器化 | 15h | ⬜ |
+| M006 | Kubernetes 入门 | 20h | ⬜ |
+| M007 | API 与 Web 服务（FastAPI/Flask） | 15h | ⬜ |
+| M008 | 数据库与 SQL | 15h | ⬜ |
+| M009 | 监控与日志（Prometheus/Grafana） | 15h | ⬜ |
+| M010 | 云平台（AWS/GCP + Terraform） | 20h | ⬜ |
 
-| 优先级 | 资源 | 说明 |
-|:--:|------|------|
-| ⭐ | 《Effective Modern C++》 | 智能指针、move 语义、模板 |
-| ⭐ | [现代 C++ 编程实战（极客时间）](https://time.geekbang.org/column/intro/100040501) | 前 Intel 架构师讲 RAII/coroutine/PMR |
-| 📖 | 《CSAPP》 | 内存层次、机器级表示、缓存 |
-| 🔗 | [zimei11/ai-infra-notes](https://github.com/zimei11/ai-infra-notes) | AI Infra 学习笔记 + 架构图 |
-| 🔗 | [现代 C++ 教程](https://github.com/changkun/modern-cpp-tutorial) | 免费在线 C++11/14/17/20 |
+### 项目穿插节奏
 
-### 学习路线
-
-| 阶段 | 内容 | 验收 |
-|------|------|------|
-| 1 | 智能指针（unique/shared/weak）+ move 语义 | 手写简化版 shared_ptr |
-| 2 | 多线程（thread/mutex/atomic/condition_variable） | 手写有界阻塞队列 |
-| 3 | 内存池 + lock-free queue | 手写简化版内存池 |
-| 4 | CMake + pybind11 + GDB | 给 CUDA kernel 绑定 Python 接口 |
-| 5 | 源码阅读：vLLM Scheduler / BlockManager | 模块级架构图笔记 |
-
----
-
-## Python（每天 25min）
-
-> 目标：PyTorch 内部原理 + Triton DSL + Python/C++ 绑定
-
-### 学习资源
-
-| 优先级 | 资源 | 说明 |
-|:--:|------|------|
-| ⭐ | 《Fluent Python》 | 装饰器、生成器、协程、GIL |
-| ⭐ | [D2L 李沐 B站 171 集](https://b23.tv/IjnkTRm) | 每天 1 集基石 |
-| 🔧 | PyTorch 源码 | autograd 引擎、nn.Module、Tensor 内存布局 |
-| 🔧 | [Triton 官方教程](https://triton-lang.org/) | GPU kernel 原型验证 |
-| 🔧 | [pybind11 文档](https://pybind11.readthedocs.io/) | Python ↔ C++ 绑定 |
-
-### 学习路线
-
-| 阶段 | 内容 | 验收 |
-|------|------|------|
-| 1 | 装饰器 + 生成器 + 协程 | 手写 @timer/@retry + 惰性文件读取 |
-| 2 | GIL / 多进程 / asyncio | 手写异步推理服务雏形 |
-| 3 | PyTorch autograd 源码 | 能讲清计算图构建 + backward 流程 |
-| 4 | Triton DSL 写 GEMM / Attention | 性能对比 PyTorch 原生 |
-| 5 | pybind11 暴露 C++ kernel 给 Python | 跑通编译 + import |
+| 项目 | 内容 | 学时 | 前置模块 |
+|------|------|:--:|------|
+| P1 | 简单模型 API 部署 | 60h | M004-M005 |
+| P2 | Kubernetes 模型服务 | 80h | P1 + M006 |
+| P3 | ML 流水线与实验追踪 | 100h | P1-P2 + M007-M008 |
+| P4 | 监控告警系统 | 80h | P1-P3 + M009 |
+| P5 | 生产级 ML 系统（Capstone） | 120h | 全部 |
 
 ---
 
-## 算法（不变 · 每天 30min）
+## 算法（每天 30min）
 
 > 代码随想录 → Hot 100 → 面试经典 150 → 灵神题单。每道 Python + C++ 双版本。
 
@@ -101,43 +77,15 @@
 
 ---
 
-## 初级工程师课程（每天 35min）
-
-> M001-M003（Python/Linux/Git）⏭️。M004 开始正课。
-
-| 模块 | 进度 |
-|------|------|
-| M004 ML 基础 + GPU Fundamentals | 🟡 |
-| M005 Docker | ⬜ |
-| M006 K8s | ⬜ |
-| M007 APIs | ⬜ |
-| M008 数据库 ⏭️ M009 监控 | ⬜ |
-| M010 云平台 | ⬜ |
-
----
-
-## llm.c（每天 35min）
-
-| 周 | 状态 |
-|------|:--:|
-| Week 1 训练跑通 | ✅ |
-| Week 2 model.py 精读 | ✅ |
-| Week 3 自测 | 🟡 待做 |
-| Week 4 llm.c 主循环 | ⬜ |
-
----
-
 ## 每日时间
 
 | 块 | 内容 | 时间 |
 |----|------|:--:|
 | 1 | CUDA/GPU | 45min |
-| 2 | C++ | 25min |
-| 3 | Python | 25min |
-| 4 | D2L 李沐 | 25min |
-| 5 | 算法 | 30min |
-| 6 | 初级课程 | 35min |
-| 7 | llm.c | 35min |
+| 2 | 初级课程（模块学习 + 项目） | 90min |
+| 3 | 算法 | 30min |
+
+> 每日总计 ~165min。CUDA/GPU 保持技术深度，初级课程作为主线全力推进，算法每日保温。
 
 ---
 
@@ -147,13 +95,9 @@
 |------|------|
 | [NVIDIA DLI CUDA C/C++](https://learn.nvidia.com/) | CUDA 官方课程 |
 | [GPU Puzzles](https://github.com/srush/gpu-puzzles) | CUDA 交互练习 |
-| [现代 C++ 教程](https://github.com/changkun/modern-cpp-tutorial) | C++11-20 系统学习 |
-| [zimei11/ai-infra-notes](https://github.com/zimei11/ai-infra-notes) | AI Infra 全景图 |
-| [Triton 官方教程](https://triton-lang.org/) | GPU kernel Python 原型 |
-| [pybind11 文档](https://pybind11.readthedocs.io/) | Python ↔ C++ |
 | [飞书 CUDA 课程](https://tvle9mq8jh.feishu.cn/docx/BnqMdyaJ9oyXb1xwktgc7esMn4c) | CUDA 中文教材 |
-| [D2L 李沐](https://b23.tv/IjnkTRm) | 深度学习基石 |
 | [CUDA-Learn-Notes](https://github.com/DefTruth/CUDA-Learn-Notes) | kernel 参考 |
+| [初级工程师课程](D:/study/ai-infra-junior-engineer-learning/) | 主线课程 |
 | [AIInfraGuide](https://caomaolufei.github.io/AIInfraGuide/) | 面试宝典 |
 
 ---

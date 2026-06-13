@@ -30,7 +30,7 @@ ai-infra-career/
 
 ## 学习路径
 
-> 主线跟随初级工程师 → 工程师课程。CUDA/GPU、算法、C++/Python、D2L 作为每日并行线。
+> 主线跟随初级工程师课程。CUDA/GPU、算法作为每日并行线。C++/Python 进阶在初级课程完成后启动。
 
 ### 阶段一：初级工程师（440h）
 
@@ -79,24 +79,6 @@ ai-infra-career/
 | 进阶 | Warp Shuffle、Cooperative Groups | CUDA Programming Guide |
 | 实战 | Tensor Core GEMM + FlashAttention | CUDA-Learn-Notes |
 
-### C++ 强化
-
-| 主题 | 内容 |
-|------|------|
-| C++11/14/17 | move 语义、lambda、template、constexpr |
-| 多线程 | thread、mutex、atomic、condition_variable |
-| 内存管理 | unique_ptr、shared_ptr、weak_ptr、memory pool |
-| 编译工具 | CMake、GDB |
-| pybind11 | Python 与 C++ 绑定 |
-
-### Python 深入
-
-| 主题 | 内容 |
-|------|------|
-| 装饰器 / 生成器 / 协程 | Fluent Python |
-| GIL / 多进程 / asyncio | Python 性能与并发 |
-| PyTorch autograd 源码 | 计算图、反向传播 |
-| Triton DSL | GPU kernel 原型 |
 
 ### 推理优化技术
 
@@ -168,12 +150,10 @@ Month 9-12 │ 工程师阶段深入 + 实习投递 + MiniInfer/MiniQuant
 | 块 | 内容 | 时间 |
 |----|------|:--:|
 | 1 | CUDA/GPU | 45min |
-| 2 | C++ | 25min |
-| 3 | Python | 25min |
-| 4 | D2L 李沐 | 25min |
-| 5 | 算法 | 30min |
-| 6 | 初级课程 | 35min |
-| 7 | llm.c | 35min |
+| 2 | 初级课程（模块 + 项目） | 90min |
+| 3 | 算法（Python + C++ 双版本） | 30min |
+
+> 每日总计 ~165min。初级课程全力推进，CUDA 保持技术深度，算法每日保温。
 
 ---
 
@@ -185,12 +165,9 @@ Month 9-12 │ 工程师阶段深入 + 实习投递 + MiniInfer/MiniQuant
 | [D2L 李沐 B站](https://b23.tv/IjnkTRm) | 每天 1 集 |
 | [CUDA-Learn-Notes](https://github.com/DefTruth/CUDA-Learn-Notes) | kernel 参考 |
 | [AIInfraGuide](https://caomaolufei.github.io/AIInfraGuide/) | 面试宝典 |
-| [KuiperInfer](https://github.com/zjhellofss/KuiperInfer) | 推理引擎参考 |
-| [yalm](https://github.com/andrewkchan/yalm) | C++/CUDA 推理引擎 |
-| [ZOMI AI-Infra](https://github.com/Aaaqiu1/AI-Infra) | 分布式/推理 |
-| [vLLM 飞书课程](https://l0kzvikuq0w.feishu.cn/drive/folder/FEHnfpzWel2BVgdERTvcQ8oLnWh) | 推理部署 |
+| [初级工程师课程](D:/study/ai-infra-junior-engineer-learning/) | 主线课程 |
+| [KuiperInfer](https://github.com/zjhellofss/KuiperInfer) | 推理引擎参考（初级完成后启动） |
+| [ZOMI AI-Infra](https://github.com/Aaaqiu1/AI-Infra) | 分布式/推理（初级完成后启动） |
 | [how-to-optim-algorithm-in-cuda](https://github.com/BBuf/how-to-optim-algorithm-in-cuda) | Reduce/Attention 优化 |
 | [FlashAttention-PyTorch-Triton](https://github.com/nguyenhuykhang/FlashAttention-PyTorch-Triton) | FA 实战 |
-| [Nano-vLLM](https://github.com) | vLLM 前置 |
-| [tiny-vllm](https://github.com/jmaczan/tiny-vllm) | PagedAttention |
 | [AIInfraGuide 面经](https://caomaolufei.github.io/AIInfraGuide/interview) | 面试题 |
