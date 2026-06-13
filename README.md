@@ -152,17 +152,6 @@ ai-infra-career/
 
 ---
 
-## 硬件与环境
-
-| 项目 | 配置 |
-|------|------|
-| GPU | GTX 1650 (4GB)，后续租云 GPU |
-| CUDA | 12.x，环境就绪 |
-| Python | 3.9.13 |
-| OS | Windows 10 |
-
----
-
 ## 时间线总览
 
 ```
@@ -171,16 +160,6 @@ Month 3-4  │ 初级 P1-P2 + CUDA Reduction/GEMM + 算法栈/队列/二叉树
 Month 5-8  │ 初级 P3-P5 + 工程师阶段 + CUDA FlashAttention/Tensor Core
 Month 9-12 │ 工程师阶段深入 + 实习投递 + MiniInfer/MiniQuant
 ```
-
----
-
-## 关键原则
-
-1. **先通后专**：CUDA 是底座
-2. **双语言同等重视**：每道算法题 C++ + Python
-3. **每天推进**：至少碰 4-5 条线
-4. **造轮子**：手写 > 只看
-5. **量化成果**：所有项目有数字对比
 
 ---
 
