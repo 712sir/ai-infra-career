@@ -84,8 +84,9 @@
 | 1 | CUDA/GPU | 45min |
 | 2 | 初级课程（模块学习 + 项目） | 90min |
 | 3 | 算法 | 30min |
+| 4 | Andrew Ng ML/DL | 25min |
 
-> 每日总计 ~165min。CUDA/GPU 保持技术深度，初级课程作为主线全力推进，算法每日保温。
+> 每日总计 ~190min。Andrew Ng 课程作为 ML/DL 理论基石，配合初级课程 M004。
 
 ---
 
@@ -93,6 +94,8 @@
 
 | 资源 | 用途 |
 |------|------|
+| [Andrew Ng ML 笔记](D:/study/Coursera-ML-AndrewNg-Notes/) | 机器学习理论基石 |
+| [Andrew Ng DL 笔记](D:/study/deeplearning_ai_books/) | 深度学习理论基石 |
 | [NVIDIA DLI CUDA C/C++](https://learn.nvidia.com/) | CUDA 官方课程 |
 | [GPU Puzzles](https://github.com/srush/gpu-puzzles) | CUDA 交互练习 |
 | [飞书 CUDA 课程](https://tvle9mq8jh.feishu.cn/docx/BnqMdyaJ9oyXb1xwktgc7esMn4c) | CUDA 中文教材 |
