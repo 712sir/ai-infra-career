@@ -20,7 +20,6 @@
 |:--:|------|:--:|------|
 | 🥇 | 初级课程 | 90min | 初级工程师课程 M004 起 + 项目穿插 |
 | 🥇 | CUDA/GPU | 45min | NVIDIA DLI + 工程师 mod-107 + PMPP |
-| 🥇 | Andrew Ng ML/DL | 25min | 吴恩达机器学习 + 深度学习 |
 | 🥈 | 算法 | 30min | 代码随想录 |
 
 ---
@@ -65,8 +64,6 @@
 
 | 资源 | 用在哪 |
 |------|------|
-| [Andrew Ng ML](D:/study/Coursera-ML-AndrewNg-Notes/) | 机器学习基石 |
-| [Andrew Ng DL](D:/study/deeplearning_ai_books/) | 深度学习基石 |
 | [NVIDIA DLI CUDA C/C++](https://learn.nvidia.com/) | CUDA 官方入门 |
 | [GPU Puzzles](https://github.com/srush/gpu-puzzles) | CUDA 交互练习 |
 | [CUDA-Learn-Notes](https://github.com/DefTruth/CUDA-Learn-Notes) | kernel 对照 |
