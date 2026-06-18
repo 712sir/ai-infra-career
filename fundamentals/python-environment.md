@@ -6,7 +6,7 @@
 
 ## 1. 当前问题
 
-你现在是全局 `pip install` — 所有项目共用一套包。这会出问题：
+全局 `pip install` — 所有项目共用一套包。这会出问题：
 
 ```
 项目A 需要 numpy==1.24
@@ -138,12 +138,12 @@ Dockerfile（一张菜谱）
 
 ---
 
-## 7. 给 ai-infra-career 项目补上
+## 7. 给示例项目补上
 
-现在就做——给 `D:\study\ai-infra-career\` 加上 `requirements.txt` 和 `.env.example`：
+现在就做——给 `示例项目` 加上 `requirements.txt` 和 `.env.example`：
 
 ```powershell
-cd D:\study\ai-infra-career
+cd 示例项目路径
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 pip install python-dotenv numpy torch

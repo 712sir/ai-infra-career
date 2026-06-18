@@ -3,3 +3,10 @@
 *.lib
 *.exp
 *.lib
+
+# Python
+venv/
+.env
+__pycache__/
+*.pyc
+*.pyo
