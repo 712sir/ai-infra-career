@@ -2,32 +2,32 @@
 
 ## 概述
 
-This exercise teaches you how to use Python's asyncio for concurrent operations in ML workflows. You'll learn to handle multiple tasks simultaneously, improve I/O-bound operation performance, and build efficient ML pipelines that can process data concurrently.
+本练习学习如何使用 Python asyncio 在 ML 工作流中实现并发操作。你将掌握同时处理多个任务、提升 I/O 密集型操作性能以及构建能并发处理数据的高效 ML 管线。
 ## 学习目标
 
-完成本练习后，你将能够：- Understand async/await syntax and coroutines
-- Write asynchronous functions for I/O-bound tasks
-- Use asyncio.gather() for concurrent execution
-- Implement async file operations and API calls
-- Build async data loaders and preprocessors
-- Handle errors in async code
-- Understand when to use async vs threading vs multiprocessing
-- Monitor and optimize async ML workflows
+完成本练习后，你将能够：- 理解 async/await 语法和协程
+- 为 I/O 密集型任务编写异步函数
+- 使用 asyncio.gather() 实现并发执行
+- 实现异步文件操作和 API 调用
+- 构建异步数据加载器和预处理器
+- 处理异步代码中的错误
+- 理解何时使用 async、threading 或 multiprocessing
+- 监控和优化异步 ML 工作流
 
 ## 前置条件
 
 - 已完成练习 01-05
-- Understanding of synchronous vs asynchronous execution
-- Basic knowledge of concurrent programming concepts
+- 理解同步与异步执行的差异
+- 并发编程概念基础
 
 ## 预计用时
 
 - 预计：90-120 分钟
-- Difficulty: 中级 to 高级
+- 难度：中高级
 
-## 第 1: Async Basics
+## 第 1 部分：Async 基础
 
-### 步骤 1: Understanding Coroutines
+### 步骤 1：理解协程
 
 ```python
 # 创建脚本： async_basics.py
@@ -57,9 +57,9 @@ async def preprocess_data(data: dict) -> dict:
     print(f"Preprocessed: {data['name']}")
     return {**data, "preprocessed": True}
 
-# Sequential vs Concurrent execution
+# 顺序执行 vs 并发执行
 async def sequential_execution():
-    """Execute tasks sequentially"""
+    """顺序执行任务"""
     print("=== Sequential Execution ===")
     start = time.time()
 
@@ -71,11 +71,11 @@ async def sequential_execution():
     print(f"Sequential time: {elapsed:.2f}s\n")
 
 async def concurrent_execution():
-    """Execute tasks concurrently"""
+    """并发执行任务"""
     print("=== Concurrent Execution ===")
     start = time.time()
 
-    # Run tasks concurrently
+    # 并发运行任务
     model_task = download_model("resnet50")
     data_task = load_dataset("imagenet")
 
@@ -87,14 +87,14 @@ async def concurrent_execution():
 
 # 使用示例
 if __name__ == "__main__":
-    # Run sequential
+    # 运行顺序版
     asyncio.run(sequential_execution())
 
-    # Run concurrent
+    # 运行并发版
     asyncio.run(concurrent_execution())
 ```
 
-### 步骤 2: Async with Multiple Tasks
+### 步骤 2：多任务 Async
 
 ```python
 # 创建脚本： async_multiple.py
@@ -104,8 +104,8 @@ import random
 from typing import List, Dict
 
 async def process_sample(sample_id: int) -> dict:
-    """Process a single sample asynchronously"""
-    # Simulate variable processing time
+    """异步处理单个样本"""
+    # 模拟可变的处理时间
     delay = random.uniform(0.1, 0.5)
     await asyncio.sleep(delay)
 
@@ -116,13 +116,13 @@ async def process_sample(sample_id: int) -> dict:
     }
 
 async def process_batch_async(batch: List[int]) -> List[dict]:
-    """Process entire batch concurrently"""
+    """并发处理整个批次"""
     tasks = [process_sample(sample_id) for sample_id in batch]
     results = await asyncio.gather(*tasks)
     return results
 
 async def download_multiple_models(model_names: List[str]) -> Dict[str, dict]:
-    """Download multiple models concurrently"""
+    """并发下载多个模型"""
     async def download(name: str) -> tuple:
         await asyncio.sleep(random.uniform(0.5, 2.0))
         return name, {"name": name, "downloaded": True}
@@ -158,9 +158,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## 第 2: Async File Operations
+## 第 2 部分：异步文件操作
 
-### 步骤 3: Async File I/O
+### 步骤 3：异步文件 I/O
 
 ```python
 # 创建脚本： async_file_io.py
@@ -171,18 +171,18 @@ from pathlib import Path
 from typing import List, Dict
 
 async def read_file_async(filepath: str) -> str:
-    """Read file asynchronously"""
+    """异步读取文件"""
     async with aiofiles.open(filepath, 'r') as f:
         content = await f.read()
     return content
 
 async def write_file_async(filepath: str, content: str) -> None:
-    """Write file asynchronously"""
+    """异步写入文件"""
     async with aiofiles.open(filepath, 'w') as f:
         await f.write(content)
 
 async def read_multiple_files(filepaths: List[str]) -> Dict[str, str]:
-    """Read multiple files concurrently"""
+    """并发读取多个文件"""
     async def read_one(path: str) -> tuple:
         content = await read_file_async(path)
         return path, content
@@ -190,7 +190,7 @@ async def read_multiple_files(filepaths: List[str]) -> Dict[str, str]:
     tasks = [read_one(path) for path in filepaths]
     results = await asyncio.gather(*tasks, return_exceptions=True)
 
-    # Filter out exceptions
+    # 过滤异常结果
     successful = {}
     for result in results:
         if isinstance(result, tuple):
@@ -200,7 +200,7 @@ async def read_multiple_files(filepaths: List[str]) -> Dict[str, str]:
     return successful
 
 async def process_csv_async(filepath: str) -> List[Dict]:
-    """Process CSV file asynchronously"""
+    """异步处理 CSV 文件"""
     import csv
 
     async with aiofiles.open(filepath, 'r') as f:
@@ -217,7 +217,7 @@ async def process_csv_async(filepath: str) -> List[Dict]:
 
 async def save_predictions_async(filepath: str,
                                  predictions: List[Dict]) -> None:
-    """Save predictions asynchronously"""
+    """异步保存预测结果"""
     import csv
     import io
 
@@ -236,13 +236,13 @@ async def save_predictions_async(filepath: str,
 
 # 使用示例
 async def main():
-    # Create sample files
+    # 创建样本文件
     print("=== Creating Sample Files ===")
     for i in range(5):
         await write_file_async(f"data_{i}.txt", f"Content of file {i}\n" * 10)
     print("✓ Created 5 sample files\n")
 
-    # Read multiple files
+    # 读取多个文件
     print("=== Reading Multiple Files ===")
     filepaths = [f"data_{i}.txt" for i in range(5)]
 
@@ -252,7 +252,7 @@ async def main():
 
     print(f"Read {len(contents)} files in {elapsed:.2f}s")
 
-    # Save predictions
+    # 保存预测结果
     predictions = [
         {"sample_id": i, "prediction": 0.9, "label": 1}
         for i in range(100)
@@ -265,9 +265,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## 第 3: Async API Calls
+## 第 3 部分：异步 API 调用
 
-### 步骤 4: Concurrent API Requests
+### 步骤 4：并发 API 请求
 
 ```python
 # 创建脚本： async_api_calls.py
@@ -278,7 +278,7 @@ from typing import List, Dict, Optional
 
 async def fetch_model_metadata(session: aiohttp.ClientSession,
                                model_id: str) -> Dict:
-    """Fetch model metadata from API"""
+    """从 API 获取模型元数据"""
     url = f"https://api.example.com/models/{model_id}"
 
     try:
@@ -294,7 +294,7 @@ async def fetch_model_metadata(session: aiohttp.ClientSession,
         return {"model_id": model_id, "error": str(e), "success": False}
 
 async def fetch_multiple_models(model_ids: List[str]) -> List[Dict]:
-    """Fetch metadata for multiple models concurrently"""
+    """并发获取多个模型的元数据"""
     async with aiohttp.ClientSession() as session:
         tasks = [fetch_model_metadata(session, model_id) for model_id in model_ids]
         results = await asyncio.gather(*tasks)
@@ -303,7 +303,7 @@ async def fetch_multiple_models(model_ids: List[str]) -> List[Dict]:
 async def batch_inference_api(samples: List[Dict],
                               api_url: str,
                               batch_size: int = 10) -> List[Dict]:
-    """Send samples to inference API in batches"""
+    """批量发送样本到推理 API"""
     async def send_batch(session: aiohttp.ClientSession, batch: List[Dict]) -> Dict:
         try:
             async with session.post(api_url, json={"samples": batch}) as response:
@@ -311,7 +311,7 @@ async def batch_inference_api(samples: List[Dict],
         except Exception as e:
             return {"error": str(e), "success": False}
 
-    # Split into batches
+    # 拆分为批次
     batches = [samples[i:i+batch_size] for i in range(0, len(samples), batch_size)]
 
     async with aiohttp.ClientSession() as session:
@@ -328,8 +328,8 @@ async def main():
 
     print(f"Fetching metadata for {len(model_ids)} models...")
 
-    # Note: This would fail with real API, but demonstrates the pattern
-    # Uncomment when you have a real API endpoint
+    # 注：真实 API 会失败，但演示了使用模式
+    # 有真实 API 端点时取消注释
     # results = await fetch_multiple_models(model_ids)
     # successful = [r for r in results if r.get("success")]
     # print(f"Successfully fetched: {len(successful)}/{len(model_ids)}")
@@ -340,9 +340,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## 第 4: Async Data Pipeline
+## 第 4 部分：异步数据管线
 
-### 步骤 5: Building an Async ML Pipeline
+### 步骤 5：构建异步 ML 管线
 
 ```python
 # 创建脚本： async_ml_pipeline.py
@@ -354,20 +354,20 @@ import time
 
 @dataclass
 class Sample:
-    """Data sample"""
+    """数据样本"""
     id: int
     data: List[float]
     processed: bool = False
     predicted: bool = False
 
 class AsyncMLPipeline:
-    """Asynchronous ML pipeline"""
+    """异步 ML 管线"""
 
     def __init__(self, batch_size: int = 32):
         self.batch_size = batch_size
 
     async def load_data(self, num_samples: int) -> List[Sample]:
-        """Load data asynchronously"""
+        """异步加载数据"""
         print(f"Loading {num_samples} samples...")
         await asyncio.sleep(0.5)  # Simulate I/O
 
@@ -380,35 +380,35 @@ class AsyncMLPipeline:
         return samples
 
     async def preprocess_sample(self, sample: Sample) -> Sample:
-        """Preprocess single sample"""
+        """预处理单个样本"""
         await asyncio.sleep(0.01)  # Simulate processing
         sample.processed = True
         return sample
 
     async def preprocess_batch(self, samples: List[Sample]) -> List[Sample]:
-        """Preprocess batch of samples concurrently"""
+        """并发预处理样本批次"""
         tasks = [self.preprocess_sample(s) for s in samples]
         return await asyncio.gather(*tasks)
 
     async def predict_sample(self, sample: Sample) -> Sample:
-        """Run inference on single sample"""
+        """对单个样本运行推理"""
         await asyncio.sleep(0.02)  # Simulate inference
         sample.predicted = True
         return sample
 
     async def predict_batch(self, samples: List[Sample]) -> List[Sample]:
-        """Run inference on batch concurrently"""
+        """并发运行批次推理"""
         tasks = [self.predict_sample(s) for s in samples]
         return await asyncio.gather(*tasks)
 
     async def run_pipeline(self, num_samples: int) -> Dict[str, any]:
-        """Run complete async pipeline"""
+        """运行完整的异步管线"""
         start_time = time.time()
 
-        # Load data
+        # 加载数据
         samples = await self.load_data(num_samples)
 
-        # Preprocess in batches
+        # 分批预处理
         print(f"Preprocessing {len(samples)} samples...")
         batches = [samples[i:i+self.batch_size]
                   for i in range(0, len(samples), self.batch_size)]
@@ -420,7 +420,7 @@ class AsyncMLPipeline:
 
         print(f"✓ Preprocessed {len(preprocessed)} samples")
 
-        # Predict in batches
+        # 分批推理
         print(f"Running inference on {len(preprocessed)} samples...")
         predicted = []
         for batch in [preprocessed[i:i+self.batch_size]
@@ -454,9 +454,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## 第 5: Error Handling in Async Code
+## 第 5 部分：异步代码中的错误处理
 
-### 步骤 6: Async Exception Handling
+### 步骤 6：异步异常处理
 
 ```python
 # 创建脚本： async_error_handling.py
@@ -469,7 +469,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 async def risky_operation(task_id: int, failure_rate: float = 0.3) -> Dict:
-    """Operation that might fail"""
+    """可能失败的操作"""
     import random
 
     await asyncio.sleep(0.1)
@@ -480,7 +480,7 @@ async def risky_operation(task_id: int, failure_rate: float = 0.3) -> Dict:
     return {"task_id": task_id, "result": "success"}
 
 async def safe_risky_operation(task_id: int) -> Dict:
-    """Wrap risky operation with error handling"""
+    """用错误处理包装风险操作"""
     try:
         result = await risky_operation(task_id)
         return result
@@ -492,11 +492,11 @@ async def safe_risky_operation(task_id: int) -> Dict:
         return {"task_id": task_id, "result": "error", "error": str(e)}
 
 async def run_tasks_with_error_handling(num_tasks: int) -> Dict[str, int]:
-    """Run multiple tasks with error handling"""
+    """用错误处理运行多个任务"""
     tasks = [safe_risky_operation(i) for i in range(num_tasks)]
     results = await asyncio.gather(*tasks)
 
-    # Count outcomes
+    # 统计结果
     successful = sum(1 for r in results if r["result"] == "success")
     failed = sum(1 for r in results if r["result"] == "failed")
     errors = sum(1 for r in results if r["result"] == "error")
@@ -509,7 +509,7 @@ async def run_tasks_with_error_handling(num_tasks: int) -> Dict[str, int]:
     }
 
 async def retry_async(func, *args, max_retries: int = 3, **kwargs):
-    """Retry async function on failure"""
+    """失败时重试异步函数"""
     for attempt in range(max_retries):
         try:
             return await func(*args, **kwargs)
@@ -535,9 +535,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## 第 6: When to Use Async
+## 第 6 部分：何时使用 Async
 
-### 步骤 7: Async vs Threading vs Multiprocessing
+### 步骤 7：Async vs Threading vs Multiprocessing
 
 ```python
 # 创建脚本： concurrency_comparison.py
@@ -549,23 +549,23 @@ import multiprocessing
 from typing import List
 
 def cpu_bound_task(n: int) -> int:
-    """CPU-intensive task"""
+    """CPU 密集型任务"""
     result = sum(i * i for i in range(n))
     return result
 
 def io_bound_task(duration: float) -> str:
-    """I/O-bound task (simulated)"""
+    """I/O 密集型任务（模拟）"""
     time.sleep(duration)
     return "completed"
 
 async def io_bound_task_async(duration: float) -> str:
-    """Async I/O-bound task"""
+    """异步 I/O 密集型任务"""
     await asyncio.sleep(duration)
     return "completed"
 
-# Synchronous baseline
+# 同步基线
 def sync_io_tasks(num_tasks: int):
-    """Run I/O tasks synchronously"""
+    """同步运行 I/O 任务"""
     start = time.time()
 
     for _ in range(num_tasks):
@@ -573,9 +573,9 @@ def sync_io_tasks(num_tasks: int):
 
     return time.time() - start
 
-# Async version
+# 异步版本
 async def async_io_tasks(num_tasks: int):
-    """Run I/O tasks asynchronously"""
+    """异步运行 I/O 任务"""
     start = time.time()
 
     tasks = [io_bound_task_async(0.1) for _ in range(num_tasks)]
@@ -583,9 +583,9 @@ async def async_io_tasks(num_tasks: int):
 
     return time.time() - start
 
-# Threading version
+# 线程版本
 def threaded_io_tasks(num_tasks: int):
-    """Run I/O tasks with threading"""
+    """用线程运行 I/O 任务"""
     start = time.time()
 
     threads = []
@@ -600,21 +600,21 @@ def threaded_io_tasks(num_tasks: int):
     return time.time() - start
 
 def compare_approaches():
-    """Compare different concurrency approaches"""
+    """对比不同的并发方式"""
     num_tasks = 10
 
     print("=== I/O-Bound Task Comparison ===")
     print(f"Number of tasks: {num_tasks}\n")
 
-    # Synchronous
+    # 同步
     sync_time = sync_io_tasks(num_tasks)
     print(f"Synchronous: {sync_time:.2f}s")
 
-    # Async
+    # 异步
     async_time = asyncio.run(async_io_tasks(num_tasks))
     print(f"Async: {async_time:.2f}s")
 
-    # Threading
+    # 线程
     threaded_time = threaded_io_tasks(num_tasks)
     print(f"Threading: {threaded_time:.2f}s\n")
 
@@ -624,8 +624,8 @@ def compare_approaches():
 if __name__ == "__main__":
     compare_approaches()
 
-    print("\n=== Guidelines ===")
-    print("Use Async for:")
+    print("\n=== 使用指南 ===")
+    print("Async 适用：")
     print("  - I/O-bound tasks (file, network, database)")
     print("  - Many concurrent operations")
     print("  - API calls and web scraping")
@@ -644,7 +644,7 @@ if __name__ == "__main__":
 # 创建脚本： validate_async.py
 
 async def validate_async_basics():
-    """Validate async basics"""
+    """验证 async 基础"""
     async def test_func():
         await asyncio.sleep(0.1)
         return "success"
@@ -654,7 +654,7 @@ async def validate_async_basics():
     print("✓ Async basics work")
 
 async def validate_gather():
-    """Validate asyncio.gather()"""
+    """验证 asyncio.gather()"""
     async def task(n):
         await asyncio.sleep(0.1)
         return n * 2
@@ -664,7 +664,7 @@ async def validate_gather():
     print("✓ asyncio.gather() works")
 
 async def validate_error_handling():
-    """Validate async error handling"""
+    """验证异步错误处理"""
     async def failing_task():
         raise ValueError("Test error")
 
@@ -687,12 +687,12 @@ if __name__ == "__main__":
 
 ## 思考题
 
-1. When should you use async vs threading?2. How does asyncio improve I/O-bound task performance?3. What are the limitations of async programming?4. How do you debug async code?5. When is multiprocessing better than async?6. How do you handle errors in concurrent tasks?7. What monitoring is needed for async ML pipelines?
+1. 何时用 async，何时用 threading？2. asyncio 如何提升 I/O 密集型任务的性能？3. 异步编程有哪些局限性？4. 如何调试异步代码？5. 什么时候 multiprocessing 比 async 更好？6. 如何处理并发任务中的错误？7. 异步 ML 管线需要哪些监控？
 ## 下一步
 
-- **Exercise 07**: Testing async code with pytest-asyncio
-- **Module 002**: Linux Essentials
-- **Project 01**: Build a complete async ML pipeline
+- **练习07**：使用 pytest-asyncio 测试异步代码
+- **模块002**：Linux 基础
+- **项目01**：构建完整的异步 ML 管线
 
 ## 补充资源
 
@@ -703,4 +703,4 @@ if __name__ == "__main__":
 
 ---
 
-**Congratulations!** You've mastered async programming for concurrent ML operations. You can now build efficient, high-performance ML pipelines that handle multiple tasks simultaneously.
+**恭喜！** 你已掌握面向并发 ML 操作的异步编程。你现在可以构建高效、高性能的 ML 管线，同时处理多个任务。

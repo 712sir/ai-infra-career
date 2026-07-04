@@ -9,10 +9,10 @@ This exercise teaches you how to write comprehensive unit tests for ML utility f
 - Use fixtures for test setup and teardown
 - Implement parameterized tests for multiple scenarios
 - Mock external dependencies and file I/O
-- Test error handling and edge cases
+- 测试错误处理和边界情况
 - Measure test coverage
 - Write tests for async functions
-- Follow testing best practices for ML code
+- 遵循 ML 测试最佳实践 code
 - Build a CI-ready test suite
 
 ## 前置条件
@@ -78,7 +78,7 @@ def test_accuracy_length_mismatch():
 # Run tests: pytest tests/test_basics.py -v
 ```
 
-### 步骤 2: Using Fixtures
+### 步骤 2：使用 Fixture
 
 ```python
 # Create a file: tests/test_fixtures.py
@@ -174,7 +174,7 @@ def test_normalize(value, min_val, max_val, expected):
     (0, 0, 0),   # All zeros
 ])
 def test_normalize_edge_cases(value, min_val, max_val):
-    """Test edge cases"""
+    """测试边界情况"""
     result = normalize_value(value, min_val, max_val)
     assert result == 0.0
 
@@ -795,7 +795,7 @@ tests/
 1. What makes a good unit test?2. When should you use mocks vs real objects?3. How much test coverage is enough?4. What's the difference between unit and integration tests?5. How do you test ML model predictions?6. When should tests be skipped vs fixed?7. How do you maintain tests as code evolves?
 ## 下一步
 
-- **Module 002**: Linux Essentials
+- **模块002**：Linux 基础
 - **Project 01**: Build tested ML pipeline
 - Set up CI/CD with automated testing
 
