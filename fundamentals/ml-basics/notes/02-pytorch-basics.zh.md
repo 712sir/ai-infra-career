@@ -3,7 +3,6 @@
 ## 学习目标
 
 学完本讲后，你将能够：
-
 - Understand PyTorch architecture and its role in ML infrastructure
 - Work with PyTorch tensors and manage CPU/GPU devices
 - Load pre-trained PyTorch models from various sources
@@ -12,25 +11,20 @@
 - Identify and resolve common PyTorch deployment issues
 - Estimate resource requirements for PyTorch models
 
-**学时**： 8-10 hours
-**难度**： 初级到中级
-**前置条件**： 模块001（Python），第01讲（ML 概述）
-
+**学时**： 8-10 hours**难度**： 初级到中级**前置条件**： Module 001 (Python), Lecture 01 (ML Overview)
 ---
 
-## 1. PyTorch 简介
+## 1. Introduction to PyTorch
 
 ### 什么是 PyTorch？
 
-PyTorch is an open-source machine learning framework developed by Meta (Facebook) AI Research. For infrastructure engineers, PyTorch is important because:
-
-**Industry Adoption**:
+PyTorch is an 开源 ML 框架 开发 Meta (Facebook) AI 研究院。 对基础设施工程师而言， PyTorch 之所以重要：
+**业界采用**:
 - Used by major companies: Meta, Tesla, Microsoft, OpenAI
 - Powers products like GPT models, Tesla Autopilot, and Meta's recommendation systems
 - Strong in research and increasingly in production
 
-**Infrastructure Perspective**:
-- **Dynamic computation graphs**: Models are Python code, easier to debug
+**Infrastructure Perspective**:- **Dynamic computation graphs**: Models are Python code, easier to debug
 - **Python-native**: Integrates naturally with Python infrastructure
 - **GPU acceleration**: Optimized for NVIDIA CUDA
 - **Production-ready**: TorchServe for model serving
@@ -47,8 +41,7 @@ PyTorch is an open-source machine learning framework developed by Meta (Facebook
 | **Ecosystem** | Research-focused | Production-focused | Interoperability |
 | **Learning Curve** | Pythonic, easier | Steeper | Model format only |
 
-**For Infrastructure**:
-- PyTorch: Easier to debug, common in research orgs
+**For Infrastructure**:- PyTorch: Easier to debug, common in research orgs
 - TensorFlow: More mature serving tools, enterprise adoption
 - ONNX: Framework-independent deployment
 
@@ -94,8 +87,7 @@ if torch.cuda.is_available():
 print(f"Number of CPU threads: {torch.get_num_threads()}")
 ```
 
-**Expected Output (with GPU)**:
-```
+**Expected Output (with GPU)**:```
 PyTorch version: 2.1.0+cu118
 CUDA available: True
 CUDA version: 11.8
@@ -106,8 +98,7 @@ Number of CPU threads: 8
 
 ### Infrastructure Considerations
 
-**Docker Images**:
-```dockerfile
+**Docker Images**:```dockerfile
 # Official PyTorch images
 FROM pytorch/pytorch:2.1.0-cuda11.8-cudnn8-runtime
 
@@ -116,8 +107,7 @@ FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
 RUN pip install torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cu118
 ```
 
-**Dependencies**:
-- **torch**: Core library (~800MB for CPU, ~2GB for GPU)
+**Dependencies**:- **torch**: Core library (~800MB for CPU, ~2GB for GPU)
 - **torchvision**: Computer vision models and utilities
 - **torchaudio**: Audio processing (optional for most infrastructure work)
 - **CUDA toolkit**: Required for GPU support (already in nvidia/cuda images)
@@ -129,7 +119,6 @@ RUN pip install torch==2.1.0 torchvision==0.16.0 --index-url https://download.py
 ### What Are Tensors?
 
 Tensors are multi-dimensional arrays—the fundamental data structure in PyTorch. Think of them as NumPy arrays with GPU acceleration and automatic differentiation.
-
 ```python
 import torch
 import numpy as np
@@ -147,8 +136,7 @@ print(f"t3 shape: {t3.shape}")
 print(f"t5:\n{t5}")
 ```
 
-**Output**:
-```
+**Output**:```
 t1: tensor([1, 2, 3, 4])
 t3 shape: torch.Size([2, 3])
 t5:
@@ -189,8 +177,7 @@ print(f"float32 dtype: {t_float32.dtype}")
 print(f"Memory: float32={t_float32.element_size()} bytes, float16={t_float16.element_size()} bytes")
 ```
 
-**Infrastructure Impact**:
-- **float32**: Standard precision, 4 bytes per value
+**Infrastructure Impact**:- **float32**: Standard precision, 4 bytes per value
 - **float16**: Half precision, 2 bytes per value, 2x memory savings, faster on modern GPUs
 - **int8**: Quantized models, 1 byte per value, 4x savings vs float32
 
@@ -253,8 +240,7 @@ if torch.cuda.is_available():
     print(f"Speedup: {cpu_time/gpu_time:.2f}x")
 ```
 
-**Typical Results**:
-```
+**Typical Results**:```
 CPU time: 2.3456 seconds
 GPU time: 0.0234 seconds
 Speedup: 100.24x
@@ -281,8 +267,7 @@ if torch.cuda.is_available():
     print(f"Memory reserved: {torch.cuda.memory_reserved() / 1024**3:.2f} GB")
 ```
 
-**Common Error**:
-```python
+**Common Error**:```python
 # This will fail!
 model = MyModel().to('cuda')
 data = torch.rand(1, 3, 224, 224)  # On CPU by default
@@ -313,8 +298,7 @@ print(f"Model type: {type(model)}")
 print(f"Number of parameters: {sum(p.numel() for p in model.parameters()):,}")
 ```
 
-**Output**:
-```
+**Output**:```
 Model type: <class 'torchvision.models.resnet.ResNet'>
 Number of parameters: 25,557,032
 ```
@@ -360,8 +344,7 @@ print("Models loaded successfully!")
 
 ### Infrastructure Considerations
 
-**Model Storage**:
-```bash
+**Model Storage**:```bash
 # Models are cached by default
 ls ~/.cache/torch/hub/checkpoints/
 # resnet50-0676ba61.pth (97.8 MB)
@@ -372,8 +355,7 @@ ls ~/.cache/huggingface/hub/
 # models--bert-base-uncased/ (440 MB)
 ```
 
-**Best Practices**:
-```python
+**Best Practices**:```python
 import os
 from pathlib import Path
 
@@ -439,8 +421,7 @@ for i in range(5):
     print(f"{labels[top5_catid[i]]}: {top5_prob[i].item():.4f}")
 ```
 
-**Output**:
-```
+**Output**:```
 Top 5 predictions:
 Samoyed: 0.8932
 Arctic fox: 0.0402
@@ -478,8 +459,7 @@ for batch_size in batch_sizes:
     print(f"Batch {batch_size:2d}: {batch_time:.4f}s ({throughput:.2f} samples/sec)")
 ```
 
-**Typical Output (GPU)**:
-```
+**Typical Output (GPU)**:```
 Single sample: 0.0123 seconds
 Batch  1: 0.0125s (80.00 samples/sec)
 Batch  8: 0.0234s (341.88 samples/sec)
@@ -488,8 +468,7 @@ Batch 32: 0.0756s (423.28 samples/sec)
 Batch 64: 0.1489s (429.82 samples/sec)
 ```
 
-**Key Insights**:
-- Batching significantly improves throughput
+**Key Insights**:- Batching significantly improves throughput
 - GPU utilization increases with larger batches
 - Diminishing returns after certain batch size (memory constraints)
 
@@ -499,8 +478,7 @@ Batch 64: 0.1489s (429.82 samples/sec)
 
 ### Two Serialization Methods
 
-**Method 1: Save State Dict (Recommended)**:
-```python
+**Method 1: Save State Dict (Recommended)**:```python
 # Save
 model = torch.hub.load('pytorch/vision', 'resnet18', pretrained=True)
 torch.save(model.state_dict(), 'model_weights.pth')
@@ -511,8 +489,7 @@ model.load_state_dict(torch.load('model_weights.pth'))
 model.eval()
 ```
 
-**Method 2: Save Entire Model**:
-```python
+**Method 2: Save Entire Model**:```python
 # Save
 torch.save(model, 'model_full.pth')
 
@@ -570,7 +547,7 @@ class ModelSerializer:
         # Return metadata if exists
         return checkpoint.get('metadata', {})
 
-# Usage
+# 用法
 model = torch.hub.load('pytorch/vision', 'resnet18', pretrained=True)
 
 # Save with metadata
@@ -594,9 +571,7 @@ print(f"Loaded model with metadata: {metadata}")
 ### What is TorchServe?
 
 TorchServe is PyTorch's official model serving framework for production deployments.
-
-**Features**:
-- RESTful and gRPC APIs
+**Features**:- RESTful and gRPC APIs
 - Multi-model serving
 - Model versioning
 - Auto-scaling
@@ -655,7 +630,7 @@ torch-model-archiver \
 # Start TorchServe
 torchserve --start --model-store model-store --models resnet50=resnet50.mar
 
-# Test inference
+# 测试 inference
 curl -X POST http://localhost:8080/predictions/resnet50 -T image.jpg
 ```
 
@@ -683,13 +658,11 @@ CMD ["torchserve", \
 
 ### Issue 1: CUDA Out of Memory
 
-**Error**:
-```
+**Error**:```
 RuntimeError: CUDA out of memory. Tried to allocate 1024.00 MiB
 ```
 
-**Solutions**:
-```python
+**Solutions**:```python
 # 1. Reduce batch size
 batch_size = 8  # Instead of 32
 
@@ -712,13 +685,11 @@ print(f"Reserved: {torch.cuda.memory_reserved() / 1024**3:.2f} GB")
 
 ### Issue 2: Model on Wrong Device
 
-**Error**:
-```
+**Error**:```
 RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
 ```
 
-**Solution**:
-```python
+**Solution**:```python
 # Ensure model and input are on same device
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = model.to(device)
@@ -729,9 +700,7 @@ output = model(input_tensor)
 ### Issue 3: Model in Training Mode
 
 **Problem**: Model gives different outputs each time (due to dropout/batchnorm)
-
-**Solution**:
-```python
+**Solution**:```python
 # Always set model to eval mode for inference
 model.eval()
 
@@ -742,13 +711,11 @@ with torch.no_grad():
 
 ### Issue 4: Input Shape Mismatch
 
-**Error**:
-```
+**Error**:```
 RuntimeError: shape '[32, 3, 224, 224]' is invalid for input of size 150528
 ```
 
-**Solution**:
-```python
+**Solution**:```python
 # Check expected input shape
 print(f"Input shape: {input_tensor.shape}")  # torch.Size([224, 224, 3])
 
@@ -761,13 +728,11 @@ input_tensor = input_tensor.unsqueeze(0)  # Now [1, 3, 224, 224]
 
 ### Issue 5: Version Mismatch
 
-**Error**:
-```
+**Error**:```
 RuntimeError: version_ <= kMaxSupportedFileFormatVersion INTERNAL ASSERT FAILED
 ```
 
-**Solution**:
-```python
+**Solution**:```python
 # Save with specific protocol version for compatibility
 torch.save(model.state_dict(), 'model.pth', _use_new_zipfile_serialization=False)
 
@@ -844,7 +809,7 @@ def benchmark_inference(model, input_shape, batch_sizes=[1, 8, 16, 32], warmup=1
 
     return results
 
-# Usage
+# 用法
 model = torch.hub.load('pytorch/vision', 'resnet50', pretrained=True)
 results = benchmark_inference(model, input_shape=(3, 224, 224))
 
@@ -856,8 +821,7 @@ for r in results:
 
 ### Optimization Techniques
 
-**1. Mixed Precision Inference**:
-```python
+**1. Mixed Precision Inference**:```python
 # Use float16 instead of float32
 model = model.half()  # Convert model to float16
 input = input.half()  # Convert input to float16
@@ -867,8 +831,7 @@ with torch.cuda.amp.autocast():
     output = model(input)
 ```
 
-**2. TorchScript Compilation**:
-```python
+**2. TorchScript Compilation**:```python
 # Trace model for faster inference
 example_input = torch.rand(1, 3, 224, 224)
 traced_model = torch.jit.trace(model, example_input)
@@ -879,8 +842,7 @@ model = torch.jit.load('model_traced.pt')
 output = model(input)
 ```
 
-**3. Quantization**:
-```python
+**3. Quantization**:```python
 # Dynamic quantization (easiest, CPU only)
 quantized_model = torch.quantization.quantize_dynamic(
     model, {torch.nn.Linear}, dtype=torch.qint8
@@ -895,19 +857,10 @@ quantized_model = torch.quantization.quantize_dynamic(
 
 ### For Infrastructure Engineers
 
-1. **PyTorch is Python-native**: Easy to debug, integrates naturally
-2. **Device management is critical**: Always match model and input devices
-3. **Batch inference improves throughput**: Balance latency and throughput
-4. **Use torch.no_grad() for inference**: Saves memory and computation
-5. **TorchServe for production**: Don't build your own serving framework
-6. **Model serialization matters**: Use state_dict for flexibility
-7. **Monitor GPU memory**: OOM errors are common, use empty_cache()
-8. **Version compatibility**: PyTorch versions must match for loading models
-
+1. **PyTorch is Python-native**: Easy to debug, integrates naturally2. **Device management is critical**: Always match model and input devices3. **Batch inference improves throughput**: Balance latency and throughput4. **Use torch.no_grad() for inference**: Saves memory and computation5. **TorchServe for production**: Don't build your own serving framework6. **Model serialization matters**: Use state_dict for flexibility7. **Monitor GPU memory**: OOM errors are common, use empty_cache()8. **Version compatibility**: PyTorch versions must match for loading models
 ### Production Checklist
 
 Before deploying PyTorch models:
-
 - [ ] Model set to `.eval()` mode
 - [ ] All inference in `torch.no_grad()` context
 - [ ] Input preprocessing defined and tested
@@ -960,16 +913,11 @@ print(torch.cuda.memory_allocated())
 
 ## What's Next?
 
-In the next lecture, we'll cover:
-- **TensorFlow Basics**: Compare with PyTorch
+In the next lecture, we'll cover:- **TensorFlow Basics**: Compare with PyTorch
 - **TensorFlow Serving**: Production serving framework
 - **Model format differences**: SavedModel vs state_dict
 
 Continue to `lecture-notes/03-tensorflow-basics.md`
-
 ---
 
-**Lecture Version**: 1.0
-**Last Updated**: October 2025
-**Estimated Completion Time**: 8-10 hours
-**难度**： 初级到中级
+**Lecture Version**: 1.0**Last Updated**: October 2025**Estimated Completion Time**: 8-10 hours**难度**： 初级到中级

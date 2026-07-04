@@ -3,11 +3,9 @@
 ## 目标（Objective）
 
 为一个 ML 训练项目设置完整的 Python 开发环境，包含适当的依赖管理、可复现的配置和自动化脚本。
-
 ## 学习成果（Learning Outcomes）
 
-完成本练习后，您将能够：
-- 创建和管理虚拟环境
+完成本练习后，您将能够：- 创建和管理虚拟环境
 - 编写全面的 requirements 文件
 - 按照最佳实践建立项目结构
 - 创建环境设置的自动化脚本
@@ -22,7 +20,6 @@
 ## 项目场景（Project Scenario）
 
 您正在加入一个 AI 基础设施团队。您的第一个任务是为一个名为 "sentiment-classifier" 的新机器学习训练管道项目建立一个可复现的开发环境。
-
 ## 第 1 部分：项目结构设置（15 分钟）
 
 ### 任务 1.1：创建项目目录结构
@@ -59,16 +56,13 @@ sentiment-classifier/
 ```
 
 **TODO**：创建此目录结构。使用 `mkdir -p` 和 `touch` 命令，或者编写一个 Python 脚本。
-
-**需要思考的问题：**
-- 为什么要包含 `__init__.py` 文件？
+**需要思考的问题：**- 为什么要包含 `__init__.py` 文件？
 - `.gitkeep` 文件的作用是什么？
 - 为什么要将 `src/` 和 `tests/` 分开？
 
 ### 任务 1.2：创建 .gitignore 文件
 
 创建一个包含 Python ML 项目合适模式的 `.gitignore` 文件：
-
 ```gitignore
 # TODO: 添加要忽略的模式：
 # - 虚拟环境（venv, .venv, env, virtualenv）
@@ -82,13 +76,11 @@ sentiment-classifier/
 ```
 
 **TODO**：用适当的模式完成 `.gitignore` 文件。
-
 ## 第 2 部分：虚拟环境管理（20 分钟）
 
 ### 任务 2.1：创建虚拟环境
 
 **TODO**：使用 venv 创建虚拟环境：
-
 ```bash
 # 创建虚拟环境的命令
 # TODO: 完成此命令
@@ -103,10 +95,7 @@ python -m venv _____
 
 **TODO**：
 1. 激活虚拟环境
-2. 通过检查 `which python`（Linux/Mac）或 `where python`（Windows）来验证激活
-3. 检查 Python 版本：`python --version`
-4. 验证 pip 位置：`which pip` 或 `where pip`
-
+2. 通过检查 `which python`（Linux/Mac）或 `where python`（Windows）来验证激活3. 检查 Python 版本：`python --version`4. 验证 pip 位置：`which pip` 或 `where pip`
 记录您的发现：
 ```
 激活前:
@@ -121,7 +110,6 @@ python -m venv _____
 ### 任务 2.3：多环境测试
 
 创建两个独立的虚拟环境以理解隔离：
-
 ```bash
 # 环境 1: 用于 Python 3.11 开发
 # TODO: 创建 venv-py311
@@ -130,12 +118,10 @@ python -m venv _____
 # TODO: 创建 venv-py310（如果您安装了 Python 3.10）
 ```
 
-**TODO**：在每个环境中安装不同版本的包：
-- venv-py311：安装 `numpy==1.24.0`
+**TODO**：在每个环境中安装不同版本的包：- venv-py311：安装 `numpy==1.24.0`
 - venv-py310：安装 `numpy==1.23.0`
 
-通过激活每个环境并运行以下命令来验证隔离：
-```python
+通过激活每个环境并运行以下命令来验证隔离：```python
 import numpy
 print(numpy.__version__)
 ```
@@ -145,9 +131,7 @@ print(numpy.__version__)
 ### 任务 3.1：创建 requirements.txt
 
 该项目需要以下生产依赖：
-
 **TODO**：创建带有固定版本的 `requirements.txt`：
-
 ```txt
 # 核心 ML 框架
 # TODO: 添加 torch 2.1.0
@@ -179,7 +163,6 @@ print(numpy.__version__)
 ### 任务 3.2：创建 requirements-dev.txt
 
 **TODO**：创建带有开发工具的 `requirements-dev.txt`：
-
 ```txt
 # 包含生产依赖
 -r requirements.txt
@@ -203,17 +186,11 @@ print(numpy.__version__)
 ### 任务 3.3：安装依赖
 
 **TODO**：
-1. 激活您的虚拟环境
-2. 升级 pip：`python -m pip install --upgrade pip`
-3. 安装开发依赖：`pip install -r requirements-dev.txt`
-4. 验证安装：`pip list`
-
+1. 激活您的虚拟环境2. 升级 pip：`python -m pip install --upgrade pip`3. 安装开发依赖：`pip install -r requirements-dev.txt`4. 验证安装：`pip list`
 **预期结果**：requirements.txt 和 requirements-dev.txt 中的所有包都应被安装。
-
 ### 任务 3.4：冻结当前环境
 
 **TODO**：生成完整的依赖冻结文件：
-
 ```bash
 pip freeze > requirements-frozen.txt
 ```
@@ -223,8 +200,7 @@ pip freeze > requirements-frozen.txt
 - 每个文件中有多少个包？
 - 有什么区别？
 
-**回答以下问题：**
-- 为什么 `requirements-frozen.txt` 中有更多的包？
+**回答以下问题：**- 为什么 `requirements-frozen.txt` 中有更多的包？
 - 什么是传递依赖（transitive dependencies）？
 - 什么时候应该使用冻结的需求文件，什么时候应该使用未冻结的？
 
@@ -233,7 +209,6 @@ pip freeze > requirements-frozen.txt
 ### 任务 4.1：创建 .env.example 模板
 
 **TODO**：创建包含配置模板的 `.env.example`：
-
 ```bash
 # .env.example
 # 将其复制为 .env 并填写实际值
@@ -277,16 +252,11 @@ DB_PASSWORD=changeme
 ### 任务 4.2：创建实际的 .env 文件
 
 **TODO**：
-1. 将 `.env.example` 复制为 `.env`
-2. 为您的本地开发填写合理的值
-3. 验证 `.env` 在 `.gitignore` 中
-
+1. 将 `.env.example` 复制为 `.env`2. 为您的本地开发填写合理的值3. 验证 `.env` 在 `.gitignore` 中
 **重要（CRITICAL）**：永远不要将 `.env` 提交到 git！
-
 ### 任务 4.3：测试环境变量加载
 
 创建 `test_env.py`：
-
 ```python
 # test_env.py
 import os
@@ -315,13 +285,11 @@ print(f"Batch size as integer: {batch_size_int}")
 ```
 
 **运行并验证**：`python test_env.py`
-
 ## 第 5 部分：自动化脚本（30 分钟）
 
 ### 任务 5.1：创建 setup.sh 脚本
 
 **TODO**：创建 `setup.sh` 来自动化环境设置：
-
 ```bash
 #!/bin/bash
 # setup.sh - 自动化环境设置脚本
@@ -386,14 +354,10 @@ echo ""
 ```
 
 **TODO**：
-1. 完成 setup.sh 中的 TODO
-2. 使其可执行：`chmod +x setup.sh`
-3. 测试它：`./setup.sh`
-
+1. 完成 setup.sh 中的 TODO2. 使其可执行：`chmod +x setup.sh`3. 测试它：`./setup.sh`
 ### 任务 5.2：创建 verify_setup.py 脚本
 
 **TODO**：创建 `verify_setup.py` 以验证设置：
-
 ```python
 #!/usr/bin/env python3
 """
@@ -494,16 +458,12 @@ if __name__ == "__main__":
 ```
 
 **TODO**：
-1. 完成每个检查函数的实现
-2. 运行：`python verify_setup.py`
-3. 修复报告的任何问题
-
+1. 完成每个检查函数的实现2. 运行：`python verify_setup.py`3. 修复报告的任何问题
 ## 第 6 部分：文档（20 分钟）
 
 ### 任务 6.1：创建全面的 README.md
 
 **TODO**：创建包含设置说明的 `README.md`：
-
 ```markdown
 # Sentiment Classifier
 
@@ -552,8 +512,7 @@ if __name__ == "__main__":
 
 ### 任务 6.2：记录您的学习心得
 
-创建 `SETUP_NOTES.md` 记录：
-- 您遇到的挑战
+创建 `SETUP_NOTES.md` 记录：- 您遇到的挑战
 - 如何解决这些挑战
 - 给团队成员的提示
 - 常见错误和修复方法
@@ -580,33 +539,21 @@ if __name__ == "__main__":
 ## 提交（Submission）
 
 创建一个文档回答以下问题：
-
 1. **环境隔离**：解释虚拟环境如何提供隔离。在一个 venv 中安装包与全局安装有什么不同？
-
 2. **依赖版本固定**：为什么在生产环境中精确固定版本，而在开发期间可能使用 `>=`？
-
 3. **传递依赖**：它们是什么？`pip freeze` 与您原始的 requirements.txt 有什么不同？
-
 4. **配置策略**：为什么要将 `.env.example`（提交）与 `.env`（不提交）分开？
-
 5. **自动化**：`setup.sh` 相比手动设置说明有什么好处？
-
 6. **挑战**：本练习中最具挑战性的部分是什么？您是如何克服的？
-
 ## 扩展挑战（可选）
 
 额外练习：
 
 1. **多环境**：为 Python 3.10、3.11 和 3.12 创建单独的环境。测试包兼容性。
-
 2. **Pip-tools 集成**：安装 `pip-tools` 并创建 `requirements.in` 而不是 `requirements.txt`。使用 `pip-compile` 生成锁定的需求文件。
-
 3. **Docker 集成**：创建一个在容器中设置此环境的 `Dockerfile`。
-
 4. **Pre-commit Hooks**：设置 pre-commit hooks 以在提交前运行 `black`、`flake8` 和 `mypy`。
-
 5. **CI/CD 配置**：创建一个 GitHub Actions 工作流来设置环境并运行测试。
-
 ## 资源（Resources）
 
 - [Python venv 文档](https://docs.python.org/3/library/venv.html)
@@ -616,6 +563,4 @@ if __name__ == "__main__":
 
 ---
 
-**练习版本**：1.0
-**预计时间**：2-3 小时
-**难度**：初级
+**练习版本**：1.0**预计时间**：2-3 小时**难度**：初级

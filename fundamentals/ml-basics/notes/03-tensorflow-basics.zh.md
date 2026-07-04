@@ -3,7 +3,6 @@
 ## 学习目标
 
 学完本讲后，你将能够：
-
 - Understand TensorFlow/Keras architecture and ecosystem
 - Work with TensorFlow model formats (SavedModel, H5, TFLite)
 - Load pre-trained TensorFlow models from various sources
@@ -12,25 +11,20 @@
 - Compare TensorFlow and PyTorch from infrastructure perspective
 - Troubleshoot common TensorFlow deployment issues
 
-**学时**： 8-10 hours
-**难度**： 初级到中级
-**前置条件**： 模块001（Python），第01讲（ML 概述）, Lecture 02 (PyTorch Basics)
-
+**学时**： 8-10 hours**难度**： 初级到中级**前置条件**： Module 001 (Python), Lecture 01 (ML Overview), Lecture 02 (PyTorch Basics)
 ---
 
-## 1. TensorFlow 简介
+## 1. Introduction to TensorFlow
 
 ### 什么是 TensorFlow？
 
-TensorFlow is an open-source machine learning framework developed by Google. It's one of the most mature and production-ready ML frameworks available.
-
-**Industry Adoption**:
+TensorFlow is an 开源 ML 框架 开发 Google. 它是目前最成熟、生产就绪程度最高的 ML 框架之一。
+**业界采用**:
 - Used by: Google, Airbnb, Uber, Twitter, Dropbox
 - Powers: Google Search, Gmail, Google Photos, YouTube recommendations
 - Strong in: Production deployments, mobile/edge ML, enterprise environments
 
-**Infrastructure Perspective**:
-- **Static computation graphs**: More optimization opportunities
+**Infrastructure Perspective**:- **Static computation graphs**: More optimization opportunities
 - **TensorFlow Serving**: Battle-tested production serving
 - **TensorFlow Lite**: Mobile and edge deployment
 - **TensorFlow.js**: Browser-based ML
@@ -39,8 +33,7 @@ TensorFlow is an open-source machine learning framework developed by Google. It'
 
 ### TensorFlow and Keras
 
-**Keras** is the high-level API for TensorFlow (built-in since TF 2.0):
-```python
+**Keras** is the high-level API for TensorFlow (built-in since TF 2.0):```python
 # Old way (TensorFlow 1.x)
 import tensorflow as tf
 import keras
@@ -52,7 +45,6 @@ from tensorflow import keras
 ```
 
 **For Infrastructure**: Always use `tensorflow.keras`, not standalone Keras.
-
 ---
 
 ## 2. TensorFlow Installation and Environment
@@ -98,8 +90,7 @@ print(f"Built with CUDA: {tf.test.is_built_with_cuda()}")
 print(f"GPU support: {tf.test.is_gpu_available()}")
 ```
 
-**Expected Output (with GPU)**:
-```
+**Expected Output (with GPU)**:```
 TensorFlow version: 2.14.0
 GPUs available: 1
   /physical_device:GPU:0: GPU
@@ -110,8 +101,7 @@ GPU support: True
 
 ### Infrastructure Considerations
 
-**Docker Images**:
-```dockerfile
+**Docker Images**:```dockerfile
 # Official TensorFlow images
 FROM tensorflow/tensorflow:2.14.0-gpu
 
@@ -123,8 +113,7 @@ FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
 RUN pip install tensorflow==2.14.0
 ```
 
-**Dependencies**:
-- **tensorflow**: Core library (~500MB)
+**Dependencies**:- **tensorflow**: Core library (~500MB)
 - **tensorboard**: Visualization tool (included)
 - **tensorflow-datasets**: Common datasets (optional)
 - **tensorflow-hub**: Pre-trained models (optional)
@@ -134,11 +123,9 @@ RUN pip install tensorflow==2.14.0
 ## 3. TensorFlow Model Formats
 
 TensorFlow supports multiple model formats, each with different use cases:
-
 ### Format 1: SavedModel (Recommended for Production)
 
 **What it is**: Complete TensorFlow program including weights and computation graph.
-
 ```python
 import tensorflow as tf
 
@@ -163,8 +150,7 @@ model.save('my_model/')
 loaded_model = tf.keras.models.load_model('my_model/')
 ```
 
-**Characteristics**:
-- ✅ **Production-ready**: Works with TensorFlow Serving
+**Characteristics**:- ✅ **Production-ready**: Works with TensorFlow Serving
 - ✅ **Language-independent**: Can load in C++, Java, Go
 - ✅ **Complete**: Includes graph and weights
 - ✅ **Versioned**: Supports model versioning
@@ -173,7 +159,6 @@ loaded_model = tf.keras.models.load_model('my_model/')
 ### Format 2: HDF5 (.h5 or .keras)
 
 **What it is**: Single file containing architecture and weights.
-
 ```python
 # Save as H5
 model.save('my_model.h5')
@@ -185,8 +170,7 @@ model.save('my_model.keras')
 loaded_model = tf.keras.models.load_model('my_model.h5')
 ```
 
-**Characteristics**:
-- ✅ **Single file**: Easy to manage
+**Characteristics**:- ✅ **Single file**: Easy to manage
 - ✅ **Compact**: Smaller than SavedModel
 - ✅ **Keras-only**: Works only with Keras models
 - ❌ **Not for TF Serving**: Cannot use with TensorFlow Serving
@@ -195,7 +179,6 @@ loaded_model = tf.keras.models.load_model('my_model.h5')
 ### Format 3: TensorFlow Lite (.tflite)
 
 **What it is**: Optimized format for mobile and edge devices.
-
 ```python
 # Convert to TFLite
 converter = tf.lite.TFLiteConverter.from_keras_model(model)
@@ -218,8 +201,7 @@ interpreter.invoke()
 output = interpreter.get_tensor(output_details[0]['index'])
 ```
 
-**Characteristics**:
-- ✅ **Optimized**: Smaller size, faster inference
+**Characteristics**:- ✅ **Optimized**: Smaller size, faster inference
 - ✅ **Mobile-ready**: Android, iOS support
 - ✅ **Edge devices**: Raspberry Pi, microcontrollers
 - ❌ **Limited ops**: Not all TensorFlow ops supported
@@ -233,8 +215,7 @@ output = interpreter.get_tensor(output_details[0]['index'])
 | **H5/Keras** | Medium | Fast | ❌ No | ❌ No | Development, experiments |
 | **TFLite** | Small | Very Fast | ❌ No | ✅ Yes | Mobile, edge devices |
 
-**Infrastructure Decision Tree**:
-```
+**Infrastructure Decision Tree**:```
 Are you deploying to mobile/edge?
 ├─ Yes → Use TFLite
 └─ No → Are you using TensorFlow Serving?
@@ -277,8 +258,7 @@ print(f"Number of layers: {len(model.layers)}")
 print(f"Number of parameters: {model.count_params():,}")
 ```
 
-**Output**:
-```
+**Output**:```
 Model name: resnet50
 Number of layers: 175
 Number of parameters: 25,636,712
@@ -329,7 +309,7 @@ os.environ['TFHUB_CACHE_DIR'] = '/data/models/tfhub'
 model = tf.keras.applications.ResNet50(weights='imagenet')
 model.save('/data/models/resnet50/')
 
-# In production, load from local path
+# 在生产环境中， load from local path
 model = tf.keras.models.load_model('/data/models/resnet50/')
 ```
 
@@ -373,8 +353,7 @@ for i, (imagenet_id, label, score) in enumerate(decoded):
     print(f"{i+1}. {label}: {score:.4f}")
 ```
 
-**Output**:
-```
+**Output**:```
 Input shape: (1, 224, 224, 3)
 
 Top 5 predictions:
@@ -419,8 +398,7 @@ for batch_size in batch_sizes:
     print(f"{batch_size:<12} {elapsed:<12.4f} {throughput:<25.2f} {latency_per_sample:<20.2f}")
 ```
 
-**Typical Output (GPU)**:
-```
+**Typical Output (GPU)**:```
 Batch Size   Time (s)     Throughput (samples/s)    Latency/Sample (ms)
 1            0.0234       42.74                     23.40
 8            0.0456       175.44                    5.70
@@ -466,7 +444,7 @@ class ImageClassifier:
         predictions = self.predict(image_batch)
         return predictions[0]
 
-# Usage
+# 用法
 classifier = ImageClassifier('resnet50_model/')
 dummy_image = np.random.rand(224, 224, 3).astype(np.float32)
 result = classifier.predict_single(dummy_image)
@@ -480,9 +458,7 @@ print(f"Prediction shape: {result.shape}")
 ### What is TensorFlow Serving?
 
 TensorFlow Serving is a flexible, high-performance serving system for machine learning models, designed for production environments.
-
-**Features**:
-- **REST and gRPC APIs**: Multiple protocol support
+**Features**:- **REST and gRPC APIs**: Multiple protocol support
 - **Model versioning**: Serve multiple versions simultaneously
 - **Hot-swapping**: Update models without downtime
 - **Batching**: Automatic request batching
@@ -540,8 +516,7 @@ docker run -p 8501:8501 \
 
 ### Making Inference Requests
 
-**REST API**:
-```python
+**REST API**:```python
 import requests
 import json
 import numpy as np
@@ -563,8 +538,7 @@ predictions = response.json()["predictions"]
 print(f"Predictions shape: {np.array(predictions).shape}")
 ```
 
-**gRPC API** (faster):
-```python
+**gRPC API** (faster):```python
 import grpc
 import numpy as np
 from tensorflow_serving.apis import predict_pb2
@@ -669,8 +643,7 @@ CMD ["tensorflow_model_server", \
 
 ### Code Comparison
 
-**PyTorch**:
-```python
+**PyTorch**:```python
 import torch
 
 # Load model
@@ -682,8 +655,7 @@ with torch.no_grad():
     output = model(input_tensor)
 ```
 
-**TensorFlow**:
-```python
+**TensorFlow**:```python
 import tensorflow as tf
 
 # Load model
@@ -695,22 +667,19 @@ output = model.predict(input_array)
 
 ### When to Choose Which?
 
-**Choose TensorFlow if**:
-- ✅ Need mature production serving (TensorFlow Serving)
+**Choose TensorFlow if**:- ✅ Need mature production serving (TensorFlow Serving)
 - ✅ Deploying to mobile/edge devices extensively
 - ✅ Enterprise environment with multi-language requirements
 - ✅ Using Google Cloud Platform heavily
 - ✅ Need battle-tested production tools
 
-**Choose PyTorch if**:
-- ✅ Research-oriented organization
+**Choose PyTorch if**:- ✅ Research-oriented organization
 - ✅ Need easier debugging during development
 - ✅ Team prefers Pythonic, intuitive APIs
 - ✅ Deploying primarily to servers (not mobile)
 - ✅ Using HuggingFace ecosystem heavily
 
-**Use Both**:
-- Convert models to ONNX for framework-independent deployment
+**Use Both**:- Convert models to ONNX for framework-independent deployment
 - Use whichever framework the data science team prefers
 - Build infrastructure that supports both
 
@@ -721,9 +690,7 @@ output = model.predict(input_array)
 ### Issue 1: GPU Not Detected
 
 **Problem**: TensorFlow not using GPU despite having one.
-
-**Diagnostics**:
-```python
+**Diagnostics**:```python
 import tensorflow as tf
 
 # Check GPU
@@ -732,7 +699,7 @@ print(tf.config.list_physical_devices('GPU'))
 # Enable logging
 tf.debugging.set_log_device_placement(True)
 
-# Test GPU computation
+# 测试 GPU computation
 with tf.device('/GPU:0'):
     a = tf.constant([[1.0, 2.0], [3.0, 4.0]])
     b = tf.constant([[5.0, 6.0], [7.0, 8.0]])
@@ -740,8 +707,7 @@ with tf.device('/GPU:0'):
     print(c)
 ```
 
-**Solutions**:
-```bash
+**Solutions**:```bash
 # 1. Check CUDA installation
 nvidia-smi
 
@@ -755,13 +721,11 @@ pip install tensorflow[and-cuda]
 
 ### Issue 2: Model Loading Errors
 
-**Error**:
-```
+**Error**:```
 ValueError: Unable to load model. Unable to restore object of class _tf_keras_metric
 ```
 
-**Solution**:
-```python
+**Solution**:```python
 # Use custom_objects when loading
 import tensorflow as tf
 
@@ -777,15 +741,12 @@ model = tf.keras.models.load_model('model.h5', compile=False)
 
 ### Issue 3: Input Shape Mismatch
 
-**Error**:
-```
+**Error**:```
 ValueError: Input 0 of layer "resnet50" is incompatible with the layer: expected shape=(None, 224, 224, 3), found shape=(None, 3, 224, 224)
 ```
 
 **Problem**: TensorFlow uses channels-last (NHWC), PyTorch uses channels-first (NCHW).
-
-**Solution**:
-```python
+**Solution**:```python
 import numpy as np
 
 # PyTorch format: [N, C, H, W]
@@ -803,13 +764,11 @@ output = model.predict(tensorflow_format)
 
 ### Issue 4: Out of Memory
 
-**Error**:
-```
+**Error**:```
 ResourceExhaustedError: OOM when allocating tensor
 ```
 
-**Solutions**:
-```python
+**Solutions**:```python
 import tensorflow as tf
 
 # 1. Enable memory growth (don't allocate all GPU memory at once)
@@ -834,21 +793,18 @@ tf.keras.mixed_precision.set_global_policy('mixed_float16')
 
 ### Issue 5: TensorFlow Serving Connection Issues
 
-**Error**:
-```
+**Error**:```
 requests.exceptions.ConnectionError: HTTPConnectionPool
 ```
 
-**Diagnostics**:
-```bash
+**Diagnostics**:```bash
 # Check if TensorFlow Serving is running
 curl http://localhost:8501/v1/models/mobilenet
 
 # Should return model metadata
 ```
 
-**Solutions**:
-```python
+**Solutions**:```python
 import requests
 import time
 
@@ -895,8 +851,7 @@ print(f"Compute dtype: {policy.compute_dtype}")  # float16
 print(f"Variable dtype: {policy.variable_dtype}")  # float32
 ```
 
-**Benefits**:
-- ~2x faster inference on modern GPUs
+**Benefits**:- ~2x faster inference on modern GPUs
 - ~50% less memory usage
 - Minimal accuracy loss
 
@@ -1015,19 +970,10 @@ for key, value in memory.items():
 
 ### For Infrastructure Engineers
 
-1. **SavedModel is production format**: Use for TensorFlow Serving deployments
-2. **TensorFlow Serving is mature**: Battle-tested for production
-3. **Channels-last format**: TensorFlow uses [N, H, W, C], not [N, C, H, W]
-4. **Multiple model formats**: Choose based on deployment target
-5. **Mixed precision is powerful**: Easy 2x speedup with minimal changes
-6. **Memory growth is important**: Enable to avoid OOM errors
-7. **REST API is convenient**: gRPC is faster for high-throughput
-8. **Model versioning built-in**: TF Serving supports A/B testing naturally
-
+1. **SavedModel is production format**: Use for TensorFlow Serving deployments2. **TensorFlow Serving is mature**: Battle-tested for production3. **Channels-last format**: TensorFlow uses [N, H, W, C], not [N, C, H, W]4. **Multiple model formats**: Choose based on deployment target5. **Mixed precision is powerful**: Easy 2x speedup with minimal changes6. **Memory growth is important**: Enable to avoid OOM errors7. **REST API is convenient**: gRPC is faster for high-throughput8. **Model versioning built-in**: TF Serving supports A/B testing naturally
 ### Production Checklist
 
 Before deploying TensorFlow models:
-
 - [ ] Model saved in appropriate format (SavedModel for servers)
 - [ ] Model tested with expected input shapes
 - [ ] TensorFlow Serving configuration tested
@@ -1073,7 +1019,7 @@ docker run -p 8501:8501 \
   -e MODEL_NAME=mymodel \
   tensorflow/serving
 
-# Test REST API
+# 测试 REST API
 curl -X POST http://localhost:8501/v1/models/mymodel:predict \
   -d '{"instances": [[1.0, 2.0, 3.0]]}'
 ```
@@ -1082,16 +1028,11 @@ curl -X POST http://localhost:8501/v1/models/mymodel:predict \
 
 ## What's Next?
 
-In the next lecture, we'll cover:
-- **ONNX format**: Framework-independent deployment
+In the next lecture, we'll cover:- **ONNX format**: Framework-independent deployment
 - **Model conversion**: PyTorch ↔ TensorFlow ↔ ONNX
 - **Optimization techniques**: Quantization, pruning, distillation
 
 Continue to `lecture-notes/04-model-formats.md`
-
 ---
 
-**Lecture Version**: 1.0
-**Last Updated**: October 2025
-**Estimated Completion Time**: 8-10 hours
-**难度**： 初级到中级
+**Lecture Version**: 1.0**Last Updated**: October 2025**Estimated Completion Time**: 8-10 hours**难度**： 初级到中级

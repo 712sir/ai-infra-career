@@ -3,7 +3,6 @@
 ## 学习目标
 
 学完本讲后，你将能够：
-
 - Understand ONNX (Open Neural Network Exchange) format and its benefits
 - Convert PyTorch models to ONNX format
 - Convert TensorFlow models to ONNX format
@@ -13,20 +12,15 @@
 - Package models for production deployment
 - Understand model versioning and management strategies
 
-**学时**： 6-8 hours
-**难度**： Intermediate
-**前置条件**： 第01-03讲（ML 概述、PyTorch、TensorFlow）
-
+**学时**： 6-8 hours**难度**： 中级**前置条件**： Lectures 01-03 (ML Overview, PyTorch, TensorFlow)
 ---
 
-## 1. ONNX 简介
+## 1. Introduction to ONNX
 
 ### 什么是 ONNX？
 
 **ONNX** (Open Neural Network Exchange) is an open format to represent machine learning models. It enables interoperability between different ML frameworks.
-
-**核心概念**： 任意框架训练，随处部署。
-
+**核心概念**: 任意框架训练，随处部署。
 ```
 PyTorch Model  ─┐
                 ├──→ ONNX Format ──→ ONNX Runtime ──→ Production
@@ -35,8 +29,7 @@ TensorFlow Model ─┘
 
 ### Why ONNX Matters for Infrastructure
 
-**Problem Without ONNX**:
-```
+**Problem Without ONNX**:```
 Data Scientists use PyTorch
   ↓
 Infrastructure team only supports TensorFlow Serving
@@ -44,8 +37,7 @@ Infrastructure team only supports TensorFlow Serving
 Manual rewrite or complex workarounds needed
 ```
 
-**Solution With ONNX**:
-```
+**Solution With ONNX**:```
 Data Scientists use any framework
   ↓
 Convert to ONNX
@@ -104,7 +96,7 @@ dummy_input = torch.randn(1, 3, 224, 224)
 # Export to ONNX
 torch.onnx.export(
     model,                      # Model to export
-    dummy_input,                # Example input
+    dummy_input,                # 示例 input
     "resnet18.onnx",           # Output file path
     export_params=True,         # Store trained parameter weights
     opset_version=13,          # ONNX version
@@ -155,7 +147,7 @@ torch.onnx.export(
 )
 ```
 
-### Advanced: Converting Custom Models
+### 高级: Converting Custom Models
 
 ```python
 import torch
@@ -393,7 +385,7 @@ class ONNXModel:
         batch_array = np.stack(batch)
         return self.predict(batch_array)
 
-# Usage
+# 用法
 model = ONNXModel("resnet18.onnx")
 input_data = np.random.randn(1, 3, 224, 224).astype(np.float32)
 output = model.predict(input_data)
@@ -438,8 +430,7 @@ print(f"ONNX Runtime inference time: {onnx_time*1000:.2f} ms")
 print(f"Speedup: {pytorch_time/onnx_time:.2f}x")
 ```
 
-**Typical Results (CPU)**:
-```
+**Typical Results (CPU)**:```
 PyTorch inference time: 45.23 ms
 ONNX Runtime inference time: 32.18 ms
 Speedup: 1.41x
@@ -451,9 +442,7 @@ Speedup: 1.41x
 
 ### Quantization: Reducing Model Size
 
-**What is Quantization?**
-Converting model weights from float32 (32 bits) to int8 (8 bits), reducing size by ~4x.
-
+**What is Quantization?**Converting model weights from float32 (32 bits) to int8 (8 bits), reducing size by ~4x.
 ```python
 import torch
 
@@ -529,10 +518,9 @@ print("Model pruned (30% of conv weights removed)")
 # Accuracy will be lower - may need fine-tuning
 ```
 
-### Knowledge Distillation (Advanced)
+### Knowledge Distillation (高级)
 
 **Concept**: Train a smaller "student" model to mimic a larger "teacher" model.
-
 ```python
 # Pseudocode - requires training
 # 1. Load large teacher model
@@ -595,16 +583,14 @@ for data, labels in dataloader:
 
 ### Production Recommendations
 
-**Scenario 1: Single Framework Organization**
-```
+**Scenario 1: Single Framework Organization**```
 If data scientists use only PyTorch or only TensorFlow:
 → Use native format and serving tools
 → No need for ONNX conversion
 → Simpler infrastructure
 ```
 
-**Scenario 2: Multi-Framework Organization**
-```
+**Scenario 2: Multi-Framework Organization**```
 If data scientists use both PyTorch and TensorFlow:
 → Standardize on ONNX for deployment
 → Convert all models to ONNX
@@ -612,8 +598,7 @@ If data scientists use both PyTorch and TensorFlow:
 → Single serving infrastructure
 ```
 
-**Scenario 3: Hybrid Approach**
-```
+**Scenario 3: Hybrid Approach**```
 For maximum flexibility:
 → Support both native and ONNX formats
 → Use native when possible (better performance)
@@ -699,27 +684,23 @@ class ModelPackage:
 - **Framework**: {metadata.get('framework', 'N/A')}
 - **Task**: {metadata.get('task', 'N/A')}
 
-## Usage
+## 用法
 
 ```python
 # Load model
-from model_loader import load_model
-model = load_model('model/{metadata['model_file']}')
-
+from model_loader import load_modelmodel = load_model('model/{metadata['model_file']}')
 # Run inference
-output = model.predict(input_data)
-```
+output = model.predict(input_data)```
 
 ## Metadata
 
 ```json
-{json.dumps(metadata, indent=2)}
-```
+{json.dumps(metadata, indent=2)}```
 """
         with open(self.package_dir / "README.md", 'w') as f:
             f.write(readme)
 
-# Usage
+# 用法
 packager = ModelPackage("resnet18", "1.0.0")
 packager.create(
     "resnet18.onnx",
@@ -879,7 +860,7 @@ class ModelVersionManager:
         latest = sorted(versions, key=lambda x: x['version'], reverse=True)[0]
         return latest
 
-# Usage
+# 用法
 manager = ModelVersionManager()
 
 # Register model v1
@@ -961,7 +942,7 @@ class ABTestRouter:
             }
         return stats
 
-# Usage
+# 用法
 router = ABTestRouter()
 router.register_variant("model_v1", "resnet18_v1.onnx", traffic_percentage=50)
 router.register_variant("model_v2", "resnet18_v2.onnx", traffic_percentage=50)
@@ -970,7 +951,7 @@ router.register_variant("model_v2", "resnet18_v2.onnx", traffic_percentage=50)
 for _ in range(1000):
     variant = router.route_request()
     # ... run inference ...
-    latency = 0.05  # Example latency
+    latency = 0.05  # 示例 latency
     router.log_metrics(variant, latency)
 
 # Check stats
@@ -986,14 +967,7 @@ for variant, metrics in stats.items():
 
 ### For Infrastructure Engineers
 
-1. **ONNX enables interoperability**: Train anywhere, deploy anywhere
-2. **Multiple formats exist**: Choose based on deployment target
-3. **Optimization is important**: Quantization can reduce size by 4x
-4. **Version management matters**: Always version your models
-5. **Package models properly**: Include metadata and documentation
-6. **A/B testing is essential**: Compare model versions in production
-7. **ONNX Runtime is fast**: Often faster than native frameworks
-
+1. **ONNX enables interoperability**: Train anywhere, deploy anywhere2. **Multiple formats exist**: Choose based on deployment target3. **Optimization is important**: Quantization can reduce size by 4x4. **Version management matters**: Always version your models5. **Package models properly**: Include metadata and documentation6. **A/B testing is essential**: Compare model versions in production7. **ONNX Runtime is fast**: Often faster than native frameworks
 ### Production Checklist
 
 - [ ] Model exported to appropriate format (ONNX, SavedModel, etc.)
@@ -1040,16 +1014,8 @@ outputs = session.run(None, {input_name: input_data})
 ## What's Next?
 
 You've completed all lectures in Module 004! Now it's time to:
-
-1. **Complete the exercises**: Practice converting and deploying models
-2. **Take the quiz**: Test your understanding
-3. **Build a project**: Create an end-to-end model serving system
-
+1. **Complete the exercises**: Practice converting and deploying models2. **Take the quiz**: Test your understanding3. **Build a project**: Create an end-to-end model serving system
 Continue to `exercises/exercise-01-pytorch-inference.md`
-
 ---
 
-**Lecture Version**: 1.0
-**Last Updated**: October 2025
-**Estimated Completion Time**: 6-8 hours
-**难度**： Intermediate
+**Lecture Version**: 1.0**Last Updated**: October 2025**Estimated Completion Time**: 6-8 hours**难度**： 中级

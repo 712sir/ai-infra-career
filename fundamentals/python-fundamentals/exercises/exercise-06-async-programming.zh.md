@@ -1,13 +1,11 @@
-# 练习06: Async Programming for Concurrent ML Operations
+# 练习06：面向并发 ML 操作的异步编程
 
 ## 概述
 
 This exercise teaches you how to use Python's asyncio for concurrent operations in ML workflows. You'll learn to handle multiple tasks simultaneously, improve I/O-bound operation performance, and build efficient ML pipelines that can process data concurrently.
-
 ## 学习目标
 
-完成本练习后，你将能够：
-- Understand async/await syntax and coroutines
+完成本练习后，你将能够：- Understand async/await syntax and coroutines
 - Write asynchronous functions for I/O-bound tasks
 - Use asyncio.gather() for concurrent execution
 - Implement async file operations and API calls
@@ -25,11 +23,11 @@ This exercise teaches you how to use Python's asyncio for concurrent operations 
 ## 预计用时
 
 - 预计：90-120 分钟
-- Difficulty: Intermediate to Advanced
+- Difficulty: 中级 to 高级
 
-## Part 1: Async Basics
+## 第 1: Async Basics
 
-### Step 1: Understanding Coroutines
+### 步骤 1: Understanding Coroutines
 
 ```python
 # 创建脚本： async_basics.py
@@ -96,7 +94,7 @@ if __name__ == "__main__":
     asyncio.run(concurrent_execution())
 ```
 
-### Step 2: Async with Multiple Tasks
+### 步骤 2: Async with Multiple Tasks
 
 ```python
 # 创建脚本： async_multiple.py
@@ -160,9 +158,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Part 2: Async File Operations
+## 第 2: Async File Operations
 
-### Step 3: Async File I/O
+### 步骤 3: Async File I/O
 
 ```python
 # 创建脚本： async_file_io.py
@@ -267,9 +265,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Part 3: Async API Calls
+## 第 3: Async API Calls
 
-### Step 4: Concurrent API Requests
+### 步骤 4: Concurrent API Requests
 
 ```python
 # 创建脚本： async_api_calls.py
@@ -342,9 +340,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Part 4: Async Data Pipeline
+## 第 4: Async Data Pipeline
 
-### Step 5: Building an Async ML Pipeline
+### 步骤 5: Building an Async ML Pipeline
 
 ```python
 # 创建脚本： async_ml_pipeline.py
@@ -456,9 +454,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Part 5: Error Handling in Async Code
+## 第 5: Error Handling in Async Code
 
-### Step 6: Async Exception Handling
+### 步骤 6: Async Exception Handling
 
 ```python
 # 创建脚本： async_error_handling.py
@@ -537,9 +535,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Part 6: When to Use Async
+## 第 6: When to Use Async
 
-### Step 7: Async vs Threading vs Multiprocessing
+### 步骤 7: Async vs Threading vs Multiprocessing
 
 ```python
 # 创建脚本： concurrency_comparison.py
@@ -689,14 +687,7 @@ if __name__ == "__main__":
 
 ## 思考题
 
-1. When should you use async vs threading?
-2. How does asyncio improve I/O-bound task performance?
-3. What are the limitations of async programming?
-4. How do you debug async code?
-5. When is multiprocessing better than async?
-6. How do you handle errors in concurrent tasks?
-7. What monitoring is needed for async ML pipelines?
-
+1. When should you use async vs threading?2. How does asyncio improve I/O-bound task performance?3. What are the limitations of async programming?4. How do you debug async code?5. When is multiprocessing better than async?6. How do you handle errors in concurrent tasks?7. What monitoring is needed for async ML pipelines?
 ## 下一步
 
 - **Exercise 07**: Testing async code with pytest-asyncio

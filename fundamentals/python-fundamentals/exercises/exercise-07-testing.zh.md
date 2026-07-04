@@ -1,13 +1,11 @@
-# 练习07: Unit Testing ML Utility Functions with Pytest
+# Exercise 07: Unit Testing ML Utility Functions with Pytest
 
 ## 概述
 
 This exercise teaches you how to write comprehensive unit tests for ML utility functions using pytest. You'll learn testing best practices, fixtures, mocking, parameterized tests, and how to build a robust test suite that ensures your ML infrastructure code is reliable and maintainable.
-
 ## 学习目标
 
-完成本练习后，你将能够：
-- Write effective unit tests with pytest
+完成本练习后，你将能够：- Write effective unit tests with pytest
 - Use fixtures for test setup and teardown
 - Implement parameterized tests for multiple scenarios
 - Mock external dependencies and file I/O
@@ -26,11 +24,11 @@ This exercise teaches you how to write comprehensive unit tests for ML utility f
 ## 预计用时
 
 - Estimated: 100-120 minutes
-- Difficulty: Intermediate
+- Difficulty: 中级
 
-## Part 1: Pytest Basics
+## 第 1: Pytest Basics
 
-### Step 1: Your First Tests
+### 步骤 1: Your First Tests
 
 ```python
 # Create a file: tests/test_basics.py
@@ -80,7 +78,7 @@ def test_accuracy_length_mismatch():
 # Run tests: pytest tests/test_basics.py -v
 ```
 
-### Step 2: Using Fixtures
+### 步骤 2: Using Fixtures
 
 ```python
 # Create a file: tests/test_fixtures.py
@@ -145,7 +143,7 @@ def test_batch_processing(batch_sizes):
     # 测试 your batch processing logic here
 ```
 
-### Step 3: Parametrized Tests
+### 步骤 3: Parametrized Tests
 
 ```python
 # Create a file: tests/test_parametrized.py
@@ -190,9 +188,9 @@ def test_batch_combinations(batch_size, num_samples):
     assert num_batches <= (num_samples // batch_size) + 1
 ```
 
-## Part 2: Testing ML Functions
+## 第 2: Testing ML Functions
 
-### Step 4: Testing Data Processing
+### 步骤 4: Testing Data Processing
 
 ```python
 # Create a file: src/preprocessing.py (if not exists)
@@ -309,7 +307,7 @@ class TestFillMissing:
             fill_missing([1.0, None], strategy="invalid")
 ```
 
-### Step 5: Testing with Mocks
+### 步骤 5: Testing with Mocks
 
 ```python
 # Create a file: tests/test_mocking.py
@@ -377,7 +375,7 @@ def test_with_mock_model():
     assert all(p == 0.9 for p in predictions)
 ```
 
-### Step 6: Testing Error Handling
+### 步骤 6: Testing Error Handling
 
 ```python
 # Create a file: tests/test_error_handling.py
@@ -430,9 +428,9 @@ class TestErrorHandling:
         validate_batch_size(valid_value)  # Should not raise
 ```
 
-## Part 3: Testing Async Code
+## 第 3: Testing Async Code
 
-### Step 7: Async Tests
+### 步骤 7: Async Tests
 
 ```python
 # Create a file: tests/test_async.py
@@ -493,9 +491,9 @@ async def test_with_async_fixture(async_sample_data):
     assert len(async_sample_data["samples"]) == 3
 ```
 
-## Part 4: Test Coverage
+## 第 4: Test Coverage
 
-### Step 8: Measuring Coverage
+### 步骤 8: Measuring Coverage
 
 ```python
 # Create a file: tests/test_coverage_example.py
@@ -532,9 +530,9 @@ def test_complex_function(value, expected):
 # pytest tests/test_coverage_example.py --cov=. --cov-report=term-missing
 ```
 
-## Part 5: Integration Tests
+## 第 5: Integration Tests
 
-### Step 9: Testing Complete Workflows
+### 步骤 9: Testing Complete Workflows
 
 ```python
 # Create a file: tests/test_integration.py
@@ -621,9 +619,9 @@ class TestDataPipelineIntegration:
         assert not pipeline.validate()
 ```
 
-## Part 6: Test Organization
+## 第 6: Test Organization
 
-### Step 10: Organizing Your Test Suite
+### 步骤 10: Organizing Your Test Suite
 
 ```python
 # Create a file: conftest.py (pytest configuration)
@@ -794,14 +792,7 @@ tests/
 
 ## 思考题
 
-1. What makes a good unit test?
-2. When should you use mocks vs real objects?
-3. How much test coverage is enough?
-4. What's the difference between unit and integration tests?
-5. How do you test ML model predictions?
-6. When should tests be skipped vs fixed?
-7. How do you maintain tests as code evolves?
-
+1. What makes a good unit test?2. When should you use mocks vs real objects?3. How much test coverage is enough?4. What's the difference between unit and integration tests?5. How do you test ML model predictions?6. When should tests be skipped vs fixed?7. How do you maintain tests as code evolves?
 ## 下一步
 
 - **Module 002**: Linux Essentials

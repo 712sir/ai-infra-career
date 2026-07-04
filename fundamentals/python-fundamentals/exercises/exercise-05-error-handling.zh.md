@@ -1,20 +1,18 @@
-# 练习05: Exception Handling for Robust ML Applications
+# 练习05：面向健壮 ML 应用的异常处理
 
 ## 概述
 
-This exercise teaches you how to write robust, fault-tolerant Python code for machine learning infrastructure. You'll learn to handle errors gracefully, implement proper exception handling, create custom exceptions, and build resilient ML applications that can recover from failures.
-
+本练习学习如何为 ML 基础设施编写健壮、容错的 Python 代码。你将学会优雅地处理错误、实现恰当的异常处理、创建自定义异常，并构建能从故障中恢复的高鲁棒性 ML 应用。
 ## 学习目标
 
-完成本练习后，你将能够：
-- Understand Python's exception hierarchy and handling mechanisms
+完成本练习后，你将能够：- Understand Python's exception hierarchy and handling mechanisms
 - 实现 try-except-finally 块进行错误处理
 - 创建针对特定领域错误的自定义异常
 - 使用上下文管理器进行资源管理
 - 实现针对瞬时故障的重试逻辑
 - 有效记录错误日志用于调试
 - 构建容错的 ML 管线
-- 处理 ML 常见的特定错误（GPU OOM、数据损坏等）
+- 处理 ML 常见的特定错误
 
 ## 前置条件
 
@@ -25,11 +23,11 @@ This exercise teaches you how to write robust, fault-tolerant Python code for ma
 ## 预计用时
 
 - 预计：90-120 分钟
-- 难度：中等
+- Difficulty: 中级
 
-## Part 1: Understanding Python Exceptions
+## 第 1: Understanding Python Exceptions
 
-### Step 1: Common Exception Types
+### 步骤 1: Common Exception Types
 
 ```python
 # 创建脚本： exception_basics.py
@@ -87,7 +85,7 @@ if __name__ == "__main__":
     demonstrate_exceptions()
 ```
 
-### Step 2: Try-Except-Else-Finally
+### 步骤 2: Try-Except-Else-Finally
 
 ```python
 # 创建脚本： exception_handling.py
@@ -194,9 +192,9 @@ if __name__ == "__main__":
     print(f"Results: {results}")
 ```
 
-## Part 2: Custom Exceptions
+## 第 2: Custom Exceptions
 
-### Step 3: Creating Domain-Specific Exceptions
+### 步骤 3: Creating Domain-Specific Exceptions
 
 ```python
 # 创建脚本： custom_exceptions.py
@@ -317,9 +315,9 @@ if __name__ == "__main__":
         print(f"Parameter: {e.param}, Value: {e.value}\n")
 ```
 
-## Part 3: Retry Logic and Resilience
+## 第 3: Retry Logic and Resilience
 
-### Step 4: Implementing Retry Mechanisms
+### 步骤 4: Implementing Retry Mechanisms
 
 ```python
 # 创建脚本： retry_logic.py
@@ -460,9 +458,9 @@ if __name__ == "__main__":
         print("Failed to load from all sources")
 ```
 
-## Part 4: Context Managers
+## 第 4: Context Managers
 
-### Step 5: Safe Resource Management
+### 步骤 5: Safe Resource Management
 
 ```python
 # 创建脚本： context_managers.py
@@ -558,9 +556,9 @@ if __name__ == "__main__":
     train_with_context()
 ```
 
-## Part 5: Comprehensive Error Handling System
+## 第 5: Comprehensive Error Handling System
 
-### Step 6: Building a Robust ML Pipeline
+### 步骤 6: Building a Robust ML Pipeline
 
 ```python
 # 创建脚本： ml_pipeline_robust.py
@@ -805,14 +803,7 @@ if __name__ == "__main__":
 
 ## 思考题
 
-1. When should you catch broad vs. specific exceptions?
-2. How do custom exceptions improve code maintainability?
-3. What retry strategies work best for different failure types?
-4. How do context managers ensure proper resource cleanup?
-5. What information should be logged when exceptions occur?
-6. How do you balance error handling with code readability?
-7. When should exceptions be raised vs. returned as error codes?
-
+1. When should you catch broad vs. specific exceptions?2. How do custom exceptions improve code maintainability?3. What retry strategies work best for different failure types?4. How do context managers ensure proper resource cleanup?5. What information should be logged when exceptions occur?6. How do you balance error handling with code readability?7. When should exceptions be raised vs. returned as error codes?
 ## 下一步
 
 - **Exercise 06**: Async Programming for concurrent operations
