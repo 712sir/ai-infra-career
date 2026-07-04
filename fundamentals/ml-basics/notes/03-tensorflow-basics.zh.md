@@ -970,7 +970,7 @@ for key, value in memory.items():
 
 ### For Infrastructure Engineers
 
-1. **SavedModel is production format**: Use for TensorFlow Serving deployments2. **TensorFlow Serving is mature**: Battle-tested for production3. **Channels-last format**: TensorFlow uses [N, H, W, C], not [N, C, H, W]4. **Multiple model formats**: Choose based on deployment target5. **Mixed precision is powerful**: Easy 2x speedup with minimal changes6. **Memory growth is important**: Enable to avoid OOM errors7. **REST API is convenient**: gRPC is faster for high-throughput8. **Model versioning built-in**: TF Serving supports A/B testing naturally
+1. **SavedModel 是生产格式**：用于 TensorFlow Serving 部署。2. **TensorFlow Serving 很成熟**：经生产环境实战检验。3. **通道在后格式**：TF 使用 [N, H, W, C] 而非 [N, C, H, W]。4. **多种模型格式**：根据部署目标选择。5. **混合精度很强大**：极小的改动即可获得约 2 倍加速。6. **内存增长很重要**：启用以避免 OOM 错误。7. **REST API 方便**：gRPC 在高吞吐场景下更快。8. **模型版本管理内置**：TF Serving 天然支持 A/B 测试。
 ### Production Checklist
 
 Before deploying TensorFlow models:

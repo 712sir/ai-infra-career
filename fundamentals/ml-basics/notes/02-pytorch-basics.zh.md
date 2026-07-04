@@ -857,7 +857,7 @@ quantized_model = torch.quantization.quantize_dynamic(
 
 ### For Infrastructure Engineers
 
-1. **PyTorch is Python-native**: Easy to debug, integrates naturally2. **Device management is critical**: Always match model and input devices3. **Batch inference improves throughput**: Balance latency and throughput4. **Use torch.no_grad() for inference**: Saves memory and computation5. **TorchServe for production**: Don't build your own serving framework6. **Model serialization matters**: Use state_dict for flexibility7. **Monitor GPU memory**: OOM errors are common, use empty_cache()8. **Version compatibility**: PyTorch versions must match for loading models
+1. **PyTorch 是 Python 原生的**：易于调试，自然集成。2. **设备管理至关重要**：始终匹配模型和输入设备。3. **批量推理提升吞吐**：在延迟和吞吐间取得平衡。4. **推理时使用 torch.no_grad()**：节省内存和计算。5. **生产环境用 TorchServe**：不要自己搭建推理框架。6. **模型序列化很重要**：使用 state_dict 以获得灵活性。7. **监控 GPU 内存**：OOM 错误很常见，使用 empty_cache()。8. **版本兼容性**：加载模型时 PyTorch 版本必须匹配。
 ### Production Checklist
 
 Before deploying PyTorch models:

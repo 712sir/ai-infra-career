@@ -702,7 +702,7 @@ When you encounter an ML project, ask:
 
 ### 下一步
 
-Now that you understand ML fundamentals, you'll dive into:- **Lecture 02:** PyTorch basics (loading models, running inference)
+掌握了 ML 基础后，接下来学习：- **第02讲**：PyTorch 基础（加载模型、运行推理）
 - **Lecture 03:** TensorFlow basics (alternative framework)
 - **Lecture 04:** Model formats and deployment preparation
 

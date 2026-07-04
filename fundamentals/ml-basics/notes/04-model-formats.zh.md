@@ -1014,7 +1014,7 @@ outputs = session.run(None, {input_name: input_data})
 ## What's Next?
 
 You've completed all lectures in Module 004! Now it's time to:
-1. **Complete the exercises**: Practice converting and deploying models2. **Take the quiz**: Test your understanding3. **Build a project**: Create an end-to-end model serving system
+1. **完成练习**：练习模型转换和部署。2. **参加测验**：检验你的理解。3. **构建项目**：创建端到端的模型推理系统。
 Continue to `exercises/exercise-01-pytorch-inference.md`
 ---
 
